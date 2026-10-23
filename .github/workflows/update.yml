@@ -1,0 +1,51 @@
+name: update-and-deploy
+
+on:
+  schedule:
+    - cron: "17 5,17 * * *"      # مرتان يومياً (05:17 و17:17 بتوقيت UTC)
+  workflow_dispatch:             # تشغيل يدوي من تبويب Actions
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: جلب أحدث جدول ونتائج (openfootball، ترخيص CC0)
+        run: git clone --depth 1 https://github.com/openfootball/england openfootball/england
+
+      - name: حساب التوقعات
+        env:
+          OF_DIR: openfootball/england
+        run: python3 -I src/predict.py
+
+      - name: بناء الصفحة
+        run: python3 -I src/build_site.py
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

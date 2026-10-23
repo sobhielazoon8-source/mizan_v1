@@ -1,0 +1,484 @@
+<title>ميزان الدوري</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Reem+Kufi:wght@500;700&display=swap">
+<style>
+/* التخطيط: شريط علوي بعلامة «ميزان»، ثلاث تبويبات (المباريات، الترتيب، المنهج)، وبطاقات مباريات تضع المضيف على اليمين دائماً. */
+:root {
+  --bg: #F1F4F0;
+  --surface: #FFFFFF;
+  --surface2: #E8EDE7;
+  --ink: #12201A;
+  --muted: #55655C;
+  --line: #D3DBD2;
+  --home: #1D6A48;
+  --on-home: #FFFFFF;
+  --draw: #A6B0A8;
+  --away: #BF5329;
+  --on-away: #FFFFFF;
+  --focus: #1D6A48;
+  --font-display: 'Reem Kufi', 'IBM Plex Sans Arabic', 'Segoe UI', Tahoma, sans-serif;
+  --font-body: 'IBM Plex Sans Arabic', 'Segoe UI', Tahoma, system-ui, sans-serif;
+  direction: rtl;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0D1511; --surface: #15201B; --surface2: #1C2A24; --ink: #E7EFE9; --muted: #92A59A; --line: #2A3B33;
+    --home: #46B986; --on-home: #0D1511; --draw: #6B7A71; --away: #E5835A; --on-away: #0D1511; --focus: #46B986;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0D1511; --surface: #15201B; --surface2: #1C2A24; --ink: #E7EFE9; --muted: #92A59A; --line: #2A3B33;
+  --home: #46B986; --on-home: #0D1511; --draw: #6B7A71; --away: #E5835A; --on-away: #0D1511; --focus: #46B986;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.7;
+  padding-block: 0 48px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 960px; margin: 0 auto; }
+a { color: var(--home); }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: 6px; }
+.num { font-variant-numeric: tabular-nums; }
+
+/* الشريط العلوي */
+header.top { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding: 22px 0 14px; }
+.brand { display: flex; align-items: center; gap: 12px; }
+.brand svg { width: 44px; height: 44px; flex: none; }
+.brand h1 { font-family: var(--font-display); font-weight: 700; font-size: 34px; line-height: 1; margin: 0; letter-spacing: 0; }
+.brand p { margin: 4px 0 0; color: var(--muted); font-size: 13px; }
+.stamp { font-size: 12.5px; color: var(--muted); text-align: start; }
+.stamp b { color: var(--ink); font-weight: 600; }
+
+/* التبويبات */
+nav.tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--line); margin-bottom: 18px; overflow-x: auto; }
+nav.tabs a { text-decoration: none; color: var(--muted); padding: 10px 16px; font-weight: 500; border-bottom: 3px solid transparent; white-space: nowrap; }
+nav.tabs a[aria-current="page"] { color: var(--ink); border-bottom-color: var(--home); font-weight: 600; }
+nav.tabs a:hover { color: var(--ink); }
+
+/* عناصر التحكم */
+.controls { display: grid; gap: 12px; margin-bottom: 14px; }
+.chips { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 6px; scrollbar-width: thin; }
+.chip { flex: none; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font: inherit; font-size: 13px;
+  padding: 5px 13px; border-radius: 999px; cursor: pointer; }
+.chip[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.chips.off .chip { opacity: .45; }
+.selects { display: flex; gap: 10px; flex-wrap: wrap; }
+.selects label { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); }
+select { font: inherit; font-size: 14px; background: var(--surface); color: var(--ink); border: 1px solid var(--line); border-radius: 8px; padding: 6px 10px; min-width: 0; max-width: 100%; }
+
+.heading { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin: 6px 0 12px; }
+.heading h2 { font-family: var(--font-display); font-weight: 700; font-size: 24px; margin: 0; }
+.heading span { color: var(--muted); font-size: 13px; }
+
+/* أبرز المباريات */
+.picks { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px; }
+.pick { background: var(--surface2); border-radius: 12px; padding: 12px 14px; min-width: 0; }
+.pick small { display: block; color: var(--muted); font-size: 12px; }
+.pick strong { display: block; font-weight: 600; font-size: 14.5px; margin: 2px 0; }
+.pick span { font-size: 13px; color: var(--muted); }
+
+/* بطاقة المباراة */
+.list { display: grid; gap: 12px; }
+.match { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 14px 16px 12px; min-width: 0; }
+.m-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: 12.5px; color: var(--muted); margin-bottom: 8px; flex-wrap: wrap; }
+.tag { padding: 1px 10px; border-radius: 999px; font-size: 12px; font-weight: 500; background: var(--surface2); color: var(--ink); }
+.tag.hi { background: var(--home); color: var(--on-home); }
+.tag.today { background: var(--away); color: var(--on-away); }
+.m-main { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 8px; }
+.team { display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; min-width: 0; }
+.team .nm { font-weight: 600; font-size: 15px; line-height: 1.3; overflow-wrap: anywhere; }
+.team .pos { font-size: 11.5px; color: var(--muted); margin-top: -4px; }
+.disc { width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; font-weight: 600; font-size: 12.5px; letter-spacing: .5px;
+  font-family: var(--font-body); direction: ltr; box-shadow: 0 0 0 1.5px var(--line); flex: none; }
+.pred { text-align: center; padding: 0 6px; }
+.pred .lbl { font-size: 11.5px; color: var(--muted); }
+.score { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-display); font-weight: 700; font-size: 38px; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.score i { font-style: normal; color: var(--muted); font-weight: 500; }
+.pred .sub { font-size: 12px; color: var(--muted); }
+.odds { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin-top: 12px; text-align: center; }
+.odds div { min-width: 0; }
+.odds b { display: block; font-size: 20px; font-weight: 600; font-variant-numeric: tabular-nums; line-height: 1.2; }
+.odds span { font-size: 12px; color: var(--muted); }
+.odds .top b { color: var(--ink); }
+.odds .h b { color: var(--home); } .odds .a b { color: var(--away); } .odds .d b { color: var(--muted); }
+.bar { display: flex; height: 10px; border-radius: 999px; overflow: hidden; margin-top: 8px; background: var(--surface2); gap: 2px; }
+.bar i { display: block; height: 100%; }
+.bar .h { background: var(--home); } .bar .d { background: var(--draw); } .bar .a { background: var(--away); }
+.m-foot { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 10px; font-size: 12.5px; color: var(--muted); }
+.m-foot .xg { display: inline-flex; align-items: center; gap: 6px; }
+.m-foot .xg b { color: var(--ink); font-weight: 600; font-variant-numeric: tabular-nums; }
+.more { font: inherit; font-size: 13px; color: var(--home); background: none; border: 0; cursor: pointer; padding: 4px 6px; text-decoration: underline; text-underline-offset: 3px; }
+.detail { border-top: 1px dashed var(--line); margin-top: 10px; padding-top: 12px; display: grid; gap: 14px; }
+.detail h4 { margin: 0 0 6px; font-size: 13px; font-weight: 600; color: var(--muted); }
+.sclist { display: flex; flex-wrap: wrap; gap: 6px; }
+.sc { display: inline-flex; align-items: center; gap: 5px; background: var(--surface2); border-radius: 8px; padding: 2px 10px; font-variant-numeric: tabular-nums; font-size: 14px; font-weight: 600; }
+.sc i { font-style: normal; color: var(--muted); }
+.sc em { font-style: normal; font-weight: 400; color: var(--muted); font-size: 12px; margin-inline-start: 4px; }
+.facts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.fact { background: var(--surface2); border-radius: 10px; padding: 8px 10px; min-width: 0; }
+.fact b { display: block; font-size: 17px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.fact span { font-size: 12px; color: var(--muted); }
+.vs { display: grid; gap: 8px; }
+.vs .row { display: grid; grid-template-columns: 56px 1fr 56px; align-items: center; gap: 10px; font-size: 13px; font-variant-numeric: tabular-nums; }
+.vs .row > b { font-weight: 600; text-align: center; }
+.vs .track { height: 8px; background: var(--surface2); border-radius: 999px; display: flex; overflow: hidden; gap: 2px; }
+.vs .track i { display: block; height: 100%; }
+.forms { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.form5 { display: flex; gap: 4px; flex-wrap: wrap; }
+.fm { width: 26px; height: 26px; border-radius: 6px; display: grid; place-items: center; font-size: 12px; font-weight: 600; }
+.fm.W { background: var(--home); color: var(--on-home); } .fm.D { background: var(--draw); color: var(--ink); } .fm.L { background: var(--away); color: var(--on-away); }
+
+/* جدول الترتيب */
+.tablewrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; }
+table { border-collapse: collapse; width: 100%; min-width: 760px; font-size: 14px; font-variant-numeric: tabular-nums; }
+th, td { padding: 9px 10px; text-align: center; white-space: nowrap; }
+th { font-weight: 500; color: var(--muted); font-size: 12px; border-bottom: 1px solid var(--line); }
+td.t { text-align: start; font-weight: 600; }
+td.t .in { display: flex; align-items: center; gap: 8px; }
+td.t .disc { width: 26px; height: 26px; font-size: 9px; letter-spacing: 0; }
+tbody tr + tr td { border-top: 1px solid var(--line); }
+tr.z-cl td:first-child { box-shadow: inset -4px 0 0 var(--home); }
+tr.z-rel td:first-child { box-shadow: inset -4px 0 0 var(--away); }
+td.pts { font-weight: 600; }
+.pbar { display: inline-flex; align-items: center; gap: 6px; min-width: 70px; justify-content: center; }
+.pbar i { display: block; height: 6px; border-radius: 999px; background: var(--home); min-width: 2px; }
+.pbar.rel i { background: var(--away); }
+.pbar.ti i { background: var(--ink); }
+.legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: 12.5px; color: var(--muted); margin-top: 10px; }
+.legend span::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-inline-end: 6px; vertical-align: -1px; }
+.legend .l1::before { background: var(--home); } .legend .l2::before { background: var(--away); }
+
+/* عن النموذج */
+.prose { max-width: 68ch; }
+.prose h2 { font-family: var(--font-display); font-size: 24px; margin: 26px 0 6px; }
+.prose p, .prose li { color: var(--ink); }
+.prose ul { padding-inline-start: 20px; }
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin: 14px 0; }
+.kpi { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; }
+.kpi b { display: block; font-family: var(--font-display); font-size: 30px; line-height: 1.2; font-variant-numeric: tabular-nums; }
+.kpi span { font-size: 13px; color: var(--muted); }
+.calib { width: 100%; max-width: 520px; min-width: 0; font-size: 14px; }
+.calib th, .calib td { text-align: center; }
+.note { background: var(--surface2); border-radius: 12px; padding: 12px 16px; font-size: 14px; }
+footer.foot { margin-top: 36px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12.5px; }
+
+.empty { text-align: center; color: var(--muted); padding: 32px 0; }
+
+@media (max-width: 640px) {
+  .picks { grid-template-columns: 1fr; }
+  .facts { grid-template-columns: 1fr 1fr; }
+  .forms { grid-template-columns: 1fr; }
+  .score { font-size: 32px; }
+  .disc { width: 40px; height: 40px; }
+  .team .nm { font-size: 14px; }
+  .brand h1 { font-size: 30px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .bar i { transition: width .4s ease; }
+}
+</style>
+
+<div class="wrap" id="app">
+  <header class="top">
+    <div class="brand">
+      <svg viewBox="0 0 44 44" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--home)">
+        <path d="M22 6v30M12 38h20"/><path d="M8 14l14-4 14 4"/><path d="M8 14l-5 11a6 6 0 0010 0L8 14zM36 14l-5 11a6 6 0 0010 0L36 14z"/>
+      </svg>
+      <div>
+        <h1>ميزان</h1>
+        <p id="brandsub">توقعات الدوري الإنجليزي الممتاز</p>
+      </div>
+    </div>
+    <div class="stamp" id="stamp"></div>
+  </header>
+
+  <nav class="tabs" aria-label="الأقسام">
+    <a href="#matches" data-tab="matches">المباريات</a>
+    <a href="#table" data-tab="table">الترتيب والموسم</a>
+    <a href="#about" data-tab="about">عن النموذج</a>
+  </nav>
+
+  <section id="tab-matches">
+    <div class="controls">
+      <div class="chips" id="mdchips" role="group" aria-label="الجولة"></div>
+      <div class="selects">
+        <label for="teamSel">الفريق <select id="teamSel"></select></label>
+        <label for="sortSel">الترتيب <select id="sortSel">
+          <option value="date">حسب الموعد</option>
+          <option value="conf">الأكثر حسماً</option>
+          <option value="open">الأكثر توازناً</option>
+          <option value="goals">الأغزر أهدافاً</option>
+        </select></label>
+      </div>
+    </div>
+    <div class="heading"><h2 id="mhead"></h2><span id="msub"></span></div>
+    <div class="picks" id="picks"></div>
+    <div class="list" id="list"></div>
+  </section>
+
+  <section id="tab-table" hidden>
+    <div class="heading"><h2>الترتيب وتوقعات نهاية الموسم</h2><span id="tsub"></span></div>
+    <div class="tablewrap"><table id="tbl"></table></div>
+    <div class="legend"><span class="l1">المراكز الأربعة الأولى حالياً</span><span class="l2">مراكز الهبوط الثلاثة حالياً</span></div>
+    <p class="note" style="margin-top:14px">«القوة» هي تقييم Elo بعد آخر مباراة، ويحسب فيه الفريق ماضيه لا ترتيبه الحالي فقط. لذلك قد يتقدم فريق قوي في التوقعات على فريق يسبقه في الترتيب الآن.</p>
+  </section>
+
+  <section id="tab-about" hidden>
+    <div class="prose">
+      <h2>كيف تُحسب التوقعات؟</h2>
+      <p>يجمع «ميزان» نموذجين معروفين في تحليل كرة القدم ويأخذ متوسطهما. الأول <b>تقييم Elo</b>، وهو رقم لقوة كل فريق يرتفع بعد الفوز على خصم قوي ويهبط بعد الخسارة أمام خصم ضعيف. والثاني <b>نموذج الأهداف</b> الذي يقدّر قوة هجوم كل فريق وضعف دفاع خصمه، ثم يحسب احتمال كل نتيجة ممكنة (1-0، 2-1، 1-1…). ويُضاف إلى الحساب أثر اللعب على أرضه.</p>
+      <p>أما احتمالات اللقب والهبوط فمصدرها محاكاة الموسم المتبقي 10,000 مرة، مع إدخال هامش لعدم اليقين في قوة كل فريق.</p>
+
+      <h2>ما مدى دقته؟</h2>
+      <p>اختُبر النموذج بأسلوب صارم: يتنبأ بكل مباراة بما كان معروفاً قبلها فقط، وضُبطت إعداداته على المواسم الأولى (حتى 2004/05) ثم جُمّدت قبل اختبار 15 موسماً لاحقاً.</p>
+      <div class="kpis">
+        <div class="kpi"><b>54.5%</b><span>إصابة الفائز أو التعادل (5,700 مباراة)</span></div>
+        <div class="kpi"><b>46.5%</b><span>لو خمّنا «يفوز صاحب الأرض» دائماً</span></div>
+        <div class="kpi"><b>12.6%</b><span>إصابة النتيجة الدقيقة (النتيجة الأرجح في نموذج الأهداف)</span></div>
+      </div>
+      <p>ومعنى النسبة الثالثة أن النتيجة الدقيقة تُصاب في مباراة من كل ثمانٍ تقريباً. وهذا حدّ طبيعي في كرة القدم وليس عيباً في النموذج، فعدد الأهداف في المباراة يتأثر بالحظ كثيراً. لذلك ينبغي قراءة النتيجة المعروضة على أنها أرجح نتيجة وليست وعداً.</p>
+      <p>والاحتمالات المعروضة <b>معايَرة</b>: حين يقول النموذج إن فرصة الفوز 60% تقع النتيجة فعلاً في نحو 60% من هذه المباريات.</p>
+      <div style="overflow-x:auto">
+      <table class="calib" aria-label="معايرة الاحتمالات">
+        <thead><tr><th>الاحتمال الذي أعلنه النموذج</th><th>ما حدث فعلاً</th><th>عدد المباريات</th></tr></thead>
+        <tbody>
+          <tr><td>41%</td><td>42.0%</td><td>1,635</td></tr>
+          <tr><td>50%</td><td>48.5%</td><td>1,820</td></tr>
+          <tr><td>60%</td><td>59.8%</td><td>1,089</td></tr>
+          <tr><td>70%</td><td>71.9%</td><td>705</td></tr>
+          <tr><td>80%</td><td>84.0%</td><td>451</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h2>حدود يجب معرفتها</h2>
+      <ul>
+        <li>النموذج لا يعرف الإصابات والإيقافات وتغيير المدربين ولا التشكيلة قبل المباراة.</li>
+        <li>لا يقارن نفسه بأسعار شركات المراهنة، وهي غالباً أدق قليلاً لأنها تعرف أخبار الفرق.</li>
+        <li>مواعيد انطلاق المباريات غير مدرجة؛ الصفحة تعرض يوم المباراة فقط.</li>
+        <li>الفرق الصاعدة هذا الموسم (هال سيتي، إيبسويتش تاون، كوفنتري سيتي) يعتمد تقييمها على تاريخها السابق وعلى عدد قليل من مباريات هذا الموسم، فتقديرها أقل ثباتاً.</li>
+      </ul>
+      <p class="note">«ميزان» موقع للتحليل والترفيه ولا يقدّم نصائح مراهنة، ولا يرتبط بالدوري الإنجليزي ولا بأي نادٍ أو موقع مراهنات. الشارات الملوّنة رموز خاصة بالموقع وليست شعارات الأندية الرسمية.</p>
+
+      <h2>المصادر</h2>
+      <ul>
+        <li>نتائج تاريخية من <a href="https://github.com/footballcsv/england" target="_blank" rel="noopener">footballcsv/england</a> (ترخيص CC0).</li>
+        <li>جدول الموسم الحالي من <a href="https://github.com/openfootball/england" target="_blank" rel="noopener">openfootball/england</a> (ترخيص CC0)، ويُحدَّث يومياً، وقد يتأخر المستودع أحياناً عن الواقع بجولة أو أكثر، وعندها تظهر المباراة بعبارة «بانتظار النتيجة».</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer class="foot">للترفيه والتحليل فقط. الاحتمالات تقديرات إحصائية ولا تضمن أي نتيجة.</footer>
+</div>
+
+<script type="application/json" id="data">__DATA__</script>
+<script>
+(function () {
+  document.documentElement.lang = 'ar';
+  var D = JSON.parse(document.getElementById('data').textContent);
+  var TODAY = D.generated; // تاريخ آخر تحديث للبيانات
+  var sp = (D.season || '').split('-');
+  if (sp.length === 2) document.getElementById('brandsub').textContent = 'توقعات الدوري الإنجليزي الممتاز · موسم ' + sp[0] + '/' + sp[1];
+  document.getElementById('tsub').textContent = 'بعد ' + D.played_md + ' جولات · 10,000 محاكاة للمباريات المتبقية';
+
+  var TEAMS = {
+    'Arsenal FC': ['آرسنال', 'ARS', '#D6232A'], 'Manchester City FC': ['مانشستر سيتي', 'MCI', '#6CABDD'],
+    'Liverpool FC': ['ليفربول', 'LIV', '#C8102E'], 'Chelsea FC': ['تشيلسي', 'CHE', '#1D3F94'],
+    'Brighton & Hove Albion FC': ['برايتون', 'BHA', '#0057B8'], 'Brentford FC': ['برينتفورد', 'BRE', '#E30613'],
+    'Leeds United FC': ['ليدز يونايتد', 'LEE', '#E0B400'], 'Everton FC': ['إيفرتون', 'EVE', '#003399'],
+    'Hull City AFC': ['هال سيتي', 'HUL', '#F5A12D'], 'Ipswich Town FC': ['إيبسويتش تاون', 'IPS', '#3A64A3'],
+    'Newcastle United FC': ['نيوكاسل يونايتد', 'NEW', '#2B2B2B'], 'Aston Villa FC': ['أستون فيلا', 'AVL', '#7B003C'],
+    'Manchester United FC': ['مانشستر يونايتد', 'MUN', '#DA291C'], 'Crystal Palace FC': ['كريستال بالاس', 'CRY', '#1B458F'],
+    'AFC Bournemouth': ['بورنموث', 'BOU', '#B50E12'], 'Tottenham Hotspur FC': ['توتنهام هوتسبير', 'TOT', '#132257'],
+    'Coventry City FC': ['كوفنتري سيتي', 'COV', '#59C1E8'], 'Fulham FC': ['فولهام', 'FUL', '#1A1A1A'],
+    'Nottingham Forest FC': ['نوتنغهام فورست', 'NFO', '#DD0000'], 'Sunderland AFC': ['سندرلاند', 'SUN', '#EB172B']
+  };
+  var DAYS = ['الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
+  var MONTHS = ['كانون الثاني', 'شباط', 'آذار', 'نيسان', 'أيار', 'حزيران', 'تموز', 'آب', 'أيلول', 'تشرين الأول', 'تشرين الثاني', 'كانون الأول'];
+
+  function ar(n) { return (TEAMS[n] || [n])[0]; }
+  function disc(n) {
+    var t = TEAMS[n] || [n, n.slice(0, 3).toUpperCase(), '#888888'];
+    var c = t[2], r = parseInt(c.slice(1, 3), 16), g = parseInt(c.slice(3, 5), 16), b = parseInt(c.slice(5, 7), 16);
+    var lum = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+    return '<span class="disc" style="background:' + c + ';color:' + (lum > 0.6 ? '#10201A' : '#FFFFFF') + '" aria-hidden="true">' + t[1] + '</span>';
+  }
+  function pd(s) { var p = s.split('-'); return new Date(Date.UTC(+p[0], +p[1] - 1, +p[2])); }
+  function dlabel(s) { var d = pd(s); return DAYS[d.getUTCDay()] + ' ' + d.getUTCDate() + ' ' + MONTHS[d.getUTCMonth()]; }
+  function dshort(s) { var d = pd(s); return d.getUTCDate() + ' ' + MONTHS[d.getUTCMonth()]; }
+  function days(a, b) { return Math.round((pd(b) - pd(a)) / 86400000); }
+  function pct3(a, b, c) {
+    var v = [a, b, c].map(function (x) { return x * 100; }), r = v.map(Math.floor);
+    var rem = 100 - r.reduce(function (s, x) { return s + x; }, 0);
+    var ord = [0, 1, 2].sort(function (i, j) { return (v[j] - r[j]) - (v[i] - r[i]); });
+    for (var k = 0; k < rem; k++) r[ord[k]]++;
+    return r;
+  }
+  function pr(x) { return x < 0.005 ? '—' : (x < 0.01 ? '<1%' : Math.round(x * 100) + '%'); }
+  function sc(s, extra) {
+    var p = s.split('-');
+    return '<span class="sc"><b>' + p[0] + '</b><i>–</i><b>' + p[1] + '</b>' + (extra ? '<em>' + extra + '</em>' : '') + '</span>';
+  }
+  function maxp(f) { return Math.max(f.ph, f.pd, f.pa); }
+
+  var byName = {};
+  D.teams.forEach(function (t, i) { byName[t.name] = t; t.rank = i + 1; });
+  var strengthRank = D.teams.slice().sort(function (a, b) { return b.elo - a.elo; });
+  strengthRank.forEach(function (t, i) { t.srank = i + 1; });
+
+  document.getElementById('stamp').innerHTML = 'آخر تحديث: <b>' + dlabel(TODAY) + '</b><br>النتائج حتى الجولة ' + D.played_md + ' · التوقعات حتى ' + dshort(D.fixtures.map(function (f) { return f.date; }).sort().pop());
+
+  /* ---------- المباريات ---------- */
+  var mds = []; D.fixtures.forEach(function (f) { if (mds.indexOf(f.md) < 0) mds.push(f.md); });
+  var state = { md: mds[0], team: '', sort: 'date' };
+
+  var chipsEl = document.getElementById('mdchips');
+  chipsEl.innerHTML = mds.map(function (m) { return '<button type="button" class="chip num" data-md="' + m + '" aria-pressed="false">الجولة ' + m + '</button>'; }).join('');
+  chipsEl.addEventListener('click', function (e) {
+    var b = e.target.closest('.chip'); if (!b) return;
+    state.md = +b.getAttribute('data-md'); state.team = ''; teamSel.value = ''; renderMatches();
+  });
+  var teamSel = document.getElementById('teamSel');
+  teamSel.innerHTML = '<option value="">كل الفرق</option>' + D.teams.slice().sort(function (a, b) { return ar(a.name).localeCompare(ar(b.name), 'ar'); })
+    .map(function (t) { return '<option value="' + t.name.replace(/&/g, '&amp;') + '">' + ar(t.name) + '</option>'; }).join('');
+  teamSel.addEventListener('change', function () { state.team = teamSel.value; renderMatches(); });
+  var sortSel = document.getElementById('sortSel');
+  sortSel.addEventListener('change', function () { state.sort = sortSel.value; renderMatches(); });
+
+  function confTag(f) {
+    var m = maxp(f);
+    if (m >= 0.6) return '<span class="tag hi">ثقة عالية</span>';
+    if (m >= 0.45) return '<span class="tag">ثقة متوسطة</span>';
+    return '<span class="tag">مباراة مفتوحة</span>';
+  }
+  function formHtml(name) {
+    var t = byName[name];
+    var items = t.form.map(function (x) {
+      var w = { W: 'ف', D: 'ت', L: 'خ' }[x.r];
+      var tip = (x.v === 'H' ? 'على أرضه ضد ' : 'خارج أرضه ضد ') + ar(x.op) + ' ' + x.s;
+      return '<span class="fm ' + x.r + '" title="' + tip + '">' + w + '</span>';
+    }).join('');
+    return '<div><h4>' + ar(name) + ' · آخر 5 مباريات</h4><div class="form5">' + items + '</div></div>';
+  }
+  function matchHtml(f, i) {
+    var p = pct3(f.ph, f.pd, f.pa);
+    var fav = f.ph >= f.pd && f.ph >= f.pa ? 'h' : (f.pa >= f.pd ? 'a' : 'd');
+    var stronger = f.elo_h >= f.elo_a ? f.home : f.away;
+    var gap = Math.abs(f.elo_h - f.elo_a);
+    var ph = byName[f.home], pa = byName[f.away];
+    var isToday = f.date === TODAY;
+    var pk = f.pick.s.split('-');
+    var top = f.top.map(function (x) { return sc(x.s, Math.round(x.p * 100) + '%'); }).join('');
+    var tot = f.elo_h + f.elo_a, hw = Math.round(f.elo_h / tot * 100);
+    return '<article class="match" data-i="' + i + '">' +
+      '<div class="m-top"><span>' + dlabel(f.date) + ' · الجولة <span class="num">' + f.md + '</span></span><span style="display:flex;gap:6px">' + (isToday ? '<span class="tag today">اليوم</span>' : (f.date < TODAY ? '<span class="tag">بانتظار النتيجة</span>' : '')) + confTag(f) + '</span></div>' +
+      '<div class="m-main">' +
+        '<div class="team">' + disc(f.home) + '<span class="nm">' + ar(f.home) + '</span><span class="pos num">المركز ' + ph.rank + ' · ' + ph.pts + ' نقطة</span></div>' +
+        '<div class="pred"><div class="lbl">النتيجة الأرجح</div><div class="score"><span>' + pk[0] + '</span><i>–</i><span>' + pk[1] + '</span></div><div class="sub num">احتمالها ' + Math.round(f.pick.p * 100) + '%</div></div>' +
+        '<div class="team">' + disc(f.away) + '<span class="nm">' + ar(f.away) + '</span><span class="pos num">المركز ' + pa.rank + ' · ' + pa.pts + ' نقطة</span></div>' +
+      '</div>' +
+      '<div class="odds">' +
+        '<div class="h' + (fav === 'h' ? ' top' : '') + '"><b>' + p[0] + '%</b><span>فوز ' + ar(f.home) + '</span></div>' +
+        '<div class="d' + (fav === 'd' ? ' top' : '') + '"><b>' + p[1] + '%</b><span>تعادل</span></div>' +
+        '<div class="a' + (fav === 'a' ? ' top' : '') + '"><b>' + p[2] + '%</b><span>فوز ' + ar(f.away) + '</span></div>' +
+      '</div>' +
+      '<div class="bar" role="img" aria-label="احتمالات الفوز والتعادل والخسارة"><i class="h" style="width:' + p[0] + '%"></i><i class="d" style="width:' + p[1] + '%"></i><i class="a" style="width:' + p[2] + '%"></i></div>' +
+      '<div class="m-foot"><span class="xg">الأهداف المتوقعة <b>' + f.xg_h.toFixed(1) + '</b> – <b>' + f.xg_a.toFixed(1) + '</b></span>' +
+        '<span>الأقوى تصنيفاً: <b style="color:var(--ink);font-weight:600">' + ar(stronger) + '</b> <span class="num">(+' + gap + ')</span></span>' +
+        '<button type="button" class="more" aria-expanded="false">التفاصيل</button></div>' +
+      '<div class="detail" hidden>' +
+        '<div><h4>النتائج الخمس الأكثر ترجيحاً</h4><div class="sclist">' + top + '</div></div>' +
+        '<div class="facts">' +
+          '<div class="fact"><b>' + Math.round(f.over25 * 100) + '%</b><span>أكثر من 2.5 هدف</span></div>' +
+          '<div class="fact"><b>' + Math.round(f.btts * 100) + '%</b><span>يسجل الفريقان</span></div>' +
+          '<div class="fact"><b>' + Math.round(f.cs_h * 100) + '%</b><span>شباك ' + ar(f.home) + ' نظيفة</span></div>' +
+          '<div class="fact"><b>' + Math.round(f.cs_a * 100) + '%</b><span>شباك ' + ar(f.away) + ' نظيفة</span></div>' +
+        '</div>' +
+        '<div class="vs"><h4>قوة الفريقين (تقييم Elo)</h4>' +
+          '<div class="row"><b>' + f.elo_h + '</b><div class="track"><i style="width:' + hw + '%;background:var(--home)"></i><i style="width:' + (100 - hw) + '%;background:var(--away)"></i></div><b>' + f.elo_a + '</b></div>' +
+          '<div style="font-size:12.5px;color:var(--muted)">يُضاف إلى صاحب الأرض نحو 80 نقطة عند الحساب. الفارق الفعلي في هذه المباراة: ' + Math.abs(f.elo_diff) + ' نقطة لصالح ' + ar(f.elo_diff >= 0 ? f.home : f.away) + '.</div>' +
+        '</div>' +
+        '<div class="forms">' + formHtml(f.home) + formHtml(f.away) + '</div>' +
+      '</div>' +
+    '</article>';
+  }
+  function pickCard(label, f, text) {
+    return '<div class="pick"><small>' + label + '</small><strong>' + ar(f.home) + ' – ' + ar(f.away) + '</strong><span>' + text + '</span></div>';
+  }
+
+  var current = [];
+  function renderMatches() {
+    var list = D.fixtures.filter(function (f) { return state.team ? (f.home === state.team || f.away === state.team) : f.md === state.md; });
+    if (state.sort === 'date') list.sort(function (a, b) { return a.date < b.date ? -1 : a.date > b.date ? 1 : 0; });
+    if (state.sort === 'conf') list.sort(function (a, b) { return maxp(b) - maxp(a); });
+    if (state.sort === 'open') list.sort(function (a, b) { return maxp(a) - maxp(b); });
+    if (state.sort === 'goals') list.sort(function (a, b) { return (b.xg_h + b.xg_a) - (a.xg_h + a.xg_a); });
+    current = list;
+
+    Array.prototype.forEach.call(chipsEl.children, function (c) { c.setAttribute('aria-pressed', String(!state.team && +c.getAttribute('data-md') === state.md)); });
+    chipsEl.className = 'chips' + (state.team ? ' off' : '');
+
+    var head = document.getElementById('mhead'), sub = document.getElementById('msub');
+    if (state.team) { head.textContent = 'مباريات ' + ar(state.team); sub.textContent = list.length + ' مباراة قادمة'; }
+    else {
+      var ds = list.map(function (f) { return f.date; }).sort();
+      head.textContent = 'الجولة ' + state.md;
+      sub.textContent = ds.length ? (ds[0] === ds[ds.length - 1] ? dlabel(ds[0]) : dshort(ds[0]) + ' – ' + dshort(ds[ds.length - 1])) : '';
+    }
+
+    var picks = document.getElementById('picks');
+    if (!state.team && list.length >= 3) {
+      var a = list.slice().sort(function (x, y) { return maxp(y) - maxp(x); })[0];
+      var b = list.slice().sort(function (x, y) { return maxp(x) - maxp(y); })[0];
+      var c = list.slice().sort(function (x, y) { return (y.xg_h + y.xg_a) - (x.xg_h + x.xg_a); })[0];
+      var wa = a.ph >= a.pa ? a.home : a.away;
+      picks.innerHTML = pickCard('الأقرب إلى الحسم', a, 'فوز ' + ar(wa) + ' بنسبة ' + Math.round(maxp(a) * 100) + '%') +
+        pickCard('الأكثر توازناً', b, 'أعلى احتمال ' + Math.round(maxp(b) * 100) + '% فقط') +
+        pickCard('الأغزر أهدافاً', c, 'متوقع ' + (c.xg_h + c.xg_a).toFixed(1) + ' هدف');
+      picks.hidden = false;
+    } else { picks.innerHTML = ''; picks.hidden = true; }
+
+    document.getElementById('list').innerHTML = list.length ? list.map(matchHtml).join('') : '<p class="empty">لا توجد مباريات مطابقة.</p>';
+  }
+  document.getElementById('list').addEventListener('click', function (e) {
+    var b = e.target.closest('.more'); if (!b) return;
+    var d = b.closest('.match').querySelector('.detail');
+    var open = d.hidden; d.hidden = !open;
+    b.setAttribute('aria-expanded', String(open)); b.textContent = open ? 'إخفاء التفاصيل' : 'التفاصيل';
+  });
+
+  /* ---------- الترتيب ---------- */
+  function tableHtml() {
+    var minE = Math.min.apply(null, D.teams.map(function (t) { return t.elo; })), maxE = Math.max.apply(null, D.teams.map(function (t) { return t.elo; }));
+    var head = '<thead><tr><th>#</th><th style="text-align:start">الفريق</th><th>لعب</th><th>ف</th><th>ت</th><th>خ</th><th>فارق</th><th>نقاط</th><th>القوة</th><th>المركز المتوقع</th><th>اللقب</th><th>المراكز الأربعة</th><th>الهبوط</th><th>آخر 5</th></tr></thead>';
+    var rows = D.teams.map(function (t, i) {
+      var gd = t.gf - t.ga, z = i < 4 ? ' class="z-cl"' : (i >= 17 ? ' class="z-rel"' : '');
+      var w = Math.round(((t.elo - minE) / (maxE - minE)) * 100);
+      var form = t.form.map(function (x) { return '<span class="fm ' + x.r + '" style="width:20px;height:20px;font-size:10.5px" title="' + ar(x.op) + ' ' + x.s + '">' + { W: 'ف', D: 'ت', L: 'خ' }[x.r] + '</span>'; }).join('');
+      function pb(v, cls) { return '<span class="pbar ' + cls + '"><span>' + pr(v) + '</span><i style="width:' + Math.max(0, Math.round(v * 44)) + 'px"></i></span>'; }
+      return '<tr' + z + '><td>' + (i + 1) + '</td><td class="t"><span class="in">' + disc(t.name) + ar(t.name) + '</span></td>' +
+        '<td>' + t.p + '</td><td>' + t.w + '</td><td>' + t.d + '</td><td>' + t.l + '</td><td dir="ltr">' + (gd > 0 ? '+' : '') + gd + '</td><td class="pts">' + t.pts + '</td>' +
+        '<td><span class="pbar"><span>' + t.elo + '</span><i style="width:' + Math.max(4, Math.round(w * .4)) + 'px;background:var(--ink)"></i></span></td>' +
+        '<td>' + t.exp_pos.toFixed(1) + '</td><td>' + pb(t.title, 'ti') + '</td><td>' + pb(t.top4, '') + '</td><td>' + pb(t.rel, 'rel') + '</td>' +
+        '<td><span style="display:inline-flex;gap:3px">' + form + '</span></td></tr>';
+    }).join('');
+    return head + '<tbody>' + rows + '</tbody>';
+  }
+  document.getElementById('tbl').innerHTML = tableHtml();
+
+  /* ---------- التبويبات ---------- */
+  var tabs = ['matches', 'table', 'about'];
+  function showTab() {
+    var h = (location.hash || '').replace('#', ''); if (tabs.indexOf(h) < 0) h = 'matches';
+    tabs.forEach(function (t) { document.getElementById('tab-' + t).hidden = t !== h; });
+    Array.prototype.forEach.call(document.querySelectorAll('nav.tabs a'), function (a) {
+      if (a.getAttribute('data-tab') === h) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
+    });
+  }
+  window.addEventListener('hashchange', showTab);
+  showTab();
+  renderMatches();
+})();
+</script>

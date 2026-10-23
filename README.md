@@ -1,0 +1,25 @@
+# ميزان — توقعات الدوري الإنجليزي الممتاز (الإصدار v1)
+
+موقع ثابت يعرض احتمالات الفوز والتعادل والخسارة والنتيجة الأرجح وقوة الفرق وفرص اللقب والهبوط.
+يُحدَّث آلياً مرتين يومياً عبر GitHub Actions ويُنشر على GitHub Pages. لا خادم ولا تكلفة.
+
+## البنية
+- `src/backtest.py`: النماذج (Elo + هجوم/دفاع بواسون) والاختبار الرجعي. للتشغيل: `python3 src/backtest.py`
+- `src/predict.py`: يقرأ التاريخ والجدول، ويحسب التوقعات والمحاكاة، ويكتب `data.json`.
+- `src/build_site.py`: يدمج `data.json` في `src/site_template.html` وينتج `dist/index.html`.
+- `data/history/`: نتائج 1992/93 إلى 2019/20 من footballcsv (CC0).
+- `data/patch_results.json`: نتائج تُضاف يدوياً عند تأخر المصدر عن الواقع (اختياري). الصيغة: `["مضيف","2-1","ضيف"]`.
+- `.github/workflows/update.yml`: التحديث والنشر.
+
+## مصدر البيانات الحالية
+جدول الموسم ونتائجه من مستودع openfootball/england (CC0) ويُجلب عند كل تشغيل.
+قد يتأخر هذا المستودع عن الواقع بجولة أو أكثر؛ تظهر عندها المباراة بعبارة «بانتظار النتيجة».
+
+## التشغيل المحلي
+```
+git clone --depth 1 https://github.com/openfootball/england openfootball/england
+OF_DIR=openfootball/england python3 src/predict.py
+python3 src/build_site.py        # الناتج: dist/index.html
+```
+
+للترفيه والتحليل فقط. لا علاقة للموقع بالدوري ولا بالأندية ولا بمواقع المراهنة.

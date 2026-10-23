@@ -1,0 +1,252 @@
+#!/usr/bin/env python3
+"""يبني توقعات مباريات الدوري الإنجليزي القادمة ويصدرها إلى data.json.
+
+- التاريخ: footballcsv (1992-93 → 2019-20) ثم openfootball (2020-21 → اليوم). كلاهما CC0.
+- النموذج: مزيج Elo + هجوم/دفاع (بواسون) بنفس المعاملات المختارة في الاختبار الرجعي.
+- محاكاة مونت كارلو للمواسم المتبقية لاحتمالات اللقب/دوري الأبطال/الهبوط.
+"""
+import json, math, os, random, re, sys
+from datetime import datetime, timedelta, timezone
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, HERE)
+import backtest as bt
+
+OF = os.environ.get("OF_DIR", os.path.join(HERE, "..", "openfootball", "england"))
+OUT = os.environ.get("OUT_JSON", os.path.join(HERE, "..", "data.json"))
+PATCH = os.path.join(HERE, "..", "data", "patch_results.json")
+# المواسم المتاحة في openfootball من 2020-21 فصاعداً؛ الأحدث هو الموسم الجاري
+SEASONS_OF = sorted(d for d in os.listdir(OF) if re.fullmatch(r"\d{4}-\d{2}", d) and d >= "2020-21"
+                    and os.path.exists(os.path.join(OF, d, "1-premierleague.txt")))
+CUR = SEASONS_OF[-1]
+PE = dict(k=15, home=80, draw=0.55, shrink=0.15)
+PP = dict(lr=0.02, home=0.3, shrink=0.1)
+TODAY = datetime.now(timezone.utc).replace(tzinfo=None, hour=0, minute=0, second=0, microsecond=0)
+HORIZON = TODAY + timedelta(days=160)   # نحو خمسة أشهر قادمة
+
+MATCH_RE = re.compile(r"^\s+(?:\d{1,2}:\d{2}\s+)?(?P<h>.+?)\s+v\s+(?P<a>.+?)(?:\s{2,}|\s+)(?P<s>\d+-\d+)?(?:\s*\(\d+-\d+\))?\s*$")
+DATE_RE = re.compile(r"^\s+(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun)\s+(?P<mon>[A-Z][a-z]{2})\s+(?P<d>\d{1,2})(?:\s+(?P<y>\d{4}))?\s*$")
+MD_RE = re.compile(r"Matchday\s+(\d+)")
+MONTHS = {m: i for i, m in enumerate(["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"], 1)}
+
+
+def parse_of(season):
+    y0 = int(season[:4])
+    out, date, md = [], None, None
+    with open(f"{OF}/{season}/1-premierleague.txt", encoding="utf-8") as f:
+        for line in f:
+            line = line.rstrip("\n")
+            m = MD_RE.search(line)
+            if m and line.lstrip().startswith("▪"):
+                md = int(m.group(1)); continue
+            d = DATE_RE.match(line)
+            if d:
+                mon = MONTHS[d.group("mon")]
+                year = int(d.group("y")) if d.group("y") else (y0 if mon >= 7 else y0 + 1)
+                date = datetime(year, mon, int(d.group("d"))); continue
+            if " v " in line and date:
+                # فصل الفريقين والنتيجة بدقة: نبحث عن النتيجة في نهاية السطر
+                body = re.sub(r"^\s+\d{1,2}:\d{2}\s+", "", line).strip()
+                sc = re.search(r"\s(\d+)-(\d+)(?:\s*\(\d+-\d+\))?\s*$", body)
+                hg = ag = None
+                if sc:
+                    hg, ag = int(sc.group(1)), int(sc.group(2)); body = body[:sc.start()].rstrip()
+                parts = re.split(r"\s+v\s+", body)
+                if len(parts) != 2:
+                    raise ValueError(f"سطر غير مفهوم: {line!r}")
+                out.append(dict(season=season, date=date, home=parts[0].strip(), away=parts[1].strip(),
+                                hg=hg, ag=ag, md=md))
+    return out
+
+
+def load_all():
+    old = [r for r in bt.load() if r["season"] <= "2019-20"]
+    hist = list(old)
+    upcoming, cur_played = [], []
+    for s in SEASONS_OF:
+        for r in parse_of(s):
+            if r["hg"] is None:
+                if s == CUR: upcoming.append(r)
+                continue
+            r2 = {k: r[k] for k in ("season", "date", "home", "away", "hg", "ag")}
+            hist.append(r2)
+            if s == CUR: cur_played.append(r)
+    # نتائج الجولتين 6 و7 غير موجودة بعد في openfootball (آخر تحديث للمستودع 15 أكتوبر): تُكمَّل من patch_results.json
+    patch = json.load(open(PATCH, encoding="utf-8")) if os.path.exists(PATCH) else []
+    def full(short, names):
+        c = [n for n in names if n == short or n.startswith(short + " ")]
+        assert len(c) == 1, (short, c)
+        return c[0]
+    names = {r["home"] for r in upcoming} | {r["away"] for r in upcoming}
+    applied = 0
+    for h, sc, a in patch:
+        try:
+            hf, af = full(h, names), full(a, names)
+        except AssertionError:
+            continue   # الفريقان لم يعودا ضمن المباريات غير المسجلة
+        hit = [r for r in upcoming if r["home"] == hf and r["away"] == af]
+        if not hit:
+            continue   # المصدر سجّل النتيجة بنفسه
+        assert len(hit) == 1, (h, a, hit)
+        r = hit[0]; r["hg"], r["ag"] = map(int, sc.split("-"))
+        upcoming.remove(r); cur_played.append(r)
+        hist.append({k: r[k] for k in ("season", "date", "home", "away", "hg", "ag")})
+        applied += 1
+    print("نتائج مكمَّلة من الويب:", applied)
+    hist.sort(key=lambda x: (x["date"], x["home"]))
+    return hist, cur_played, upcoming
+
+
+def table(played, teams):
+    t = {x: dict(p=0, w=0, d=0, l=0, gf=0, ga=0, pts=0) for x in teams}
+    for m in played:
+        h, a = t[m["home"]], t[m["away"]]
+        h["p"] += 1; a["p"] += 1
+        h["gf"] += m["hg"]; h["ga"] += m["ag"]; a["gf"] += m["ag"]; a["ga"] += m["hg"]
+        if m["hg"] > m["ag"]: h["w"] += 1; h["pts"] += 3; a["l"] += 1
+        elif m["hg"] < m["ag"]: a["w"] += 1; a["pts"] += 3; h["l"] += 1
+        else: h["d"] += 1; a["d"] += 1; h["pts"] += 1; a["pts"] += 1
+    return t
+
+
+def main():
+    hist, cur_played, upcoming = load_all()
+    seasons = sorted({r["season"] for r in hist})
+    print("مباريات التاريخ:", len(hist), "| مواسم:", len(seasons), seasons[0], "→", seasons[-1])
+
+    elo = bt.Elo(**PE)
+    poi = bt.PoissonDC(PP["lr"], PP["home"], 0.2, PP["shrink"])
+    mdl = bt.Blend(elo, poi, 0.5)
+
+    # تشغيل زمني كامل (هو نفسه الذي اختُبر رجعياً) ثم التقاط الحالة الراهنة
+    prev = None
+    for m in hist:
+        if prev is not None and m["season"] != prev:
+            mdl.new_season()
+        prev = m["season"]
+        mdl.update(m)
+    # بدء موسم 2026-27: لم يُنفَّذ new_season بعد لأن آخر مباراة في التاريخ هي من 2026-27 نفسه؛
+    # ملاحظة: المواسم تُفصل داخل الحلقة، لذا حالة الدوري الحالية سليمة.
+
+    teams = sorted({m["home"] for m in cur_played} | {m["home"] for m in upcoming} | {m["away"] for m in upcoming})
+    assert len(teams) == 20, teams
+    unknown = [t for t in teams if t not in elo.r]
+    print("فرق بلا تاريخ:", unknown)
+
+    tb = table(cur_played, teams)
+    played_n = {t: tb[t]["p"] for t in teams}
+    print("الجولات الملعوبة لكل فريق:", sorted(set(played_n.values())))
+
+    # قوة الفرق
+    strength = {t: elo.r[t] for t in teams}
+    # قدرات الهجوم والدفاع (بتصحيح الميزة بحيث المتوسط 0)
+    att = {t: poi.att.get(t, 0.0) for t in teams}
+    dfn = {t: poi.dfn.get(t, 0.0) for t in teams}
+
+    def predict(m):
+        p = mdl.predict(m)
+        lh, la = poi.lams(m)
+        # شبكة النتائج المحتملة بتعديل بسيط ليتوافق مجموع الاحتمالات مع المزيج
+        P = [[bt.pois(i, lh) * bt.pois(j, la) for j in range(8)] for i in range(8)]
+        tot = sum(sum(r) for r in P)
+        cells = sorted(((P[i][j] / tot, i, j) for i in range(8) for j in range(8)), reverse=True)
+        top = [dict(s=f"{i}-{j}", p=round(c, 4)) for c, i, j in cells[:5]]
+        over25 = sum(P[i][j] for i in range(8) for j in range(8) if i + j >= 3) / tot
+        btts = sum(P[i][j] for i in range(1, 8) for j in range(1, 8)) / tot
+        cs_h = sum(P[i][0] for i in range(8)) / tot
+        cs_a = sum(P[0][j] for j in range(8)) / tot
+        fav = max(range(3), key=lambda k: p[k])
+        ok = lambda i, j: (i > j) if fav == 0 else ((i == j) if fav == 1 else (i < j))
+        c2 = next((c, i, j) for c, i, j in cells if ok(i, j))
+        pick = dict(s=f"{c2[1]}-{c2[2]}", p=round(c2[0], 4))
+        return p, lh, la, top, over25, btts, cs_h, cs_a, pick
+
+    fixtures = []
+    for m in upcoming:
+        if m["date"] > HORIZON: continue
+        p, lh, la, top, o25, bt_, ch, ca, pick = predict(m)
+        diff = elo.rating(m["home"]) + PE["home"] - elo.rating(m["away"])
+        fixtures.append(dict(
+            md=m["md"], date=m["date"].strftime("%Y-%m-%d"), home=m["home"], away=m["away"],
+            ph=round(p[0], 4), pd=round(p[1], 4), pa=round(p[2], 4), pick=pick,
+            xg_h=round(lh, 2), xg_a=round(la, 2), top=top,
+            over25=round(o25, 4), btts=round(bt_, 4), cs_h=round(ch, 4), cs_a=round(ca, 4),
+            elo_h=round(elo.rating(m["home"])), elo_a=round(elo.rating(m["away"])), elo_diff=round(diff),
+        ))
+    print("مباريات قادمة حتى", HORIZON.date(), ":", len(fixtures))
+
+    # آخر 5 نتائج لكل فريق (النتيجة + الخصم)
+    forms = {t: [] for t in teams}
+    for m in sorted(cur_played, key=lambda x: x["date"]):
+        for me, op, gf, ga, ven in ((m["home"], m["away"], m["hg"], m["ag"], "H"), (m["away"], m["home"], m["ag"], m["hg"], "A")):
+            forms[me].append(dict(r="W" if gf > ga else ("D" if gf == ga else "L"), s=f"{gf}-{ga}", op=op, v=ven))
+
+    # محاكاة الموسم المتبقي كاملاً (يشمل ما بعد مارس لأجل الجدول النهائي)
+    random.seed(2026)
+    rest = []
+    for m in upcoming:
+        p = mdl.predict(m); lh, la = poi.lams(m)
+        rest.append((m["home"], m["away"], p, lh, la))
+    N = 10000
+    cnt = {t: dict(title=0, top4=0, rel=0, pos_sum=0, pts_sum=0) for t in teams}
+    base = {t: (tb[t]["pts"], tb[t]["gf"] - tb[t]["ga"], tb[t]["gf"]) for t in teams}
+    for _ in range(N):
+        pts = {t: base[t][0] for t in teams}
+        gd = {t: base[t][1] for t in teams}
+        gf = {t: base[t][2] for t in teams}
+        # عدم يقين قوة الفريق: انحراف عشوائي ثابت لكل فريق طوال هذه المحاكاة (≈ ±35 نقطة Elo)
+        q = {t: random.gauss(0, 0.2) for t in teams}
+        for h, a, p, lh, la in rest:
+            dlt = q[h] - q[a]
+            w0, w1, w2 = p[0] * math.exp(dlt), p[1], p[2] * math.exp(-dlt)
+            z = w0 + w1 + w2
+            r = random.random() * z
+            if r < w0:
+                o = 0
+            elif r < w0 + w1:
+                o = 1
+            else:
+                o = 2
+            # أهداف متسقة مع النتيجة: عيّن من بواسون مشروطاً بالنتيجة
+            for _try in range(30):
+                x = _pois_draw(lh); y = _pois_draw(la)
+                if (x > y and o == 0) or (x == y and o == 1) or (x < y and o == 2): break
+            else:
+                x, y = (1, 0) if o == 0 else ((0, 0) if o == 1 else (0, 1))
+            gd[h] += x - y; gd[a] += y - x; gf[h] += x; gf[a] += y
+            pts[h] += 3 if o == 0 else (1 if o == 1 else 0)
+            pts[a] += 3 if o == 2 else (1 if o == 1 else 0)
+        order = sorted(teams, key=lambda t: (pts[t], gd[t], gf[t], random.random()), reverse=True)
+        for i, t in enumerate(order):
+            c = cnt[t]; c["pos_sum"] += i + 1; c["pts_sum"] += pts[t]
+            if i == 0: c["title"] += 1
+            if i < 4: c["top4"] += 1
+            if i >= 17: c["rel"] += 1
+    teams_out = []
+    for t in teams:
+        c = cnt[t]
+        teams_out.append(dict(
+            name=t, elo=round(strength[t]), att=round(att[t], 3), dfn=round(dfn[t], 3),
+            **{k: tb[t][k] for k in ("p", "w", "d", "l", "gf", "ga", "pts")},
+            form=forms[t][-5:], title=round(c["title"] / N, 4), top4=round(c["top4"] / N, 4),
+            rel=round(c["rel"] / N, 4), exp_pos=round(c["pos_sum"] / N, 1), exp_pts=round(c["pts_sum"] / N, 1)))
+    teams_out.sort(key=lambda x: (-x["pts"], -(x["gf"] - x["ga"]), -x["gf"]))
+
+    out = dict(generated=TODAY.strftime("%Y-%m-%d"), played_md=min(tb[t]["p"] for t in teams), through=str(HORIZON.date()), season=CUR, model="Elo + هجوم/دفاع (بواسون)",
+               backtest=dict(matches=5700, acc=0.545, base_acc=0.465, logloss=0.965), teams=teams_out, fixtures=fixtures)
+    json.dump(out, open(OUT, "w", encoding="utf-8"), ensure_ascii=False)
+    print("تم. أفضل 5 بالقوة:", sorted(((round(v), k) for k, v in strength.items()), reverse=True)[:5])
+    print("احتمال اللقب:", sorted(((t["title"], t["name"]) for t in teams_out), reverse=True)[:5])
+    print("مجموع احتمالات اللقب:", round(sum(t["title"] for t in teams_out), 3))
+
+
+def _pois_draw(lam):
+    L = math.exp(-lam); k = 0; p = 1.0
+    while True:
+        p *= random.random()
+        if p <= L: return k
+        k += 1
+
+
+if __name__ == "__main__":
+    main()

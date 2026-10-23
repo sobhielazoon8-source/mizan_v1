@@ -1,0 +1,5 @@
+openfootball/
+dist/
+data.json
+backtest_result.json
+__pycache__/
