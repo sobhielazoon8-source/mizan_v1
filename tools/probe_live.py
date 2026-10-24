@@ -2,7 +2,7 @@
 import json, os, sys, time, urllib.request, datetime
 
 KEY = os.environ.get("API_FOOTBALL_KEY", "")
-URL = "https://v3.football.api-sports.io/fixtures?live=39"
+URL = "https://v3.football.api-sports.io/fixtures?live=all"
 DURATION = int(os.environ.get("PROBE_MINUTES", "100"))
 EVERY = 120
 out, last, lineup_done = [], {}, set()
@@ -36,9 +36,10 @@ while time.time() < end:
         continue
     if b.get("errors"):
         log(f"{now()} errors={b['errors']}")
-    res = b.get("response") or []
+    allres = b.get("response") or []
+    res = [f for f in allres if (f.get("league") or {}).get("id") == 39]
     if polls == 1:
-        log(f"{now()} أول استعلام: مباريات الدوري الجارية={len(res)} المتبقي اليوم={rem}")
+        log(f"{now()} أول استعلام: كل المباريات الجارية={len(allres)} مباريات الدوري الإنجليزي={len(res)} المتبقي اليوم={rem}")
     for f in res:
         fid = f["fixture"]["id"]
         g = f.get("goals", {})
