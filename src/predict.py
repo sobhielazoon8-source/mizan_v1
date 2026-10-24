@@ -254,6 +254,12 @@ def main():
         if m["date"] > HORIZON: continue
         p, lh, la, top, o25, bt_, ch, ca, pick, modal = predict(m)
         diff = elo.rating(m["home"]) + PE["home"] - elo.rating(m["away"])
+        # نفس النموذج تماماً لكن بلا أفضلية الأرض (ملعب محايد) لزر «بلا أفضلية الأرض» في التطبيق
+        _eh, _ph = elo.home, poi.home
+        elo.home, poi.home = 0.0, 0.0
+        pn = mdl.predict(m)
+        lhn, lan = poi.lams(m)
+        elo.home, poi.home = _eh, _ph
         fixtures.append(dict(
             md=m["md"], date=m["date"].strftime("%Y-%m-%d"), kickoff=kickoff_iso(m["date"], m.get("time")), home=m["home"], away=m["away"],
             ph=round(p[0], 4), pd=round(p[1], 4), pa=round(p[2], 4), pick=pick, modal=modal,
@@ -261,6 +267,7 @@ def main():
             xg_h=round(lh, 2), xg_a=round(la, 2), top=top,
             over25=round(o25, 4), btts=round(bt_, 4), cs_h=round(ch, 4), cs_a=round(ca, 4),
             elo_h=round(elo.rating(m["home"])), elo_a=round(elo.rating(m["away"])), elo_diff=round(diff),
+            nh_ph=round(pn[0], 4), nh_pd=round(pn[1], 4), nh_pa=round(pn[2], 4), nh_xg_h=round(lhn, 2), nh_xg_a=round(lan, 2),
         ))
     print("مباريات قادمة حتى", HORIZON.date(), ":", len(fixtures))
     NOW = datetime.now(timezone.utc)
