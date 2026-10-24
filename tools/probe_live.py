@@ -5,7 +5,7 @@ KEY = os.environ.get("API_FOOTBALL_KEY", "")
 URL = "https://v3.football.api-sports.io/fixtures?live=39"
 DURATION = int(os.environ.get("PROBE_MINUTES", "100"))
 EVERY = 120
-out, last = [], {}
+out, last, lineup_done = [], {}, set()
 
 
 def now():
@@ -43,6 +43,17 @@ while time.time() < end:
         fid = f["fixture"]["id"]
         g = f.get("goals", {})
         st = (g.get("home"), g.get("away"), f["fixture"]["status"]["short"])
+        if fid not in lineup_done:
+            lineup_done.add(fid)
+            try:
+                rq = urllib.request.Request(f"https://v3.football.api-sports.io/fixtures/lineups?fixture={fid}", headers={"x-apisports-key": KEY})
+                with urllib.request.urlopen(rq, timeout=30) as r2:
+                    lb = json.loads(r2.read().decode())
+                lr = lb.get("response") or []
+                info = [(x.get("team", {}).get("name"), x.get("formation"), len(x.get("startXI") or []), (x.get("startXI") or [{}])[0].get("player", {}).get("grid")) for x in lr]
+                log(f"{now()} تشكيلة fixture={fid}: errors={lb.get('errors')} {info}")
+            except Exception as e:
+                log(f"{now()} تشكيلة خطأ: {str(e)[:120]}")
         if last.get(fid) != st:
             log(f"{now()} {f['teams']['home']['name']} {g.get('home')}-{g.get('away')} {f['teams']['away']['name']} دقيقة={f['fixture']['status']['elapsed']} حالة={st[2]} أحداث_في_الرد={len(f.get('events') or [])}")
             last[fid] = st
