@@ -27,8 +27,10 @@ TODAY = datetime.now(timezone.utc).replace(tzinfo=None, hour=0, minute=0, second
 HORIZON = TODAY + timedelta(days=160)   # نحو خمسة أشهر قادمة
 
 MATCH_RE = re.compile(r"^\s+(?:\d{1,2}:\d{2}\s+)?(?P<h>.+?)\s+v\s+(?P<a>.+?)(?:\s{2,}|\s+)(?P<s>\d+-\d+)?(?:\s*\(\d+-\d+\))?\s*$")
-DATE_RE = re.compile(r"^\s+(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun)\s+(?P<mon>[A-Z][a-z]{2})\s+(?P<d>\d{1,2})(?:\s+(?P<y>\d{4}))?\s*$")
+DATE_RE = re.compile(r"^\s*(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun)\s+(?P<mon>[A-Z][a-z]{2})\s+(?P<d>\d{1,2})(?:\s+(?P<y>\d{4}))?\s*$")
 MD_RE = re.compile(r"Matchday\s+(\d+)")
+# صيغة المواسم 2020-21 إلى 2023-24 و2025-26: النتيجة بين الفريقين دون كلمة v
+MID_RE = re.compile(r"^\s*(?:(?P<h1>\d{1,2}):(?P<m1>\d{2})\s+)?(?P<home>[A-Za-z][^\d()]*?)\s{2,}(?P<hg>\d+)-(?P<ag>\d+)(?:\s*\(\d+-\d+\))?\s{2,}(?P<away>[A-Za-z][^\d()]*?)\s*$")
 MONTHS = {m: i for i, m in enumerate(["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"], 1)}
 
 
@@ -46,6 +48,13 @@ def parse_of(season):
                 mon = MONTHS[d.group("mon")]
                 year = int(d.group("y")) if d.group("y") else (y0 if mon >= 7 else y0 + 1)
                 date = datetime(year, mon, int(d.group("d"))); cur_time = None; continue
+            mid = MID_RE.match(line) if (date and " v " not in line) else None
+            if mid:
+                if mid.group("h1"):
+                    cur_time = (int(mid.group("h1")), int(mid.group("m1")))
+                out.append(dict(season=season, date=date, home=mid.group("home").strip(), away=mid.group("away").strip(),
+                                hg=int(mid.group("hg")), ag=int(mid.group("ag")), md=md, time=cur_time))
+                continue
             if " v " in line and date:
                 tm = re.match(r"^\s+(\d{1,2}):(\d{2})\s+", line)
                 if tm:
@@ -64,12 +73,35 @@ def parse_of(season):
     return out
 
 
+def canon_names(rows_by_season, old):
+    """يوحّد أسماء الفرق المختصرة (مثل Liverpool) مع الأسماء الكاملة المعتمدة (Liverpool FC)."""
+    known = {r["home"] for r in old} | {r["away"] for r in old}
+    for rows in rows_by_season.values():
+        for r in rows:
+            if r["hg"] is None or " FC" in r["home"] or r["home"].startswith("AFC "):
+                known.add(r["home"]); known.add(r["away"])
+    def fix(n):
+        if n in known: return n
+        for c in (n + " FC", n + " AFC", "AFC " + n):
+            if c in known: return c
+        return n
+    return fix
+
+
 def load_all():
     old = [r for r in bt.load() if r["season"] <= "2019-20"]
     hist = list(old)
     upcoming, cur_played = [], []
+    parsed = {s: parse_of(s) for s in SEASONS_OF}
+    for s_, rows_ in parsed.items():
+        # حارس ضد التجاهل الصامت: كل موسم مكتمل يجب أن يحوي 380 مباراة منتهية
+        if s_ != CUR:
+            done_ = sum(1 for r in rows_ if r["hg"] is not None)
+            assert done_ == 380, f"الموسم {s_}: {done_} مباراة مقروءة بدل 380 (تغيّرت صيغة الملف؟)"
+    fix = canon_names({s: rows for s, rows in parsed.items() if s in ("2024-25", CUR)}, old)
     for s in SEASONS_OF:
-        for r in parse_of(s):
+        for r in parsed[s]:
+            r["home"], r["away"] = fix(r["home"]), fix(r["away"])
             if r["hg"] is None:
                 if s == CUR: upcoming.append(r)
                 continue
