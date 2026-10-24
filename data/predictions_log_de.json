@@ -83,6 +83,18 @@
   "ph": 0.387,
   "shown": "1-1"
  },
+ "FC Bayern München|Borussia Dortmund": {
+  "away": "Borussia Dortmund",
+  "date": "2026-10-31",
+  "flag": false,
+  "home": "FC Bayern München",
+  "logged_at": "2026-10-24T17:33Z",
+  "md": 8,
+  "pa": 0.172,
+  "pd": 0.187,
+  "ph": 0.641,
+  "shown": "2-1"
+ },
  "FC Schalke 04|RB Leipzig": {
   "away": "RB Leipzig",
   "date": "2026-10-31",
