@@ -1,0 +1,110 @@
+{
+ "1. FC Köln|FC Schalke 04": {
+  "away": "FC Schalke 04",
+  "date": "2026-10-24",
+  "flag": false,
+  "home": "1. FC Köln",
+  "logged_at": "2026-10-24T04:35Z",
+  "md": 7,
+  "pa": 0.2584,
+  "pd": 0.2503,
+  "ph": 0.4913,
+  "shown": "1-0"
+ },
+ "1. FSV Mainz 05|SV Werder Bremen": {
+  "away": "SV Werder Bremen",
+  "date": "2026-10-24",
+  "flag": false,
+  "home": "1. FSV Mainz 05",
+  "logged_at": "2026-10-24T04:35Z",
+  "md": 7,
+  "pa": 0.2123,
+  "pd": 0.2262,
+  "ph": 0.5615,
+  "shown": "2-1"
+ },
+ "Borussia Dortmund|Eintracht Frankfurt": {
+  "away": "Eintracht Frankfurt",
+  "date": "2026-10-24",
+  "flag": false,
+  "home": "Borussia Dortmund",
+  "logged_at": "2026-10-24T04:35Z",
+  "md": 7,
+  "pa": 0.1272,
+  "pd": 0.1687,
+  "ph": 0.7042,
+  "shown": "2-1"
+ },
+ "FC Augsburg|1. FC Union Berlin": {
+  "away": "1. FC Union Berlin",
+  "date": "2026-10-24",
+  "flag": false,
+  "home": "FC Augsburg",
+  "logged_at": "2026-10-24T04:35Z",
+  "md": 7,
+  "pa": 0.2078,
+  "pd": 0.2247,
+  "ph": 0.5675,
+  "shown": "2-1"
+ },
+ "RB Leipzig|SV 07 Elversberg": {
+  "away": "SV 07 Elversberg",
+  "date": "2026-10-24",
+  "flag": false,
+  "home": "RB Leipzig",
+  "logged_at": "2026-10-24T04:35Z",
+  "md": 7,
+  "pa": 0.1744,
+  "pd": 0.1995,
+  "ph": 0.6262,
+  "shown": "2-1"
+ },
+ "SC Freiburg|FC Bayern München": {
+  "away": "FC Bayern München",
+  "date": "2026-10-25",
+  "flag": false,
+  "home": "SC Freiburg",
+  "logged_at": "2026-10-24T04:35Z",
+  "md": 7,
+  "pa": 0.6094,
+  "pd": 0.1998,
+  "ph": 0.1908,
+  "shown": "1-2"
+ },
+ "SC Paderborn 07|Hamburger SV": {
+  "away": "Hamburger SV",
+  "date": "2026-10-24",
+  "flag": false,
+  "home": "SC Paderborn 07",
+  "logged_at": "2026-10-24T04:35Z",
+  "md": 7,
+  "pa": 0.2938,
+  "pd": 0.2594,
+  "ph": 0.4468,
+  "shown": "1-0"
+ },
+ "SV 07 Elversberg|1. FSV Mainz 05": {
+  "away": "1. FSV Mainz 05",
+  "date": "2026-10-30",
+  "flag": false,
+  "home": "SV 07 Elversberg",
+  "logged_at": "2026-10-24T04:35Z",
+  "md": 8,
+  "pa": 0.3128,
+  "pd": 0.2506,
+  "ph": 0.4366,
+  "shown": "2-1"
+ },
+ "TSG 1899 Hoffenheim|Bayer 04 Leverkusen": {
+  "away": "Bayer 04 Leverkusen",
+  "date": "2026-10-25",
+  "flag": false,
+  "home": "TSG 1899 Hoffenheim",
+  "logged_at": "2026-10-24T04:35Z",
+  "md": 7,
+  "pa": 0.443,
+  "pd": 0.2375,
+  "ph": 0.3195,
+  "shown": "1-2"
+ }
+}

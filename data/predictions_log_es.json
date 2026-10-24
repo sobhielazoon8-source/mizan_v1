@@ -1,0 +1,110 @@
+{
+ "Athletic Club|Getafe CF": {
+  "away": "Getafe CF",
+  "date": "2026-10-25",
+  "flag": false,
+  "home": "Athletic Club",
+  "logged_at": "2026-10-24T04:34Z",
+  "md": 10,
+  "pa": 0.2342,
+  "pd": 0.2802,
+  "ph": 0.4856,
+  "shown": "1-0"
+ },
+ "Atlético Madrid|Deportivo La Coruña": {
+  "away": "Deportivo La Coruña",
+  "date": "2026-10-25",
+  "flag": false,
+  "home": "Atlético Madrid",
+  "logged_at": "2026-10-24T04:34Z",
+  "md": 10,
+  "pa": 0.1216,
+  "pd": 0.1738,
+  "ph": 0.7045,
+  "shown": "2-0"
+ },
+ "Celta Vigo|Real Betis": {
+  "away": "Real Betis",
+  "date": "2026-10-25",
+  "flag": true,
+  "home": "Celta Vigo",
+  "logged_at": "2026-10-24T04:34Z",
+  "md": 10,
+  "pa": 0.3309,
+  "pd": 0.2588,
+  "ph": 0.4104,
+  "shown": "1-1"
+ },
+ "FC Barcelona|Real Madrid": {
+  "away": "Real Madrid",
+  "date": "2026-10-25",
+  "flag": false,
+  "home": "FC Barcelona",
+  "logged_at": "2026-10-24T04:34Z",
+  "md": 10,
+  "pa": 0.1877,
+  "pd": 0.1992,
+  "ph": 0.6131,
+  "shown": "2-1"
+ },
+ "Racing Santander|Espanyol": {
+  "away": "Espanyol",
+  "date": "2026-10-25",
+  "flag": false,
+  "home": "Racing Santander",
+  "logged_at": "2026-10-24T04:34Z",
+  "md": 10,
+  "pa": 0.2832,
+  "pd": 0.2471,
+  "ph": 0.4697,
+  "shown": "2-1"
+ },
+ "Rayo Vallecano|Elche CF": {
+  "away": "Elche CF",
+  "date": "2026-10-25",
+  "flag": false,
+  "home": "Rayo Vallecano",
+  "logged_at": "2026-10-24T04:34Z",
+  "md": 10,
+  "pa": 0.2315,
+  "pd": 0.2433,
+  "ph": 0.5252,
+  "shown": "1-0"
+ },
+ "Real Sociedad|Levante UD": {
+  "away": "Levante UD",
+  "date": "2026-10-25",
+  "flag": false,
+  "home": "Real Sociedad",
+  "logged_at": "2026-10-24T04:34Z",
+  "md": 10,
+  "pa": 0.2408,
+  "pd": 0.224,
+  "ph": 0.5353,
+  "shown": "2-1"
+ },
+ "Sevilla FC|CA Osasuna": {
+  "away": "CA Osasuna",
+  "date": "2026-10-25",
+  "flag": false,
+  "home": "Sevilla FC",
+  "logged_at": "2026-10-24T04:34Z",
+  "md": 10,
+  "pa": 0.2554,
+  "pd": 0.2459,
+  "ph": 0.4988,
+  "shown": "1-0"
+ },
+ "Valencia CF|Villarreal CF": {
+  "away": "Villarreal CF",
+  "date": "2026-10-25",
+  "flag": true,
+  "home": "Valencia CF",
+  "logged_at": "2026-10-24T04:34Z",
+  "md": 10,
+  "pa": 0.4109,
+  "pd": 0.2583,
+  "ph": 0.3308,
+  "shown": "1-1"
+ }
+}
