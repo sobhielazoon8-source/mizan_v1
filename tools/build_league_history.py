@@ -13,7 +13,8 @@ os.makedirs(out, exist_ok=True)
 for code, cfg in L.LEAGUES.items():
     data = L.load_league(code, os.path.join(ROOT, cfg["repo"]))
     rows = []
-    seasons = sorted(data)
+    # الموسم الجاري غير مكتمل: نستبعده كي لا يُحتسب «لقب» لمتصدر مؤقت (يُعرض من بيانات الموسم الحالي)
+    seasons = sorted(data)[:-1]
     for si, s in enumerate(seasons):
         for r in data[s]:
             if r["hg"] is None:
