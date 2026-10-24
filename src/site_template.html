@@ -352,6 +352,18 @@ footer.foot { margin-top: 36px; padding-top: 16px; border-top: 1px solid var(--l
     return '<span class="sc"><b>' + p[0] + '</b><i>–</i><b>' + p[1] + '</b>' + (extra ? '<em>' + extra + '</em>' : '') + '</span>';
   }
   function maxp(f) { return Math.max(f.ph, f.pd, f.pa); }
+  function koTime(f) { return f.kickoff ? new Date(f.kickoff) : null; }
+  function pad2(n) { return (n < 10 ? '0' : '') + n; }
+  function when(f) {
+    var k = koTime(f);
+    if (!k) return dlabel(f.date);
+    return DAYS[k.getDay()] + ' ' + k.getDate() + ' ' + MONTHS[k.getMonth()] + ' · ' + pad2(k.getHours()) + ':' + pad2(k.getMinutes());
+  }
+  function isLate(f) { var k = koTime(f); return k ? Date.now() > k.getTime() + 150 * 60000 : f.date < TODAY; }
+  function isTodayLocal(f) {
+    var k = koTime(f), n = new Date();
+    return k ? (k.getFullYear() === n.getFullYear() && k.getMonth() === n.getMonth() && k.getDate() === n.getDate()) : f.date === TODAY;
+  }
   function plural(n, one, two, few, many) {
     if (n === 1) return one; if (n === 2) return two;
     return n + ' ' + (n >= 3 && n <= 10 ? few : many);
@@ -429,14 +441,14 @@ footer.foot { margin-top: 36px; padding-top: 16px; border-top: 1px solid var(--l
     var stronger = f.elo_h >= f.elo_a ? f.home : f.away;
     var gap = Math.abs(f.elo_h - f.elo_a);
     var ph = byName[f.home], pa = byName[f.away];
-    var isToday = f.date === TODAY;
+    var isToday = isTodayLocal(f);
     var sh = f.draw_flag ? f.modal : f.pick, pk = sh.s.split('-');
     var top = f.top.map(function (x) { return sc(x.s, Math.round(x.p * 100) + '%'); }).join('');
     var tot = f.elo_h + f.elo_a, hw = Math.round(f.elo_h / tot * 100);
     var open = !!expanded[key(f)];
     return '<article class="match" data-k="' + key(f).replace(/&/g, '&amp;') + '">' +
-      '<div class="m-top"><span>' + dlabel(f.date) + ' · الجولة <span class="num">' + f.md + '</span></span><span style="display:flex;gap:6px;flex-wrap:wrap">' +
-        (isToday ? '<span class="tag today">اليوم</span>' : (f.date < TODAY ? '<span class="tag">بانتظار النتيجة</span>' : '')) +
+      '<div class="m-top"><span>' + when(f) + ' · الجولة <span class="num">' + f.md + '</span></span><span style="display:flex;gap:6px;flex-wrap:wrap">' +
+        (isLate(f) ? '<span class="tag">بانتظار النتيجة</span>' : (isToday ? '<span class="tag today">اليوم</span>' : '')) +
         (f.draw_flag ? '<span class="tag draw" title="فرصتا الفريقين متقاربتان">مرشحة للتعادل</span>' : '') + confTag(f) + '</span></div>' +
       '<div class="m-main">' +
         '<div class="team">' + disc(f.home) + '<span class="nm">' + ar(f.home) + '</span><span class="pos num">المركز ' + ph.rank + ' · ' + ph.pts + ' نقطة</span></div>' +
@@ -473,7 +485,7 @@ footer.foot { margin-top: 36px; padding-top: 16px; border-top: 1px solid var(--l
     return '<div class="pick"><small>' + label + '</small><strong>' + ar(f.home) + ' – ' + ar(f.away) + '</strong><span>' + text + '</span></div>';
   }
   function renderLag() {
-    var late = D.fixtures.filter(function (f) { return f.date < TODAY; }).length;
+    var late = D.fixtures.filter(isLate).length;
     var el = $('lag');
     if (late > 0) {
       el.hidden = false;

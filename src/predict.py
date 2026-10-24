@@ -7,6 +7,7 @@
 """
 import json, math, os, random, re, sys
 from datetime import datetime, timedelta, timezone
+from zoneinfo import ZoneInfo
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
@@ -33,7 +34,7 @@ MONTHS = {m: i for i, m in enumerate(["Jan","Feb","Mar","Apr","May","Jun","Jul",
 
 def parse_of(season):
     y0 = int(season[:4])
-    out, date, md = [], None, None
+    out, date, md, cur_time = [], None, None, None
     with open(f"{OF}/{season}/1-premierleague.txt", encoding="utf-8") as f:
         for line in f:
             line = line.rstrip("\n")
@@ -44,8 +45,11 @@ def parse_of(season):
             if d:
                 mon = MONTHS[d.group("mon")]
                 year = int(d.group("y")) if d.group("y") else (y0 if mon >= 7 else y0 + 1)
-                date = datetime(year, mon, int(d.group("d"))); continue
+                date = datetime(year, mon, int(d.group("d"))); cur_time = None; continue
             if " v " in line and date:
+                tm = re.match(r"^\s+(\d{1,2}):(\d{2})\s+", line)
+                if tm:
+                    cur_time = (int(tm.group(1)), int(tm.group(2)))   # المباريات التالية في اليوم نفسه تشترك في الوقت إن لم يُذكر
                 # فصل الفريقين والنتيجة بدقة: نبحث عن النتيجة في نهاية السطر
                 body = re.sub(r"^\s+\d{1,2}:\d{2}\s+", "", line).strip()
                 sc = re.search(r"\s(\d+)-(\d+)(?:\s*\(\d+-\d+\))?\s*$", body)
@@ -56,7 +60,7 @@ def parse_of(season):
                 if len(parts) != 2:
                     raise ValueError(f"سطر غير مفهوم: {line!r}")
                 out.append(dict(season=season, date=date, home=parts[0].strip(), away=parts[1].strip(),
-                                hg=hg, ag=ag, md=md))
+                                hg=hg, ag=ag, md=md, time=cur_time))
     return out
 
 
@@ -98,6 +102,14 @@ def load_all():
     return hist, cur_played, upcoming
 
 
+def kickoff_iso(date, time):
+    """وقت الانطلاق بتوقيت UTC بصيغة ISO. أوقات المصدر بتوقيت لندن المحلي (يشمل التوقيت الصيفي)."""
+    if not time:
+        return None
+    local = datetime(date.year, date.month, date.day, time[0], time[1], tzinfo=ZoneInfo("Europe/London"))
+    return local.astimezone(timezone.utc).strftime("%Y-%m-%dT%H:%MZ")
+
+
 def draw_flag(p):
     """«مرشحة للتعادل»: فرصتا الفوز متقاربتان (فارق أقل من 12 نقطة مئوية) وفرصة التعادل 25% فأكثر.
     اختُبرت القاعدة تاريخياً: 20% من المباريات تقع تحتها، وينتهي 29.8% منها بتعادل (مقابل 24.6% عموماً)."""
@@ -115,15 +127,19 @@ def outcome_of(hg, ag):
 
 def update_log_and_score(fixtures, cur_played, now):
     """يحفظ توقعات المباريات المستقبلية قبل انطلاقها (لا تُعدَّل بعد حفظها)، ثم يقيّم ما انتهى منها.
-    شرط الحفظ: يوم المباراة بعد اليوم الحالي، أو هو اليوم الحالي والساعة قبل 10:00 بتوقيت UTC
-    (أبكر انطلاق للدوري 12:30 بتوقيت لندن)، فلا تُسجَّل توقعات بعد بدء المباراة."""
+    شرط الحفظ: قبل موعد الانطلاق بساعة على الأقل (وإن غاب الموعد: يوم المباراة بعد اليوم الحالي)،
+    فلا تُسجَّل توقعات بعد بدء المباراة."""
     log = json.load(open(LOG, encoding="utf-8")) if os.path.exists(LOG) else {}
     today = now.strftime("%Y-%m-%d")
     added = 0
     horizon = (now + timedelta(days=7)).strftime("%Y-%m-%d")
     for f in fixtures:
         key = f"{f['home']}|{f['away']}"            # كل زوج يلتقي مرة واحدة على أرض المضيف في الموسم
-        ok = (f["date"] > today or (f["date"] == today and now.hour < 10)) and f["date"] <= horizon
+        ko = f.get("kickoff")
+        if ko:   # الشرط الدقيق: قبل الانطلاق بساعة على الأقل، وخلال الأيام السبعة القادمة
+            ok = (now + timedelta(hours=1)).strftime("%Y-%m-%dT%H:%MZ") < ko <= (now + timedelta(days=7)).strftime("%Y-%m-%dT%H:%MZ")
+        else:
+            ok = (f["date"] > today or (f["date"] == today and now.hour < 10)) and f["date"] <= horizon
         if not ok:
             continue                                  # بعيدة جداً، أو بدأت: لا نكتب فوق التوقع المحفوظ
         new = dict(date=f["date"], md=f["md"], home=f["home"], away=f["away"],
@@ -239,7 +255,7 @@ def main():
         p, lh, la, top, o25, bt_, ch, ca, pick, modal = predict(m)
         diff = elo.rating(m["home"]) + PE["home"] - elo.rating(m["away"])
         fixtures.append(dict(
-            md=m["md"], date=m["date"].strftime("%Y-%m-%d"), home=m["home"], away=m["away"],
+            md=m["md"], date=m["date"].strftime("%Y-%m-%d"), kickoff=kickoff_iso(m["date"], m.get("time")), home=m["home"], away=m["away"],
             ph=round(p[0], 4), pd=round(p[1], 4), pa=round(p[2], 4), pick=pick, modal=modal,
             draw_flag=draw_flag(p),
             xg_h=round(lh, 2), xg_a=round(la, 2), top=top,
