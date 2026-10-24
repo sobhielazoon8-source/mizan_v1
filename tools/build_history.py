@@ -127,6 +127,27 @@ def build_clubs():
         ok = n == need[t_] or (t_ == 1 and s_ < "1995-96" and n == 462)
         if not ok:
             print(f"تنبيه: الموسم {s_} الدرجة {t_} فيه {n} مباراة بدل {need[t_]}")
+    # توحيد أسماء النادي الواحد (مثل Arsenal / Arsenal FC / «[awarded]») باختيار أكثر الصيغ تكراراً
+    def key_of(n):
+        n = re.sub(r"\[.*?\]", "", n).strip()
+        if n not in ("AFC Bournemouth", "AFC Wimbledon"):
+            n = re.sub(r"^AFC\s+|\s+(AFC|FC)$", "", n)
+        else:
+            n = n.replace("AFC ", "")
+        return n.lower()
+    freq = Counter()
+    for r in rows:
+        freq[re.sub(r"\s*\[.*?\]", "", r["home"]).strip()] += 1
+        freq[re.sub(r"\s*\[.*?\]", "", r["away"]).strip()] += 1
+    best = {}
+    for n, c in freq.items():
+        k = key_of(n)
+        if k not in best or c > freq[best[k]]:
+            best[k] = n
+    canon = lambda n: best[key_of(n)]
+    for r in rows:
+        r["home"], r["away"] = canon(r["home"]), canon(r["away"])
+        assert r["home"] != r["away"], r
     rows.sort(key=lambda r: (r["date"], r["home"]))
     names = sorted({r["home"] for r in rows} | {r["away"] for r in rows})
     idx = {n: i for i, n in enumerate(names)}
