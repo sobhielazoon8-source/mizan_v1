@@ -59,6 +59,18 @@
   "ph": 0.4498,
   "shown": "1-0"
  },
+ "OGC Nice|Stade Rennais FC 1901": {
+  "away": "Stade Rennais FC 1901",
+  "date": "2026-10-31",
+  "flag": true,
+  "home": "OGC Nice",
+  "logged_at": "2026-10-24T16:35Z",
+  "md": 9,
+  "pa": 0.3728,
+  "pd": 0.2534,
+  "ph": 0.3738,
+  "shown": "1-1"
+ },
  "Olympique de Marseille|Le Havre AC": {
   "away": "Le Havre AC",
   "date": "2026-10-25",
