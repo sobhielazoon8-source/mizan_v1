@@ -83,6 +83,26 @@ jobs:
       - name: بناء الصفحة
         run: python3 -I src/build_site.py
 
+      - name: إضافة نسخة الويب من التطبيق (إن وُجدت)
+        run: |
+          if [ -f webapp/mizan_web.zip ]; then
+            mv dist/index.html dist/classic.html
+            unzip -qo webapp/mizan_web.zip -d dist
+            # الصفحة القديمة سجّلت عامل خدمة يخزّن index.html؛ نستبدله بآخر ينظّف نفسه
+            cat > dist/sw.js <<'SW'
+          self.addEventListener('install', () => self.skipWaiting());
+          self.addEventListener('activate', e => e.waitUntil((async () => {
+            for (const k of await caches.keys()) await caches.delete(k);
+            await self.registration.unregister();
+            for (const c of await self.clients.matchAll()) c.navigate(c.url);
+          })()));
+          SW
+            sed -i 's/^          //' dist/sw.js
+            echo "web app added"
+          else
+            echo "لا توجد نسخة ويب منشورة بعد؛ تبقى الصفحة القديمة"
+          fi
+
       - uses: actions/configure-pages@v5
 
       - uses: actions/upload-pages-artifact@v3
