@@ -28,11 +28,11 @@
   "date": "2026-10-31",
   "flag": false,
   "home": "Aston Villa FC",
-  "logged_at": "2026-10-24T21:49Z",
+  "logged_at": "2026-10-24T22:10Z",
   "md": 9,
-  "pa": 0.2244,
-  "pd": 0.2428,
-  "ph": 0.5328,
+  "pa": 0.2176,
+  "pd": 0.2386,
+  "ph": 0.5439,
   "shown": "1-0"
  },
  "Aston Villa FC|Manchester City FC": {
@@ -100,11 +100,11 @@
   "date": "2026-10-31",
   "flag": false,
   "home": "Coventry City FC",
-  "logged_at": "2026-10-24T21:49Z",
+  "logged_at": "2026-10-24T22:10Z",
   "md": 9,
-  "pa": 0.2819,
-  "pd": 0.2596,
-  "ph": 0.4584,
+  "pa": 0.274,
+  "pd": 0.2566,
+  "ph": 0.4694,
   "shown": "1-0"
  },
  "Crystal Palace FC|Newcastle United FC": {
