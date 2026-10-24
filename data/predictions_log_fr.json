@@ -35,6 +35,30 @@
   "ph": 0.336,
   "shown": "1-1"
  },
+ "ES Troyes AC|Le Mans FC": {
+  "away": "Le Mans FC",
+  "date": "2026-10-31",
+  "flag": true,
+  "home": "ES Troyes AC",
+  "logged_at": "2026-10-24T19:57Z",
+  "md": 9,
+  "pa": 0.3825,
+  "pd": 0.2552,
+  "ph": 0.3623,
+  "shown": "1-1"
+ },
+ "FC Lorient|Stade Brestois 29": {
+  "away": "Stade Brestois 29",
+  "date": "2026-10-31",
+  "flag": false,
+  "home": "FC Lorient",
+  "logged_at": "2026-10-24T19:57Z",
+  "md": 9,
+  "pa": 0.2592,
+  "pd": 0.2454,
+  "ph": 0.4954,
+  "shown": "2-1"
+ },
  "Le Havre AC|Paris Saint-Germain FC": {
   "away": "Paris Saint-Germain FC",
   "date": "2026-10-30",
@@ -70,6 +94,18 @@
   "pd": 0.2534,
   "ph": 0.3738,
   "shown": "1-1"
+ },
+ "Olympique Lyonnais|Angers SCO": {
+  "away": "Angers SCO",
+  "date": "2026-10-31",
+  "flag": false,
+  "home": "Olympique Lyonnais",
+  "logged_at": "2026-10-24T19:57Z",
+  "md": 9,
+  "pa": 0.1104,
+  "pd": 0.1704,
+  "ph": 0.7192,
+  "shown": "2-0"
  },
  "Olympique de Marseille|Le Havre AC": {
   "away": "Le Havre AC",
