@@ -11,6 +11,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import backtest as bt
 import fd
+import whatif as W
 import cl_names as CN
 import league_names as N
 import leagues as L
@@ -180,10 +181,13 @@ def main():
 
     elo, poi, mdl = new_model()
     prev = None
+    pre = {}
     for m in hist:
         if prev is not None and m["season"] != prev:
             mdl.new_season()
         prev = m["season"]
+        if m["season"] == cur_s:
+            pre[(m["date"].strftime("%Y-%m-%d"), m["home"], m["away"])] = mdl.predict(m)
         mdl.update(m)
 
     league_rows = [r for r in rows_cur if r["stage"] == "league"]
@@ -250,16 +254,19 @@ def main():
         p = mdl.predict(m); lh, la = poi.lams(m)
         rest.append((m["home"], m["away"], p, lh, la))
     NSIM = 10000
+    wi = W.WhatIf(rest, teams, (8, 24, 24), PL.TODAY, fixtures)
     cnt = {t: dict(title=0, top4=0, rel=0, pos_sum=0, pts_sum=0) for t in teams}
     base = {t: (tb[t]["pts"], tb[t]["gf"] - tb[t]["ga"], tb[t]["gf"]) for t in teams}
     for _ in range(NSIM):
         pts = {t: base[t][0] for t in teams}; gd = {t: base[t][1] for t in teams}; gf = {t: base[t][2] for t in teams}
         q = {t: random.gauss(0, 0.2) for t in teams}
+        outs = []
         for h, a, p, lh, la in rest:
             dlt = q[h] - q[a]
             w0, w1, w2 = p[0] * math.exp(dlt), p[1], p[2] * math.exp(-dlt)
             r = random.random() * (w0 + w1 + w2)
             o = 0 if r < w0 else (1 if r < w0 + w1 else 2)
+            outs.append(o)
             for _try in range(30):
                 x = PL.pois_draw(lh); y = PL.pois_draw(la)
                 if (x > y and o == 0) or (x == y and o == 1) or (x < y and o == 2):
@@ -270,11 +277,13 @@ def main():
             pts[h] += 3 if o == 0 else (1 if o == 1 else 0)
             pts[a] += 3 if o == 2 else (1 if o == 1 else 0)
         order = sorted(teams, key=lambda t: (pts[t], gd[t], gf[t], random.random()), reverse=True)
+        wi.record(outs, order)
         for i, t in enumerate(order):
             c = cnt[t]; c["pos_sum"] += i + 1; c["pts_sum"] += pts[t]
             if i < 8: c["title"] += 1
             if i < 24: c["top4"] += 1
             if i >= 24: c["rel"] += 1
+    print(f"[cl] ماذا لو: مباريات مغطاة", wi.attach(fixtures))
     teams_out = []
     for t in teams:
         c = cnt[t]
@@ -309,7 +318,7 @@ def main():
                record=record, played_md=cur_md, through=str(PL.HORIZON.date()), season=cur_s,
                model="Elo + هجوم/دفاع (بواسون) من نتائج دوري الأبطال", backtest=bt_info, teams=teams_out, fixtures=fixtures,
                results=results, scorers_live=scorers_live, table_labels=["المراكز 1-8 (مباشرة)", "المراكز 1-24 (تأهل)", "الخروج (25-36)"],
-               names_ar=names_ar)
+               names_ar=names_ar, upsets=W.upset_list(pre, results))
     json.dump(out, open(os.path.join(PL.OUTDIR, "data_cl.json"), "w", encoding="utf-8"), ensure_ascii=False)
     print("[cl] تم. أعلى فرص المراكز الثمانية:", sorted(((t["title"], t["name"]) for t in teams_out), reverse=True)[:4])
 

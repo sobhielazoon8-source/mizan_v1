@@ -13,6 +13,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import backtest as bt
 import fd
+import whatif as W
 
 OF = os.environ.get("OF_DIR", os.path.join(HERE, "..", "openfootball", "england"))
 OUT = os.environ.get("OUT_JSON", os.path.join(HERE, "..", "data.json"))
@@ -275,10 +276,13 @@ def main():
 
     # تشغيل زمني كامل (هو نفسه الذي اختُبر رجعياً) ثم التقاط الحالة الراهنة
     prev = None
+    pre = {}   # احتمالات ما قبل المباراة (تشغيل زمني متدرّج) لمباريات الموسم الجاري، لكاشف المفاجآت
     for m in hist:
         if prev is not None and m["season"] != prev:
             mdl.new_season()
         prev = m["season"]
+        if m["season"] == CUR:
+            pre[(m["date"].strftime("%Y-%m-%d"), m["home"], m["away"])] = mdl.predict(m)
         mdl.update(m)
     # بدء موسم 2026-27: لم يُنفَّذ new_season بعد لأن آخر مباراة في التاريخ هي من 2026-27 نفسه؛
     # ملاحظة: المواسم تُفصل داخل الحلقة، لذا حالة الدوري الحالية سليمة.
@@ -354,6 +358,7 @@ def main():
         p = mdl.predict(m); lh, la = poi.lams(m)
         rest.append((m["home"], m["away"], p, lh, la))
     N = 10000
+    wi = W.WhatIf(rest, teams, (1, 4, 17), TODAY, fixtures)
     cnt = {t: dict(title=0, top4=0, rel=0, pos_sum=0, pts_sum=0) for t in teams}
     base = {t: (tb[t]["pts"], tb[t]["gf"] - tb[t]["ga"], tb[t]["gf"]) for t in teams}
     for _ in range(N):
@@ -362,6 +367,7 @@ def main():
         gf = {t: base[t][2] for t in teams}
         # عدم يقين قوة الفريق: انحراف عشوائي ثابت لكل فريق طوال هذه المحاكاة (≈ ±35 نقطة Elo)
         q = {t: random.gauss(0, 0.2) for t in teams}
+        outs = []
         for h, a, p, lh, la in rest:
             dlt = q[h] - q[a]
             w0, w1, w2 = p[0] * math.exp(dlt), p[1], p[2] * math.exp(-dlt)
@@ -373,6 +379,7 @@ def main():
                 o = 1
             else:
                 o = 2
+            outs.append(o)
             # أهداف متسقة مع النتيجة: عيّن من بواسون مشروطاً بالنتيجة
             for _try in range(30):
                 x = _pois_draw(lh); y = _pois_draw(la)
@@ -383,11 +390,13 @@ def main():
             pts[h] += 3 if o == 0 else (1 if o == 1 else 0)
             pts[a] += 3 if o == 2 else (1 if o == 1 else 0)
         order = sorted(teams, key=lambda t: (pts[t], gd[t], gf[t], random.random()), reverse=True)
+        wi.record(outs, order)
         for i, t in enumerate(order):
             c = cnt[t]; c["pos_sum"] += i + 1; c["pts_sum"] += pts[t]
             if i == 0: c["title"] += 1
             if i < 4: c["top4"] += 1
             if i >= 17: c["rel"] += 1
+    print("ماذا لو: مباريات مغطاة", wi.attach(fixtures))
     teams_out = []
     for t in teams:
         c = cnt[t]
@@ -437,7 +446,7 @@ def main():
 
     out = dict(generated=TODAY.strftime("%Y-%m-%d"), updated_at=NOW.strftime("%Y-%m-%dT%H:%M:%SZ"),
                last_result_date=max(m["date"] for m in cur_played).strftime("%Y-%m-%d"), record=record, played_md=min(tb[t]["p"] for t in teams), through=str(HORIZON.date()), season=CUR, model="Elo + هجوم/دفاع (بواسون)",
-               backtest=dict(matches=5700, acc=0.545, base_acc=0.465, logloss=0.965, recent=dict(matches=2280, acc=0.525, base_acc=0.431, logloss=0.988, seasons="2020-21→2025-26")), teams=teams_out, fixtures=fixtures, results=results, scorers=scorers, scorers_prev=scorers_prev, scorers_live=scorers_live)
+               backtest=dict(matches=5700, acc=0.545, base_acc=0.465, logloss=0.965, recent=dict(matches=2280, acc=0.525, base_acc=0.431, logloss=0.988, seasons="2020-21→2025-26")), teams=teams_out, fixtures=fixtures, results=results, scorers=scorers, scorers_prev=scorers_prev, scorers_live=scorers_live, upsets=W.upset_list(pre, results))
     json.dump(out, open(OUT, "w", encoding="utf-8"), ensure_ascii=False)
     print("تم. أفضل 5 بالقوة:", sorted(((round(v), k) for k, v in strength.items()), reverse=True)[:5])
     print("احتمال اللقب:", sorted(((t["title"], t["name"]) for t in teams_out), reverse=True)[:5])
