@@ -89,6 +89,29 @@ def canon_names(rows_by_season, old):
     return fix
 
 
+def fetch_fd_results():
+    """نتائج المباريات المنتهية للدوري الممتاز من football-data.org بصيغة [مضيف، 'هـ-ض', ضيف]."""
+    tok = os.environ.get("FOOTBALL_DATA_TOKEN", "").strip()
+    if not tok:
+        return []
+    try:
+        import urllib.request
+        req = urllib.request.Request("https://api.football-data.org/v4/competitions/PL/matches?status=FINISHED",
+                                     headers={"X-Auth-Token": tok})
+        j = json.load(urllib.request.urlopen(req, timeout=30))
+        out = []
+        for m in j.get("matches", []):
+            ft = (m.get("score") or {}).get("fullTime") or {}
+            if ft.get("home") is None or ft.get("away") is None:
+                continue
+            out.append([m["homeTeam"]["name"], f"{ft['home']}-{ft['away']}", m["awayTeam"]["name"]])
+        print("نتائج من football-data.org:", len(out))
+        return out
+    except Exception as e:
+        print("تعذّر football-data.org:", type(e).__name__, str(e)[:120])
+        return []
+
+
 def load_all():
     old = [r for r in bt.load() if r["season"] <= "2019-20"]
     hist = list(old)
@@ -111,6 +134,9 @@ def load_all():
             if s == CUR: cur_played.append(r)
     # نتائج الجولتين 6 و7 غير موجودة بعد في openfootball (آخر تحديث للمستودع 15 أكتوبر): تُكمَّل من patch_results.json
     patch = json.load(open(PATCH, encoding="utf-8")) if os.path.exists(PATCH) else []
+    # نتائج أسرع من football-data.org (اختيارية: تُستعمل فقط إن وُجد المفتاح، وأي خطأ لا يوقف البناء)
+    patch = list(patch) + fetch_fd_results()
+
     def full(short, names):
         c = [n for n in names if n == short or n.startswith(short + " ")]
         assert len(c) == 1, (short, c)
