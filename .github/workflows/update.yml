@@ -25,7 +25,11 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: جلب أحدث جدول ونتائج (openfootball، ترخيص CC0)
-        run: git clone --depth 1 https://github.com/openfootball/england openfootball/england
+        run: |
+          git clone --depth 1 https://github.com/openfootball/england openfootball/england
+          for r in espana deutschland italy france; do
+            git clone --depth 1 https://github.com/openfootball/$r openfootball/$r || echo "تعذّر جلب $r"
+          done
 
       - name: حساب التوقعات
         env:
@@ -37,11 +41,25 @@ jobs:
           echo "::notice title=مصادر-النتائج::$M"
 
 
+      - name: توقعات الدوريات الأوروبية (إسباني، ألماني، إيطالي، فرنسي)
+        env:
+          OF_ROOT: openfootball
+          FOOTBALL_DATA_TOKEN: ${{ secrets.FOOTBALL_DATA_TOKEN }}
+        run: |
+          set +e
+          for c in es de it fr; do
+            python3 -I src/predict_league.py $c 2>&1 | tee -a leagues.log
+            [ ${PIPESTATUS[0]} -eq 0 ] || echo "فشل الدوري $c" | tee -a leagues.log
+          done
+          M=$(grep -a -E "اختبار رجعي|فشل|تعذّر|مكمَّلة" leagues.log | sed ':a;N;$!ba;s/%/%25/g;s/\r//g;s/\n/%0A/g')
+          echo "::notice title=الدوريات::$M"
+          exit 0
+
       - name: حفظ سجلّ التوقعات في المستودع
         run: |
           git config user.name "mizan-bot"
           git config user.email "mizan-bot@users.noreply.github.com"
-          git add data/predictions_log.json data/odds_history.json
+          git add data/predictions_log*.json data/odds_history*.json
           if ! git diff --cached --quiet; then
             git commit -m "تحديث سجلّ التوقعات"
             git pull --rebase origin main

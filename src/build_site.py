@@ -12,5 +12,11 @@ out = os.path.join(root, "dist")
 os.makedirs(out, exist_ok=True)
 open(os.path.join(out, "index.html"), "w", encoding="utf-8").write(tpl.replace("__DATA__", data))
 open(os.path.join(out, "data.json"), "w", encoding="utf-8").write(data)   # تقرؤه الصفحة دورياً للتحديث دون إعادة تحميل
+for code in ("es", "de", "it", "fr"):   # ملفات الدوريات الأوروبية (يقرؤها التطبيق)
+    src = os.path.join(root, f"data_{code}.json")
+    if os.path.exists(src):
+        txt = open(src, encoding="utf-8").read()
+        json.loads(txt)
+        open(os.path.join(out, f"data_{code}.json"), "w", encoding="utf-8").write(txt)
 open(os.path.join(out, ".nojekyll"), "w").close()
 print("تم بناء", os.path.join(out, "index.html"))

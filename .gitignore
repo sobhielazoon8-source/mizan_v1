@@ -3,3 +3,6 @@ dist/
 data.json
 backtest_result.json
 __pycache__/
+data_??.json
+leagues.log
+predict.log
