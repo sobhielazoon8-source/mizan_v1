@@ -15,6 +15,7 @@ import backtest as bt
 OF = os.environ.get("OF_DIR", os.path.join(HERE, "..", "openfootball", "england"))
 OUT = os.environ.get("OUT_JSON", os.path.join(HERE, "..", "data.json"))
 PATCH = os.path.join(HERE, "..", "data", "patch_results.json")
+LOG = os.environ.get("LOG_JSON", os.path.join(HERE, "..", "data", "predictions_log.json"))
 # المواسم المتاحة في openfootball من 2020-21 فصاعداً؛ الأحدث هو الموسم الجاري
 SEASONS_OF = sorted(d for d in os.listdir(OF) if re.fullmatch(r"\d{4}-\d{2}", d) and d >= "2020-21"
                     and os.path.exists(os.path.join(OF, d, "1-premierleague.txt")))
@@ -97,6 +98,76 @@ def load_all():
     return hist, cur_played, upcoming
 
 
+def draw_flag(p):
+    """«مرشحة للتعادل»: فرصتا الفوز متقاربتان (فارق أقل من 12 نقطة مئوية) وفرصة التعادل 25% فأكثر.
+    اختُبرت القاعدة تاريخياً: 20% من المباريات تقع تحتها، وينتهي 29.8% منها بتعادل (مقابل 24.6% عموماً)."""
+    return bool(abs(p[0] - p[2]) < 0.12 and p[1] >= 0.25)
+
+
+def shown_score(f):
+    """النتيجة التي تعرضها الصفحة: الأرجح منفردةً للمباريات المرشحة للتعادل، وإلا الأرجح المتسقة مع الفائز."""
+    return f["modal"]["s"] if f["draw_flag"] else f["pick"]["s"]
+
+
+def outcome_of(hg, ag):
+    return 0 if hg > ag else (1 if hg == ag else 2)
+
+
+def update_log_and_score(fixtures, cur_played, now):
+    """يحفظ توقعات المباريات المستقبلية قبل انطلاقها (لا تُعدَّل بعد حفظها)، ثم يقيّم ما انتهى منها.
+    شرط الحفظ: يوم المباراة بعد اليوم الحالي، أو هو اليوم الحالي والساعة قبل 10:00 بتوقيت UTC
+    (أبكر انطلاق للدوري 12:30 بتوقيت لندن)، فلا تُسجَّل توقعات بعد بدء المباراة."""
+    log = json.load(open(LOG, encoding="utf-8")) if os.path.exists(LOG) else {}
+    today = now.strftime("%Y-%m-%d")
+    added = 0
+    horizon = (now + timedelta(days=7)).strftime("%Y-%m-%d")
+    for f in fixtures:
+        key = f"{f['home']}|{f['away']}"            # كل زوج يلتقي مرة واحدة على أرض المضيف في الموسم
+        ok = (f["date"] > today or (f["date"] == today and now.hour < 10)) and f["date"] <= horizon
+        if not ok:
+            continue                                  # بعيدة جداً، أو بدأت: لا نكتب فوق التوقع المحفوظ
+        new = dict(date=f["date"], md=f["md"], home=f["home"], away=f["away"],
+                        ph=f["ph"], pd=f["pd"], pa=f["pa"], shown=shown_score(f), flag=f["draw_flag"],
+                        logged_at=now.strftime("%Y-%m-%dT%H:%MZ"))
+        old = log.get(key)
+        if old is None or any(old[k] != new[k] for k in ("ph", "pd", "pa", "shown", "flag", "date", "md")):
+            log[key] = new                            # آخر توقع قبل المباراة هو المعتمد في السجل
+            added += 1
+    if added or not os.path.exists(LOG):
+        os.makedirs(os.path.dirname(LOG), exist_ok=True)
+        json.dump(log, open(LOG, "w", encoding="utf-8"), ensure_ascii=False, indent=1, sort_keys=True)
+    res = {(m["home"], m["away"]): m for m in cur_played}
+    scored, pending = [], 0
+    for key, e in log.items():
+        m = res.get((e["home"], e["away"]))
+        if m is None:
+            if e["date"] >= (now - timedelta(days=7)).strftime("%Y-%m-%d"):
+                pending += 1
+            continue
+        o = outcome_of(m["hg"], m["ag"])
+        probs = [e["ph"], e["pd"], e["pa"]]
+        scored.append(dict(date=e["date"], md=e["md"], home=e["home"], away=e["away"],
+                           ph=e["ph"], pd=e["pd"], pa=e["pa"], shown=e["shown"], flag=e["flag"],
+                           hg=m["hg"], ag=m["ag"], outcome=o,
+                           hit=max(range(3), key=lambda k: probs[k]) == o,
+                           exact=e["shown"] == f"{m['hg']}-{m['ag']}",
+                           logloss=-math.log(max(probs[o], 1e-9))))
+    scored.sort(key=lambda x: (x["date"], x["home"]), reverse=True)
+    n = len(scored)
+    base_freq = [0.465, 0.246, 0.288]       # النسب التاريخية لفوز المضيف/تعادل/فوز الضيف
+    rec = dict(
+        since=min((e["date"] for e in log.values()), default=None), logged=len(log), pending=pending, n=n,
+        hits=sum(1 for x in scored if x["hit"]), exact=sum(1 for x in scored if x["exact"]),
+        draws=sum(1 for x in scored if x["outcome"] == 1),
+        flagged=sum(1 for x in scored if x["flag"]), flagged_draws=sum(1 for x in scored if x["flag"] and x["outcome"] == 1),
+        home_wins=sum(1 for x in scored if x["outcome"] == 0),
+        logloss=round(sum(x["logloss"] for x in scored) / n, 4) if n else None,
+        base_logloss=round(sum(-math.log(base_freq[x["outcome"]]) for x in scored) / n, 4) if n else None,
+        recent=scored[:30])
+    print(f"السجل الحي: محفوظ {len(log)} | جديد/محدَّث {added} | مُقيَّم {n} | بانتظار {pending}")
+    return rec
+
+
 def table(played, teams):
     t = {x: dict(p=0, w=0, d=0, l=0, gf=0, ga=0, pts=0) for x in teams}
     for m in played:
@@ -159,21 +230,25 @@ def main():
         ok = lambda i, j: (i > j) if fav == 0 else ((i == j) if fav == 1 else (i < j))
         c2 = next((c, i, j) for c, i, j in cells if ok(i, j))
         pick = dict(s=f"{c2[1]}-{c2[2]}", p=round(c2[0], 4))
-        return p, lh, la, top, over25, btts, cs_h, cs_a, pick
+        modal = dict(s=f"{cells[0][1]}-{cells[0][2]}", p=round(cells[0][0], 4))
+        return p, lh, la, top, over25, btts, cs_h, cs_a, pick, modal
 
     fixtures = []
     for m in upcoming:
         if m["date"] > HORIZON: continue
-        p, lh, la, top, o25, bt_, ch, ca, pick = predict(m)
+        p, lh, la, top, o25, bt_, ch, ca, pick, modal = predict(m)
         diff = elo.rating(m["home"]) + PE["home"] - elo.rating(m["away"])
         fixtures.append(dict(
             md=m["md"], date=m["date"].strftime("%Y-%m-%d"), home=m["home"], away=m["away"],
-            ph=round(p[0], 4), pd=round(p[1], 4), pa=round(p[2], 4), pick=pick,
+            ph=round(p[0], 4), pd=round(p[1], 4), pa=round(p[2], 4), pick=pick, modal=modal,
+            draw_flag=draw_flag(p),
             xg_h=round(lh, 2), xg_a=round(la, 2), top=top,
             over25=round(o25, 4), btts=round(bt_, 4), cs_h=round(ch, 4), cs_a=round(ca, 4),
             elo_h=round(elo.rating(m["home"])), elo_a=round(elo.rating(m["away"])), elo_diff=round(diff),
         ))
     print("مباريات قادمة حتى", HORIZON.date(), ":", len(fixtures))
+    NOW = datetime.now(timezone.utc)
+    record = update_log_and_score(fixtures, cur_played, NOW)
 
     # آخر 5 نتائج لكل فريق (النتيجة + الخصم)
     forms = {t: [] for t in teams}
@@ -232,7 +307,8 @@ def main():
             rel=round(c["rel"] / N, 4), exp_pos=round(c["pos_sum"] / N, 1), exp_pts=round(c["pts_sum"] / N, 1)))
     teams_out.sort(key=lambda x: (-x["pts"], -(x["gf"] - x["ga"]), -x["gf"]))
 
-    out = dict(generated=TODAY.strftime("%Y-%m-%d"), played_md=min(tb[t]["p"] for t in teams), through=str(HORIZON.date()), season=CUR, model="Elo + هجوم/دفاع (بواسون)",
+    out = dict(generated=TODAY.strftime("%Y-%m-%d"), updated_at=NOW.strftime("%Y-%m-%dT%H:%M:%SZ"),
+               last_result_date=max(m["date"] for m in cur_played).strftime("%Y-%m-%d"), record=record, played_md=min(tb[t]["p"] for t in teams), through=str(HORIZON.date()), season=CUR, model="Elo + هجوم/دفاع (بواسون)",
                backtest=dict(matches=5700, acc=0.545, base_acc=0.465, logloss=0.965), teams=teams_out, fixtures=fixtures)
     json.dump(out, open(OUT, "w", encoding="utf-8"), ensure_ascii=False)
     print("تم. أفضل 5 بالقوة:", sorted(((round(v), k) for k, v in strength.items()), reverse=True)[:5])

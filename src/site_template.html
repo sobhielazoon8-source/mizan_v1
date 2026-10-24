@@ -86,6 +86,19 @@ select { font: inherit; font-size: 14px; background: var(--surface); color: var(
 .tag { padding: 1px 10px; border-radius: 999px; font-size: 12px; font-weight: 500; background: var(--surface2); color: var(--ink); }
 .tag.hi { background: var(--home); color: var(--on-home); }
 .tag.today { background: var(--away); color: var(--on-away); }
+.tag.draw { background: var(--draw); color: var(--ink); }
+:root[data-theme="dark"] .tag.draw { color: #fff; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .tag.draw { color: #fff; } }
+.banner { background: var(--surface2); border-radius: 12px; padding: 10px 14px; font-size: 13.5px; margin-bottom: 12px; border-inline-start: 4px solid var(--away); }
+.dnote { margin: 8px 0 0; font-size: 12.5px; color: var(--muted); }
+.mark { font-weight: 600; }
+.mark.ok { color: var(--home); } .mark.no { color: var(--away); }
+.sub2 { color: var(--muted); font-size: 13px; margin: -6px 0 12px; }
+.rec table { min-width: 640px; }
+.rec td.l { text-align: start; }
+.rec .tablewrap { margin-bottom: 8px; }
+.refreshed { animation: pulse 1.2s ease 1; }
+@keyframes pulse { from { background: var(--surface2); } to { background: transparent; } }
 .m-main { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 8px; }
 .team { display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; min-width: 0; }
 .team .nm { font-weight: 600; font-size: 15px; line-height: 1.3; overflow-wrap: anywhere; }
@@ -197,10 +210,12 @@ footer.foot { margin-top: 36px; padding-top: 16px; border-top: 1px solid var(--l
   <nav class="tabs" aria-label="الأقسام">
     <a href="#matches" data-tab="matches">المباريات</a>
     <a href="#table" data-tab="table">الترتيب والموسم</a>
+    <a href="#record" data-tab="record">سجلّ الدقة</a>
     <a href="#about" data-tab="about">عن النموذج</a>
   </nav>
 
   <section id="tab-matches">
+    <div class="banner" id="lag" hidden></div>
     <div class="controls">
       <div class="chips" id="mdchips" role="group" aria-label="الجولة"></div>
       <div class="selects">
@@ -223,6 +238,20 @@ footer.foot { margin-top: 36px; padding-top: 16px; border-top: 1px solid var(--l
     <div class="tablewrap"><table id="tbl"></table></div>
     <div class="legend"><span class="l1">المراكز الأربعة الأولى حالياً</span><span class="l2">مراكز الهبوط الثلاثة حالياً</span></div>
     <p class="note" style="margin-top:14px">«القوة» هي تقييم Elo بعد آخر مباراة، ويحسب فيه الفريق ماضيه لا ترتيبه الحالي فقط. لذلك قد يتقدم فريق قوي في التوقعات على فريق يسبقه في الترتيب الآن.</p>
+  </section>
+
+  <section id="tab-record" class="rec" hidden>
+    <div class="heading"><h2>سجلّ دقتنا</h2><span id="recsub"></span></div>
+    <p class="sub2">يُحفظ توقعنا لكل مباراة قبل انطلاقها بأيام، ولا يُعدَّل بعد بدئها، ثم يُقارَن بالنتيجة الفعلية.</p>
+    <div id="reclive"></div>
+    <h3 style="font-family:var(--font-display);font-size:20px;margin:24px 0 6px">الاختبار التاريخي</h3>
+    <p class="sub2">النموذج نفسه على 5,700 مباراة سابقة (15 موسماً) لم يرها عند ضبطه.</p>
+    <div class="kpis">
+      <div class="kpi"><b>54.5%</b><span>إصابة النتيجة الأرجح (فوز/تعادل/خسارة)</span></div>
+      <div class="kpi"><b>46.5%</b><span>لو خمّنا «يفوز صاحب الأرض» دائماً</span></div>
+      <div class="kpi"><b>29.8%</b><span>من المباريات «المرشحة للتعادل» (20% من المباريات) انتهت فعلاً بتعادل، مقابل 24.6% عموماً</span></div>
+    </div>
+    <p class="note">لا يظهر التعادل كتوقع رئيسي لأن أعلى احتمال تعادل لأي مباراة في هذه السنوات لم يتجاوز 29.9%، فيبقى دائماً خلف أحد الفوزين، مع أن 24.6% من المباريات تنتهي به. لذلك نعرض نسبته في كل بطاقة ونضع شارة «مرشحة للتعادل» على المباريات المتقاربة.</p>
   </section>
 
   <section id="tab-about" hidden>
@@ -253,11 +282,15 @@ footer.foot { margin-top: 36px; padding-top: 16px; border-top: 1px solid var(--l
       </table>
       </div>
 
+      <h2>لماذا لا يظهر التعادل كثيراً؟</h2>
+      <p>التعادل يحدث في نحو ربع المباريات، لكنه نادراً ما يكون أرجح احتمال في مباراة بعينها: في اختبار 5,700 مباراة لم تتجاوز نسبته 29.9% في أي مباراة، فيتقدم عليه أحد الفوزين دائماً. وإجبار النموذج على اختيار التعادل يخفض دقته. لذلك نعرض نسبة التعادل في كل مباراة، ونضع شارة «مرشحة للتعادل» حين تتقارب فرصتا الفريقين، وهي مباريات انتهى نحو 30% منها بتعادل.</p>
+
       <h2>حدود يجب معرفتها</h2>
       <ul>
         <li>النموذج لا يعرف الإصابات والإيقافات وتغيير المدربين ولا التشكيلة قبل المباراة.</li>
         <li>لا يقارن نفسه بأسعار شركات المراهنة، وهي غالباً أدق قليلاً لأنها تعرف أخبار الفرق.</li>
         <li>مواعيد انطلاق المباريات غير مدرجة؛ الصفحة تعرض يوم المباراة فقط.</li>
+        <li>الصفحة ليست مباشرة. النتائج تصل من مصدر مفتوح قد يتأخر بساعات أو أياماً، ويظهر ذلك في أعلى الصفحة. لا توجد نتائج لحظية ولا إشعارات أهداف.</li>
         <li>الفرق الصاعدة هذا الموسم (هال سيتي، إيبسويتش تاون، كوفنتري سيتي) يعتمد تقييمها على تاريخها السابق وعلى عدد قليل من مباريات هذا الموسم، فتقديرها أقل ثباتاً.</li>
       </ul>
       <p class="note">«ميزان» موقع للتحليل والترفيه ولا يقدّم نصائح مراهنة، ولا يرتبط بالدوري الإنجليزي ولا بأي نادٍ أو موقع مراهنات. الشارات الملوّنة رموز خاصة بالموقع وليست شعارات الأندية الرسمية.</p>
@@ -278,10 +311,7 @@ footer.foot { margin-top: 36px; padding-top: 16px; border-top: 1px solid var(--l
 (function () {
   document.documentElement.lang = 'ar';
   var D = JSON.parse(document.getElementById('data').textContent);
-  var TODAY = D.generated; // تاريخ آخر تحديث للبيانات
-  var sp = (D.season || '').split('-');
-  if (sp.length === 2) document.getElementById('brandsub').textContent = 'توقعات الدوري الإنجليزي الممتاز · موسم ' + sp[0] + '/' + sp[1];
-  document.getElementById('tsub').textContent = 'بعد ' + D.played_md + ' جولات · 10,000 محاكاة للمباريات المتبقية';
+  var TODAY = D.generated;
 
   var TEAMS = {
     'Arsenal FC': ['آرسنال', 'ARS', '#D6232A'], 'Manchester City FC': ['مانشستر سيتي', 'MCI', '#6CABDD'],
@@ -298,6 +328,7 @@ footer.foot { margin-top: 36px; padding-top: 16px; border-top: 1px solid var(--l
   var DAYS = ['الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
   var MONTHS = ['كانون الثاني', 'شباط', 'آذار', 'نيسان', 'أيار', 'حزيران', 'تموز', 'آب', 'أيلول', 'تشرين الأول', 'تشرين الثاني', 'كانون الأول'];
 
+  function $(id) { return document.getElementById(id); }
   function ar(n) { return (TEAMS[n] || [n])[0]; }
   function disc(n) {
     var t = TEAMS[n] || [n, n.slice(0, 3).toUpperCase(), '#888888'];
@@ -308,7 +339,6 @@ footer.foot { margin-top: 36px; padding-top: 16px; border-top: 1px solid var(--l
   function pd(s) { var p = s.split('-'); return new Date(Date.UTC(+p[0], +p[1] - 1, +p[2])); }
   function dlabel(s) { var d = pd(s); return DAYS[d.getUTCDay()] + ' ' + d.getUTCDate() + ' ' + MONTHS[d.getUTCMonth()]; }
   function dshort(s) { var d = pd(s); return d.getUTCDate() + ' ' + MONTHS[d.getUTCMonth()]; }
-  function days(a, b) { return Math.round((pd(b) - pd(a)) / 86400000); }
   function pct3(a, b, c) {
     var v = [a, b, c].map(function (x) { return x * 100; }), r = v.map(Math.floor);
     var rem = 100 - r.reduce(function (s, x) { return s + x; }, 0);
@@ -322,31 +352,62 @@ footer.foot { margin-top: 36px; padding-top: 16px; border-top: 1px solid var(--l
     return '<span class="sc"><b>' + p[0] + '</b><i>–</i><b>' + p[1] + '</b>' + (extra ? '<em>' + extra + '</em>' : '') + '</span>';
   }
   function maxp(f) { return Math.max(f.ph, f.pd, f.pa); }
+  function plural(n, one, two, few, many) {
+    if (n === 1) return one; if (n === 2) return two;
+    return n + ' ' + (n >= 3 && n <= 10 ? few : many);
+  }
+  function ago(iso) {
+    var mins = Math.max(0, Math.round((Date.now() - new Date(iso).getTime()) / 60000));
+    if (mins < 1) return 'قبل لحظات';
+    if (mins < 60) return 'قبل ' + plural(mins, 'دقيقة', 'دقيقتين', 'دقائق', 'دقيقة');
+    var h = Math.round(mins / 60);
+    if (h < 24) return 'قبل ' + plural(h, 'ساعة', 'ساعتين', 'ساعات', 'ساعة');
+    var d = Math.round(h / 24);
+    return 'قبل ' + plural(d, 'يوم', 'يومين', 'أيام', 'يوماً');
+  }
 
-  var byName = {};
-  D.teams.forEach(function (t, i) { byName[t.name] = t; t.rank = i + 1; });
-  var strengthRank = D.teams.slice().sort(function (a, b) { return b.elo - a.elo; });
-  strengthRank.forEach(function (t, i) { t.srank = i + 1; });
+  var byName = {}, mds = [];
+  var state = { md: null, team: '', sort: 'date' };
+  var expanded = {};
+  function key(f) { return f.home + '|' + f.away; }
 
-  document.getElementById('stamp').innerHTML = 'آخر تحديث: <b>' + dlabel(TODAY) + '</b><br>النتائج حتى الجولة ' + D.played_md + ' · التوقعات حتى ' + dshort(D.fixtures.map(function (f) { return f.date; }).sort().pop());
+  function prepare() {
+    TODAY = D.generated;
+    byName = {};
+    D.teams.forEach(function (t, i) { byName[t.name] = t; t.rank = i + 1; });
+    mds = []; D.fixtures.forEach(function (f) { if (mds.indexOf(f.md) < 0) mds.push(f.md); });
+    if (mds.indexOf(state.md) < 0) state.md = mds[0];
+  }
+
+  /* ---------- الرأس ---------- */
+  function renderStamp() {
+    $('stamp').innerHTML = 'آخر تحديث للبيانات: <b>' + ago(D.updated_at) + '</b><br>آخر نتيجة في المصدر: <b>' + (D.last_result_date ? dshort(D.last_result_date) : '—') + '</b> (الجولة ' + D.played_md + ')';
+  }
+  function renderHeader() {
+    var sp = (D.season || '').split('-');
+    if (sp.length === 2) $('brandsub').textContent = 'توقعات الدوري الإنجليزي الممتاز · موسم ' + sp[0] + '/' + sp[1];
+    $('tsub').textContent = 'بعد ' + D.played_md + ' جولات · 10,000 محاكاة للمباريات المتبقية';
+    renderStamp();
+  }
 
   /* ---------- المباريات ---------- */
-  var mds = []; D.fixtures.forEach(function (f) { if (mds.indexOf(f.md) < 0) mds.push(f.md); });
-  var state = { md: mds[0], team: '', sort: 'date' };
-
-  var chipsEl = document.getElementById('mdchips');
-  chipsEl.innerHTML = mds.map(function (m) { return '<button type="button" class="chip num" data-md="' + m + '" aria-pressed="false">الجولة ' + m + '</button>'; }).join('');
+  var chipsEl = $('mdchips'), teamSel = $('teamSel'), sortSel = $('sortSel');
   chipsEl.addEventListener('click', function (e) {
     var b = e.target.closest('.chip'); if (!b) return;
     state.md = +b.getAttribute('data-md'); state.team = ''; teamSel.value = ''; renderMatches();
   });
-  var teamSel = document.getElementById('teamSel');
-  teamSel.innerHTML = '<option value="">كل الفرق</option>' + D.teams.slice().sort(function (a, b) { return ar(a.name).localeCompare(ar(b.name), 'ar'); })
-    .map(function (t) { return '<option value="' + t.name.replace(/&/g, '&amp;') + '">' + ar(t.name) + '</option>'; }).join('');
   teamSel.addEventListener('change', function () { state.team = teamSel.value; renderMatches(); });
-  var sortSel = document.getElementById('sortSel');
   sortSel.addEventListener('change', function () { state.sort = sortSel.value; renderMatches(); });
 
+  function renderChips() {
+    chipsEl.innerHTML = mds.map(function (m) { return '<button type="button" class="chip num" data-md="' + m + '" aria-pressed="false">الجولة ' + m + '</button>'; }).join('');
+  }
+  function fillTeams() {
+    var cur = teamSel.value;
+    teamSel.innerHTML = '<option value="">كل الفرق</option>' + D.teams.slice().sort(function (a, b) { return ar(a.name).localeCompare(ar(b.name), 'ar'); })
+      .map(function (t) { return '<option value="' + t.name.replace(/&/g, '&amp;') + '">' + ar(t.name) + '</option>'; }).join('');
+    teamSel.value = cur;
+  }
   function confTag(f) {
     var m = maxp(f);
     if (m >= 0.6) return '<span class="tag hi">ثقة عالية</span>';
@@ -362,21 +423,24 @@ footer.foot { margin-top: 36px; padding-top: 16px; border-top: 1px solid var(--l
     }).join('');
     return '<div><h4>' + ar(name) + ' · آخر 5 مباريات</h4><div class="form5">' + items + '</div></div>';
   }
-  function matchHtml(f, i) {
+  function matchHtml(f) {
     var p = pct3(f.ph, f.pd, f.pa);
     var fav = f.ph >= f.pd && f.ph >= f.pa ? 'h' : (f.pa >= f.pd ? 'a' : 'd');
     var stronger = f.elo_h >= f.elo_a ? f.home : f.away;
     var gap = Math.abs(f.elo_h - f.elo_a);
     var ph = byName[f.home], pa = byName[f.away];
     var isToday = f.date === TODAY;
-    var pk = f.pick.s.split('-');
+    var sh = f.draw_flag ? f.modal : f.pick, pk = sh.s.split('-');
     var top = f.top.map(function (x) { return sc(x.s, Math.round(x.p * 100) + '%'); }).join('');
     var tot = f.elo_h + f.elo_a, hw = Math.round(f.elo_h / tot * 100);
-    return '<article class="match" data-i="' + i + '">' +
-      '<div class="m-top"><span>' + dlabel(f.date) + ' · الجولة <span class="num">' + f.md + '</span></span><span style="display:flex;gap:6px">' + (isToday ? '<span class="tag today">اليوم</span>' : (f.date < TODAY ? '<span class="tag">بانتظار النتيجة</span>' : '')) + confTag(f) + '</span></div>' +
+    var open = !!expanded[key(f)];
+    return '<article class="match" data-k="' + key(f).replace(/&/g, '&amp;') + '">' +
+      '<div class="m-top"><span>' + dlabel(f.date) + ' · الجولة <span class="num">' + f.md + '</span></span><span style="display:flex;gap:6px;flex-wrap:wrap">' +
+        (isToday ? '<span class="tag today">اليوم</span>' : (f.date < TODAY ? '<span class="tag">بانتظار النتيجة</span>' : '')) +
+        (f.draw_flag ? '<span class="tag draw" title="فرصتا الفريقين متقاربتان">مرشحة للتعادل</span>' : '') + confTag(f) + '</span></div>' +
       '<div class="m-main">' +
         '<div class="team">' + disc(f.home) + '<span class="nm">' + ar(f.home) + '</span><span class="pos num">المركز ' + ph.rank + ' · ' + ph.pts + ' نقطة</span></div>' +
-        '<div class="pred"><div class="lbl">النتيجة الأرجح</div><div class="score"><span>' + pk[0] + '</span><i>–</i><span>' + pk[1] + '</span></div><div class="sub num">احتمالها ' + Math.round(f.pick.p * 100) + '%</div></div>' +
+        '<div class="pred"><div class="lbl">' + (f.draw_flag ? 'أرجح نتيجة منفردة' : 'النتيجة الأرجح') + '</div><div class="score"><span>' + pk[0] + '</span><i>–</i><span>' + pk[1] + '</span></div><div class="sub num">احتمالها ' + Math.round(sh.p * 100) + '%</div></div>' +
         '<div class="team">' + disc(f.away) + '<span class="nm">' + ar(f.away) + '</span><span class="pos num">المركز ' + pa.rank + ' · ' + pa.pts + ' نقطة</span></div>' +
       '</div>' +
       '<div class="odds">' +
@@ -385,10 +449,11 @@ footer.foot { margin-top: 36px; padding-top: 16px; border-top: 1px solid var(--l
         '<div class="a' + (fav === 'a' ? ' top' : '') + '"><b>' + p[2] + '%</b><span>فوز ' + ar(f.away) + '</span></div>' +
       '</div>' +
       '<div class="bar" role="img" aria-label="احتمالات الفوز والتعادل والخسارة"><i class="h" style="width:' + p[0] + '%"></i><i class="d" style="width:' + p[1] + '%"></i><i class="a" style="width:' + p[2] + '%"></i></div>' +
+      (f.draw_flag ? '<p class="dnote">مباراة متقاربة: في مثل هذه المباريات انتهى نحو 30% منها بتعادل (مقابل 25% في المباريات عموماً).</p>' : '') +
       '<div class="m-foot"><span class="xg">الأهداف المتوقعة <b>' + f.xg_h.toFixed(1) + '</b> – <b>' + f.xg_a.toFixed(1) + '</b></span>' +
         '<span>الأقوى تصنيفاً: <b style="color:var(--ink);font-weight:600">' + ar(stronger) + '</b> <span class="num">(+' + gap + ')</span></span>' +
-        '<button type="button" class="more" aria-expanded="false">التفاصيل</button></div>' +
-      '<div class="detail" hidden>' +
+        '<button type="button" class="more" aria-expanded="' + open + '">' + (open ? 'إخفاء التفاصيل' : 'التفاصيل') + '</button></div>' +
+      '<div class="detail"' + (open ? '' : ' hidden') + '>' +
         '<div><h4>النتائج الخمس الأكثر ترجيحاً</h4><div class="sclist">' + top + '</div></div>' +
         '<div class="facts">' +
           '<div class="fact"><b>' + Math.round(f.over25 * 100) + '%</b><span>أكثر من 2.5 هدف</span></div>' +
@@ -407,20 +472,25 @@ footer.foot { margin-top: 36px; padding-top: 16px; border-top: 1px solid var(--l
   function pickCard(label, f, text) {
     return '<div class="pick"><small>' + label + '</small><strong>' + ar(f.home) + ' – ' + ar(f.away) + '</strong><span>' + text + '</span></div>';
   }
-
-  var current = [];
+  function renderLag() {
+    var late = D.fixtures.filter(function (f) { return f.date < TODAY; }).length;
+    var el = $('lag');
+    if (late > 0) {
+      el.hidden = false;
+      el.textContent = (late === 1 ? 'نتيجة مباراة منتهية واحدة لم تصل' : (late === 2 ? 'نتيجتا مباراتين منتهيتين لم تصلا' : 'نتائج ' + late + (late <= 10 ? ' مباريات منتهية لم تصل' : ' مباراة منتهية لم تصل'))) + ' بعد من المصدر المفتوح (آخر نتيجة مسجّلة عنده بتاريخ ' + (D.last_result_date ? dshort(D.last_result_date) : '—') + '). تظهر هذه المباريات بعبارة «بانتظار النتيجة» ويُحسب الترتيب من النتائج المتوفرة فقط.';
+    } else { el.hidden = true; }
+  }
   function renderMatches() {
     var list = D.fixtures.filter(function (f) { return state.team ? (f.home === state.team || f.away === state.team) : f.md === state.md; });
     if (state.sort === 'date') list.sort(function (a, b) { return a.date < b.date ? -1 : a.date > b.date ? 1 : 0; });
     if (state.sort === 'conf') list.sort(function (a, b) { return maxp(b) - maxp(a); });
     if (state.sort === 'open') list.sort(function (a, b) { return maxp(a) - maxp(b); });
     if (state.sort === 'goals') list.sort(function (a, b) { return (b.xg_h + b.xg_a) - (a.xg_h + a.xg_a); });
-    current = list;
 
     Array.prototype.forEach.call(chipsEl.children, function (c) { c.setAttribute('aria-pressed', String(!state.team && +c.getAttribute('data-md') === state.md)); });
     chipsEl.className = 'chips' + (state.team ? ' off' : '');
 
-    var head = document.getElementById('mhead'), sub = document.getElementById('msub');
+    var head = $('mhead'), sub = $('msub');
     if (state.team) { head.textContent = 'مباريات ' + ar(state.team); sub.textContent = list.length + ' مباراة قادمة'; }
     else {
       var ds = list.map(function (f) { return f.date; }).sort();
@@ -428,7 +498,7 @@ footer.foot { margin-top: 36px; padding-top: 16px; border-top: 1px solid var(--l
       sub.textContent = ds.length ? (ds[0] === ds[ds.length - 1] ? dlabel(ds[0]) : dshort(ds[0]) + ' – ' + dshort(ds[ds.length - 1])) : '';
     }
 
-    var picks = document.getElementById('picks');
+    var picks = $('picks');
     if (!state.team && list.length >= 3) {
       var a = list.slice().sort(function (x, y) { return maxp(y) - maxp(x); })[0];
       var b = list.slice().sort(function (x, y) { return maxp(x) - maxp(y); })[0];
@@ -440,17 +510,18 @@ footer.foot { margin-top: 36px; padding-top: 16px; border-top: 1px solid var(--l
       picks.hidden = false;
     } else { picks.innerHTML = ''; picks.hidden = true; }
 
-    document.getElementById('list').innerHTML = list.length ? list.map(matchHtml).join('') : '<p class="empty">لا توجد مباريات مطابقة.</p>';
+    $('list').innerHTML = list.length ? list.map(matchHtml).join('') : '<p class="empty">لا توجد مباريات مطابقة.</p>';
   }
-  document.getElementById('list').addEventListener('click', function (e) {
+  $('list').addEventListener('click', function (e) {
     var b = e.target.closest('.more'); if (!b) return;
-    var d = b.closest('.match').querySelector('.detail');
-    var open = d.hidden; d.hidden = !open;
+    var card = b.closest('.match'), k = card.getAttribute('data-k');
+    var d = card.querySelector('.detail');
+    var open = d.hidden; d.hidden = !open; expanded[k] = open;
     b.setAttribute('aria-expanded', String(open)); b.textContent = open ? 'إخفاء التفاصيل' : 'التفاصيل';
   });
 
   /* ---------- الترتيب ---------- */
-  function tableHtml() {
+  function renderTable() {
     var minE = Math.min.apply(null, D.teams.map(function (t) { return t.elo; })), maxE = Math.max.apply(null, D.teams.map(function (t) { return t.elo; }));
     var head = '<thead><tr><th>#</th><th style="text-align:start">الفريق</th><th>لعب</th><th>ف</th><th>ت</th><th>خ</th><th>فارق</th><th>نقاط</th><th>القوة</th><th>المركز المتوقع</th><th>اللقب</th><th>المراكز الأربعة</th><th>الهبوط</th><th>آخر 5</th></tr></thead>';
     var rows = D.teams.map(function (t, i) {
@@ -464,21 +535,64 @@ footer.foot { margin-top: 36px; padding-top: 16px; border-top: 1px solid var(--l
         '<td>' + t.exp_pos.toFixed(1) + '</td><td>' + pb(t.title, 'ti') + '</td><td>' + pb(t.top4, '') + '</td><td>' + pb(t.rel, 'rel') + '</td>' +
         '<td><span style="display:inline-flex;gap:3px">' + form + '</span></td></tr>';
     }).join('');
-    return head + '<tbody>' + rows + '</tbody>';
+    $('tbl').innerHTML = head + '<tbody>' + rows + '</tbody>';
   }
-  document.getElementById('tbl').innerHTML = tableHtml();
+
+  /* ---------- سجلّ الدقة ---------- */
+  function renderRecord() {
+    var R = D.record || { n: 0, logged: 0, pending: 0, recent: [] };
+    $('recsub').textContent = R.since ? 'التسجيل بدأ في ' + dshort(R.since) : '';
+    var el = $('reclive');
+    if (!R.n) {
+      el.innerHTML = '<div class="note">لم تنتهِ بعد أي مباراة حُفظ توقعها مسبقاً. المباريات المحفوظة بانتظار نتائجها: <b class="num">' + R.pending + '</b>. ستظهر هنا النسبة الحقيقية تلقائياً مع وصول النتائج.</div>';
+      return;
+    }
+    var acc = Math.round(R.hits / R.n * 100), hw = Math.round(R.home_wins / R.n * 100);
+    var small = R.n < 30 ? '<p class="note" style="margin-bottom:12px">العينة ما زالت صغيرة (' + R.n + ' مباراة)، فلا تُبنى عليها استنتاجات. النتيجة الموثوقة تحتاج عشرات المباريات.</p>' : '';
+    var kp = '<div class="kpis">' +
+      '<div class="kpi"><b class="num">' + acc + '%</b><span>إصابة النتيجة الأرجح (' + R.hits + ' من ' + R.n + ')</span></div>' +
+      '<div class="kpi"><b class="num">' + hw + '%</b><span>لو خمّنا «يفوز صاحب الأرض» دائماً</span></div>' +
+      '<div class="kpi"><b class="num">' + R.exact + '</b><span>نتائج دقيقة أصبناها من ' + R.n + '</span></div>' +
+      '<div class="kpi"><b class="num">' + R.draws + '</b><span>تعادلات من ' + R.n + ' مباراة' + (R.flagged ? '، منها ' + R.flagged_draws + ' من ' + R.flagged + ' «مرشحة للتعادل»' : '') + '</span></div>' +
+      '</div>';
+    var rows = R.recent.map(function (x) {
+      var p = pct3(x.ph, x.pd, x.pa), o = ['فوز ' + ar(x.home), 'تعادل', 'فوز ' + ar(x.away)][x.outcome];
+      return '<tr><td>' + dshort(x.date) + '</td><td class="l t">' + ar(x.home) + ' – ' + ar(x.away) + (x.flag ? ' <span class="tag draw">مرشحة للتعادل</span>' : '') + '</td>' +
+        '<td class="num">' + p[0] + '% · ' + p[1] + '% · ' + p[2] + '%</td><td>' + sc(x.shown) + '</td><td>' + sc(x.hg + '-' + x.ag) + '</td>' +
+        '<td><span class="mark ' + (x.hit ? 'ok' : 'no') + '">' + (x.hit ? '✓ أصبنا' : '✗ أخطأنا') + '</span> <span style="color:var(--muted);font-size:12px">(' + o + ')</span>' + (x.exact ? ' ★' : '') + '</td></tr>';
+    }).join('');
+    el.innerHTML = small + kp + '<div class="tablewrap"><table><thead><tr><th>التاريخ</th><th style="text-align:start">المباراة</th><th>احتمالاتنا (مضيف · تعادل · ضيف)</th><th>توقعنا</th><th>الفعلية</th><th>الحكم</th></tr></thead><tbody>' + rows + '</tbody></table></div>' +
+      '<p class="sub2">★ = أصبنا النتيجة الدقيقة. «أصبنا» تعني أن النتيجة الفعلية كانت صاحبة أعلى احتمال لدينا. المباريات المحفوظة بانتظار نتائجها: <span class="num">' + R.pending + '</span>.</p>';
+  }
 
   /* ---------- التبويبات ---------- */
-  var tabs = ['matches', 'table', 'about'];
+  var tabs = ['matches', 'table', 'record', 'about'];
   function showTab() {
     var h = (location.hash || '').replace('#', ''); if (tabs.indexOf(h) < 0) h = 'matches';
-    tabs.forEach(function (t) { document.getElementById('tab-' + t).hidden = t !== h; });
+    tabs.forEach(function (t) { $('tab-' + t).hidden = t !== h; });
     Array.prototype.forEach.call(document.querySelectorAll('nav.tabs a'), function (a) {
       if (a.getAttribute('data-tab') === h) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
     });
   }
   window.addEventListener('hashchange', showTab);
+
+  function renderAll() {
+    prepare(); renderHeader(); renderLag(); renderChips(); fillTeams(); renderMatches(); renderTable(); renderRecord();
+  }
+
+  /* ---------- تحديث تلقائي دون إعادة تحميل ---------- */
+  function poll() {
+    try {
+      fetch('data.json?t=' + Date.now(), { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : null; }).then(function (nd) {
+        if (nd && nd.updated_at && nd.updated_at !== D.updated_at) { D = nd; renderAll(); $('app').classList.add('refreshed'); setTimeout(function () { $('app').classList.remove('refreshed'); }, 1500); }
+      }).catch(function () { /* بلا اتصال: تبقى البيانات الحالية */ });
+    } catch (e) { /* المتصفح لا يدعم fetch */ }
+  }
+  setInterval(poll, 5 * 60 * 1000);
+  setInterval(renderStamp, 60 * 1000);
+  document.addEventListener('visibilitychange', function () { if (!document.hidden) { renderStamp(); poll(); } });
+
   showTab();
-  renderMatches();
+  renderAll();
 })();
 </script>
