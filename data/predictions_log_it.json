@@ -59,6 +59,18 @@
   "ph": 0.5824,
   "shown": "1-0"
  },
+ "Bologna FC 1909|AC Monza": {
+  "away": "AC Monza",
+  "date": "2026-10-31",
+  "flag": false,
+  "home": "Bologna FC 1909",
+  "logged_at": "2026-10-24T14:04Z",
+  "md": 10,
+  "pa": 0.1549,
+  "pd": 0.2198,
+  "ph": 0.6253,
+  "shown": "2-0"
+ },
  "Cagliari Calcio|Bologna FC 1909": {
   "away": "Bologna FC 1909",
   "date": "2026-10-24",
