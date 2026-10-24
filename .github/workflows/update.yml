@@ -27,6 +27,7 @@ jobs:
       - name: جلب أحدث جدول ونتائج (openfootball، ترخيص CC0)
         run: |
           git clone --depth 1 https://github.com/openfootball/england openfootball/england
+          git clone --depth 1 https://github.com/openfootball/champions-league openfootball/champions-league || echo "تعذّر جلب دوري الأبطال"
           for r in espana deutschland italy france; do
             git clone --depth 1 https://github.com/openfootball/$r openfootball/$r || echo "تعذّر جلب $r"
           done
@@ -53,6 +54,17 @@ jobs:
           done
           M=$(grep -a -E "اختبار رجعي|فشل|تعذّر|مكمَّلة" leagues.log | sed ':a;N;$!ba;s/%/%25/g;s/\r//g;s/\n/%0A/g')
           echo "::notice title=الدوريات::$M"
+          exit 0
+
+      - name: توقعات دوري أبطال أوروبا
+        env:
+          CL_ROOT: openfootball/champions-league
+          FOOTBALL_DATA_TOKEN: ${{ secrets.FOOTBALL_DATA_TOKEN }}
+        run: |
+          set +e
+          python3 -I src/predict_cl.py 2>&1 | tee cl.log
+          M=$(grep -a -E "اختبار رجعي|فشل|تعذّر|مكمَّلة|لا مباريات" cl.log | sed ':a;N;$!ba;s/%/%25/g;s/\r//g;s/\n/%0A/g')
+          echo "::notice title=دوري-الأبطال::$M"
           exit 0
 
       - name: حفظ سجلّ التوقعات في المستودع

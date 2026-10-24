@@ -149,11 +149,25 @@ def build_clubs():
         r["home"], r["away"] = canon(r["home"]), canon(r["away"])
         assert r["home"] != r["away"], r
     rows.sort(key=lambda r: (r["date"], r["home"]))
+    # مسجّلو آخر موسم مكتمل (openfootball): نربطهم برقم الصف بعد التوحيد
+    goals = {}
+    try:
+        import scorers as S
+        last_done = [s for s in pr.SEASONS_OF if s < pr.CUR][-1]
+        gm, n_, ok_ = S.attach(pr.parse_of(last_done), canon=lambda n: canon(fix(n)))
+        pos = {(ymd(r["date"]), r["home"], r["away"]): i for i, r in enumerate(rows) if r["season"] == last_done and r["tier"] == 1}
+        for (dstr, h, a), g in gm.items():
+            i = pos.get((int(dstr.replace("-", "")), h, a))
+            if i is not None and g:
+                goals[str(i)] = g
+        print("مسجلو", last_done, ":", len(goals), "مباراة بتفاصيل من", n_)
+    except Exception as e:
+        print("تعذّر مسجلو الموسم المكتمل:", type(e).__name__, e)
     names = sorted({r["home"] for r in rows} | {r["away"] for r in rows})
     idx = {n: i for i, n in enumerate(names)}
     seasons_l = sorted({r["season"] for r in rows})
     sidx = {s: i for i, s in enumerate(seasons_l)}
-    data = dict(teams=names, seasons=seasons_l,
+    data = dict(teams=names, seasons=seasons_l, goals=goals, goals_season=[s for s in pr.SEASONS_OF if s < pr.CUR][-1],
                 rows=[[sidx[r["season"]], r["tier"], ymd(r["date"]), idx[r["home"]], idx[r["away"]], r["hg"], r["ag"]] for r in rows],
                 note="الدرجة الأولى منذ 1992-93 والثانية منذ 1998-99 (إنجلترا)")
     json.dump(data, open(f"{OUT}/clubs.json", "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
@@ -219,6 +233,42 @@ def metrics(preds, outs):
     return acc, ll
 
 
+def build_nation_goals(rows, names):
+    """مسجّلو أهداف المنتخبات (martj42/international_results، CC0): نحتفظ فقط بالمباريات التي طابق عدد أهدافها النتيجة تماماً.
+    المفتاح: رقم المباراة في nations.json (rows). القيمة: [[جانب 0/1، دقيقة (-1 مجهولة)، مسجل، علم (0 عادي/1 جزاء/2 عكسي)، صانع الهدف أو ""]]."""
+    pos = {}
+    for i, m in enumerate(rows):
+        pos.setdefault((m["date"].strftime("%Y-%m-%d"), m["home"], m["away"]), i)
+    by = {}
+    path = os.path.join(HERE, "..", "data", "international", "goalscorers.csv")
+    if not os.path.exists(path):
+        print("goalscorers.csv غير موجود: لا ملف أهداف للمنتخبات")
+        return
+    with open(path, encoding="utf-8") as f:
+        for x in csv.DictReader(f):
+            i = pos.get((x["date"], x["home_team"], x["away_team"]))
+            if i is None:
+                continue
+            m = rows[i]
+            side = 0 if x["team"] == m["home"] else (1 if x["team"] == m["away"] else None)
+            if side is None:
+                continue
+            try:
+                minute = int(float(x["minute"]))
+            except (ValueError, TypeError):
+                minute = -1
+            flag = 2 if x["own_goal"] == "TRUE" else (1 if x["penalty"] == "TRUE" else 0)
+            ast = x.get("assist", "") or ""
+            by.setdefault(i, []).append([side, minute, x["scorer"].strip(), flag, "" if ast == "NA" else ast.strip()])
+    good = {}
+    for i, g in by.items():
+        m = rows[i]
+        if (sum(1 for e in g if e[0] == 0), sum(1 for e in g if e[0] == 1)) == (m["hg"], m["ag"]):
+            good[str(i)] = sorted(g, key=lambda e: (e[1] if e[1] >= 0 else 999, e[0]))
+    json.dump(dict(m=good), open(f"{OUT}/nations_goals.json", "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
+    print("أهداف منتخبات: مباريات بتفاصيل", len(good), "من", len(rows), "| مستبعد لعدم تطابق العدد", len(by) - len(good))
+
+
 def build_nations():
     rows = []
     with open(os.path.join(HERE, "..", "data", "international", "results.csv"), encoding="utf-8") as f:
@@ -226,7 +276,8 @@ def build_nations():
             if x["home_score"] in ("", "NA") or x["away_score"] in ("", "NA"):
                 continue
             rows.append(dict(date=datetime.strptime(x["date"], "%Y-%m-%d"), home=x["home_team"], away=x["away_team"],
-                             hg=int(x["home_score"]), ag=int(x["away_score"]), tour=x["tournament"], neutral=x["neutral"] == "TRUE"))
+                             hg=int(x["home_score"]), ag=int(x["away_score"]), tour=x["tournament"], neutral=x["neutral"] == "TRUE",
+                             city=x.get("city", "").strip(), country=x.get("country", "").strip()))
     rows.sort(key=lambda m: m["date"])
     d_train_end, d_test = datetime(2009, 12, 31), datetime(2010, 1, 1)
     best = (9e9, None)
@@ -250,8 +301,13 @@ def build_nations():
     last = {}
     for m in rows:
         last[m["home"]] = last[m["away"]] = ymd(m["date"])
-    data = dict(teams=names, tours=tours,
-                rows=[[ymd(m["date"]), idx[m["home"]], idx[m["away"]], m["hg"], m["ag"], tidx[m["tour"]], 1 if m["neutral"] else 0] for m in rows],
+    cities = sorted({m["city"] for m in rows})
+    countries = sorted({m["country"] for m in rows})
+    cidx = {c: i for i, c in enumerate(cities)}
+    kidx = {c: i for i, c in enumerate(countries)}
+    data = dict(teams=names, tours=tours, cities=cities, countries=countries,
+                rows=[[ymd(m["date"]), idx[m["home"]], idx[m["away"]], m["hg"], m["ag"], tidx[m["tour"]], 1 if m["neutral"] else 0,
+                       cidx[m["city"]], kidx[m["country"]]] for m in rows],
                 elo=[round(ratings.get(n, 1500.0)) for n in names], last=[last.get(n, 0) for n in names],
                 params=dict(scale=scale, draw=draw, home_adv=HOME_ADV))
     json.dump(data, open(f"{OUT}/nations.json", "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
@@ -259,6 +315,7 @@ def build_nations():
               logloss=round(ll, 4), always_home=round(home_acc, 4),
               recent=dict(from_="2018-01-01", matches=len(o2), acc=round(acc2, 4), logloss=round(ll2, 4)))
     json.dump(bt, open(f"{OUT}/nations_backtest.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    build_nation_goals(rows, names)
     print("منتخبات:", len(names), "مباريات:", len(rows), "| اختبار 2010→:", bt)
     top = sorted(((ratings[n], n) for n in names if last.get(n, 0) >= 20250101), reverse=True)[:10]
     print("أعلى 10:", [(n, round(v)) for v, n in top])

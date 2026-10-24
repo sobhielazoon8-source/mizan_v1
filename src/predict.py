@@ -38,9 +38,17 @@ MONTHS = {m: i for i, m in enumerate(["Jan","Feb","Mar","Apr","May","Jun","Jul",
 def parse_of(season):
     y0 = int(season[:4])
     out, date, md, cur_time = [], None, None, None
+    goal_depth = 0
     with open(f"{OF}/{season}/1-premierleague.txt", encoding="utf-8") as f:
         for line in f:
             line = line.rstrip("\n")
+            # أسطر المسجّلين تلي سطر المباراة وقد تمتد على عدة أسطر (لا تؤثر على قراءة المباريات)
+            if goal_depth > 0 and (re.match(r"^\s+\d{1,2}:\d{2}\s", line) or DATE_RE.match(line)):
+                goal_depth = 0
+            if out and (goal_depth > 0 or line.lstrip().startswith("(")):
+                out[-1]["goals_raw"] = (out[-1].get("goals_raw", "") + " " + line.strip()).strip()
+                goal_depth = out[-1]["goals_raw"].count("(") - out[-1]["goals_raw"].count(")")
+                continue
             m = MD_RE.search(line)
             if m and line.lstrip().startswith("▪"):
                 md = int(m.group(1)); continue
@@ -123,6 +131,8 @@ def load_all():
             done_ = sum(1 for r in rows_ if r["hg"] is not None)
             assert done_ == 380, f"الموسم {s_}: {done_} مباراة مقروءة بدل 380 (تغيّرت صيغة الملف؟)"
     fix = canon_names({s: rows for s, rows in parsed.items() if s in ("2024-25", CUR)}, old)
+    global PARSED, FIX
+    PARSED, FIX = parsed, fix
     for s in SEASONS_OF:
         for r in parsed[s]:
             r["home"], r["away"] = fix(r["home"]), fix(r["away"])
@@ -405,10 +415,30 @@ def main():
     json.dump(odds_hist, open(ODDS, "w", encoding="utf-8"), ensure_ascii=False, sort_keys=True)
     results = [dict(date=m["date"].strftime("%Y-%m-%d"), md=m.get("md"), home=m["home"], away=m["away"], hg=m["hg"], ag=m["ag"])
                for m in sorted(cur_played, key=lambda x: x["date"])]
+    # مسجّلو الأهداف: نُرفق ما تحقق منه العدّ (عدد أهداف كل جانب = النتيجة) ولا ننشر غيره
+    scorers = scorers_prev = scorers_live = None
+    try:
+        import scorers as S
+        scorers_live = S.fetch_fd_scorers("PL", [t["name"] for t in teams_out])
+        def sc_block(season):
+            rows = PARSED[season]
+            for r in rows:
+                r["home"], r["away"] = FIX(r["home"]), FIX(r["away"])
+            g, n, ok = S.attach(rows)
+            return g, dict(season=season, matches=n, with_details=ok, top=S.top_scorers(rows, g))
+        g_cur, scorers = sc_block(CUR)
+        for r in results:
+            g = g_cur.get((r["date"], r["home"], r["away"]))
+            if g:
+                r["g"] = g
+        prev_season = sorted(PARSED)[-2]
+        _, scorers_prev = sc_block(prev_season)
+    except Exception as e:   # المسجلون إضافة؛ أي خلل فيها لا يوقف نشر التوقعات
+        print("تعذّر استخراج المسجلين:", type(e).__name__, str(e)[:120])
 
     out = dict(generated=TODAY.strftime("%Y-%m-%d"), updated_at=NOW.strftime("%Y-%m-%dT%H:%M:%SZ"),
                last_result_date=max(m["date"] for m in cur_played).strftime("%Y-%m-%d"), record=record, played_md=min(tb[t]["p"] for t in teams), through=str(HORIZON.date()), season=CUR, model="Elo + هجوم/دفاع (بواسون)",
-               backtest=dict(matches=5700, acc=0.545, base_acc=0.465, logloss=0.965, recent=dict(matches=2280, acc=0.525, base_acc=0.431, logloss=0.988, seasons="2020-21→2025-26")), teams=teams_out, fixtures=fixtures, results=results)
+               backtest=dict(matches=5700, acc=0.545, base_acc=0.465, logloss=0.965, recent=dict(matches=2280, acc=0.525, base_acc=0.431, logloss=0.988, seasons="2020-21→2025-26")), teams=teams_out, fixtures=fixtures, results=results, scorers=scorers, scorers_prev=scorers_prev, scorers_live=scorers_live)
     json.dump(out, open(OUT, "w", encoding="utf-8"), ensure_ascii=False)
     print("تم. أفضل 5 بالقوة:", sorted(((round(v), k) for k, v in strength.items()), reverse=True)[:5])
     print("احتمال اللقب:", sorted(((t["title"], t["name"]) for t in teams_out), reverse=True)[:5])

@@ -15,12 +15,19 @@ sys.path.insert(0, HERE)
 import backtest as bt
 import leagues as L
 import league_names as N
+import scorers as S
 
 ROOT = os.environ.get("OF_ROOT", os.path.join(HERE, "..", "openfootball"))
 DATA = os.environ.get("DATA_DIR", os.path.join(HERE, "..", "data"))
 OUTDIR = os.environ.get("OUT_DIR", os.path.join(HERE, ".."))
 PE = dict(k=15, home=80, draw=0.55, shrink=0.15)
 PP = dict(lr=0.02, home=0.3, shrink=0.1)
+# معاملات مضبوطة لكل دوري (tools/tune_leagues.py): تُعتمد فقط حيث تحسّن logloss على آخر 3 مواسم مجمّدة بما لا يقل عن 0.005
+# دون خفض الدقة. إسبانيا وفرنسا لم تبلغا العتبة فبقيتا على المعاملات العامة. أيام الراحة جُرّبت ولم تغيّر شيئاً فلم تُعتمد.
+TUNED = {
+    "de": dict(pe=dict(k=10, home=65, draw=0.55, shrink=0.1), pp=dict(lr=0.015, home=0.2, shrink=0.05), w=0.4),
+    "it": dict(pe=dict(k=20, home=50, draw=0.65, shrink=0.1), pp=dict(lr=0.03, home=0.2, shrink=0.05), w=0.5),
+}
 TODAY = datetime.now(timezone.utc).replace(tzinfo=None, hour=0, minute=0, second=0, microsecond=0)
 HORIZON = TODAY + timedelta(days=160)
 FD_CODES = {"es": "PD", "de": "BL1", "it": "SA", "fr": "FL1"}
@@ -122,25 +129,27 @@ def load(code):
             applied += 1
     print(f"[{code}] نتائج مكمَّلة من football-data.org: {applied}")
     hist.sort(key=lambda x: (x["date"], x["home"]))
-    return hist, cur_played, upcoming, cur_s
+    return hist, cur_played, upcoming, cur_s, data
 
 
-def new_model():
-    elo = bt.Elo(**PE)
-    poi = bt.PoissonDC(PP["lr"], PP["home"], 0.2, PP["shrink"])
-    return elo, poi, bt.Blend(elo, poi, 0.5)
+def new_model(code=None):
+    t = TUNED.get(code)
+    pe, pp, w = (t["pe"], t["pp"], t["w"]) if t else (PE, PP, 0.5)
+    elo = bt.Elo(**pe)
+    poi = bt.PoissonDC(pp["lr"], pp["home"], 0.2, pp["shrink"])
+    return elo, poi, bt.Blend(elo, poi, w)
 
 
-def backtest(hist, cur_s):
+def backtest(hist, cur_s, code=None):
     """اختبار زمني على المواسم المكتملة: أول موسمين تسخين، والباقي يُقاس. ثم آخر 3 مواسم منفصلة."""
     seasons = sorted({r["season"] for r in hist if r["season"] != cur_s})
     rows = [r for r in hist if r["season"] != cur_s]
     start = seasons[2]
-    _, _, mdl = new_model()
+    _, _, mdl = new_model(code)
     preds, outs = bt.run(mdl, rows, start)
     m = bt.metrics(preds, outs)
     base = sum(1 for o in outs if o == 0) / len(outs)
-    _, _, mdl2 = new_model()
+    _, _, mdl2 = new_model(code)
     r_start = seasons[-3]
     p2, o2 = bt.run(mdl2, rows, r_start)
     m2 = bt.metrics(p2, o2)
@@ -203,16 +212,16 @@ def update_log_and_score(code, fixtures, cur_played, now, base_freq):
 
 def run_league(code):
     cfg = L.LEAGUES[code]
-    hist, cur_played, upcoming, cur_s = load(code)
+    hist, cur_played, upcoming, cur_s, season_rows = load(code)
     print(f"[{code}] مباريات التاريخ {len(hist)} | الموسم الجاري {cur_s} | قادمة {len(upcoming)}")
-    bt_info = backtest(hist, cur_s)
+    bt_info = backtest(hist, cur_s, code)
     print(f"[{code}] اختبار رجعي: {bt_info['acc']:.3f} مقابل المضيف دائماً {bt_info['base_acc']:.3f} على {bt_info['matches']} | "
           f"حديث {bt_info['recent']['acc']:.3f} مقابل {bt_info['recent']['base_acc']:.3f} على {bt_info['recent']['matches']}")
     freq = Counter(outcome_of(r["hg"], r["ag"]) for r in hist)
     tot = sum(freq.values())
     base_freq = [freq[0] / tot, freq[1] / tot, freq[2] / tot]
 
-    elo, poi, mdl = new_model()
+    elo, poi, mdl = new_model(code)
     prev = None
     for m in hist:
         if prev is not None and m["season"] != prev:
@@ -250,7 +259,7 @@ def run_league(code):
         if m["date"] > HORIZON:
             continue
         p, lh, la, top, o25, bb, ch, ca, pick, modal = predict(m)
-        diff = elo.rating(m["home"]) + PE["home"] - elo.rating(m["away"])
+        diff = elo.rating(m["home"]) + elo.home - elo.rating(m["away"])
         _eh, _ph = elo.home, poi.home
         elo.home, poi.home = 0.0, 0.0
         pn = mdl.predict(m); lhn, lan = poi.lams(m)
@@ -328,11 +337,27 @@ def run_league(code):
 
     results = [dict(date=m["date"].strftime("%Y-%m-%d"), md=m.get("md"), home=m["home"], away=m["away"], hg=m["hg"], ag=m["ag"])
                for m in sorted(cur_played, key=lambda x: x["date"])]
+    # مسجّلو الأهداف (متوفرون فقط لمباريات حرّر لها المتطوعون التفاصيل): نُرفق ما تحقق منه العدّ
+    g_cur, n_cur, ok_cur = S.attach([r for r in season_rows[cur_s]], canon=lambda n: n)
+    for r in results:
+        g = g_cur.get((r["date"], r["home"], r["away"]))
+        if g:
+            r["g"] = g
+    scorers_live = S.fetch_fd_scorers(FD_CODES[code], [t["name"] for t in teams_out]) if code in FD_CODES else None
+    prev_s = sorted(season_rows)[-2] if len(season_rows) > 1 else None
+    scorers = dict(season=cur_s, matches=n_cur, with_details=ok_cur,
+                   top=S.top_scorers(season_rows[cur_s], g_cur))
+    if prev_s:
+        g_prev, n_prev, ok_prev = S.attach(season_rows[prev_s])
+        scorers_prev = dict(season=prev_s, matches=n_prev, with_details=ok_prev, top=S.top_scorers(season_rows[prev_s], g_prev))
+    else:
+        scorers_prev = None
     out = dict(league=code, league_ar=cfg["ar"], rel_n=rel_n, generated=TODAY.strftime("%Y-%m-%d"),
                updated_at=NOW.strftime("%Y-%m-%dT%H:%M:%SZ"),
                last_result_date=max((m["date"] for m in cur_played), default=TODAY).strftime("%Y-%m-%d"),
                record=record, played_md=cur_md, through=str(HORIZON.date()), season=cur_s,
                model="Elo + هجوم/دفاع (بواسون)", backtest=bt_info, teams=teams_out, fixtures=fixtures, results=results,
+               scorers=scorers, scorers_prev=scorers_prev, scorers_live=scorers_live,
                names_ar=N.AR[code])
     json.dump(out, open(os.path.join(OUTDIR, f"data_{code}.json"), "w", encoding="utf-8"), ensure_ascii=False)
     print(f"[{code}] تم. اللقب:", sorted(((t["title"], t["name"]) for t in teams_out), reverse=True)[:3],

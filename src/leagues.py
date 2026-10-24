@@ -42,6 +42,7 @@ def seasons_available(code, root):
 def parse_file(path, season):
     y0 = int(season[:4])
     out, date, md, cur_time = [], None, None, None
+    goal_depth = 0
     with open(path, encoding="utf-8") as f:
         for line in f:
             line = line.rstrip("\n")
@@ -49,6 +50,14 @@ def parse_file(path, season):
                 m = MD_RE.search(line)
                 if m:
                     md = int(m.group(1))
+                continue
+            # أسطر المسجّلين «(اسم 12'; اسم 40')» تلي سطر المباراة وقد تمتد على عدة أسطر
+            if goal_depth > 0 and (re.match(r"^\s+\d{1,2}:\d{2}\s", line) or DATE_RE.match(line)):
+                goal_depth = 0  # قوس لم يُغلق: نتوقف عند أول سطر مباراة أو تاريخ
+            if out and (goal_depth > 0 or line.lstrip().startswith("(")):
+                txt = line.strip()
+                out[-1]["goals_raw"] = (out[-1].get("goals_raw", "") + " " + txt).strip()
+                goal_depth = out[-1]["goals_raw"].count("(") - out[-1]["goals_raw"].count(")")
                 continue
             d = DATE_RE.match(line)
             if d:

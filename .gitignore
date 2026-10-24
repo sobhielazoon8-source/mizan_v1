@@ -6,3 +6,6 @@ __pycache__/
 data_??.json
 leagues.log
 predict.log
+data_cl.json
+cl.log
+site_config.json.local
