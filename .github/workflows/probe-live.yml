@@ -1,0 +1,22 @@
+name: probe-live
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 130
+    steps:
+      - uses: actions/checkout@v4
+      - name: Watch live Premier League matches
+        env:
+          API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
+          PROBE_MINUTES: "100"
+        run: |
+          set +e
+          python3 -I tools/probe_live.py
+          if [ -f probe_live_result.txt ]; then
+            M=$(sed ':a;N;$!ba;s/%/%25/g;s/\r//g;s/\n/%0A/g' probe_live_result.txt | cut -c1-3500)
+            echo "::notice title=probe-live::$M"
+          fi
