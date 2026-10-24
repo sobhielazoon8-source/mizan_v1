@@ -1,0 +1,45 @@
+name: social-cards
+
+# بطاقات «توقعات اليوم»: تُنشأ يومياً وتُرفع كملف (artifact) لتنشرها يدوياً حيث شئت.
+# النشر التلقائي على فيسبوك يعمل فقط إذا ضبطتَ السرّين FB_PAGE_ID وFB_PAGE_TOKEN
+# والمتغيّر SOCIAL_LIVE=1 (Settings ▸ Secrets and variables ▸ Actions ▸ Variables).
+on:
+  schedule:
+    - cron: "40 8 * * *"        # 08:40 UTC (11:40 بتوقيت بيروت صيفاً)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  cards:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: تثبيت الاعتماديات
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq libraqm0 libfribidi0 >/dev/null
+          pip install -q pillow
+      - name: إنشاء البطاقات والنشر
+        env:
+          FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
+          FB_PAGE_TOKEN: ${{ secrets.FB_PAGE_TOKEN }}
+          SOCIAL_LIVE: ${{ vars.SOCIAL_LIVE }}
+        run: python3 -I tools/social_post.py | tee social.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: social-cards
+          path: social_out/
+          if-no-files-found: ignore
+      - name: حفظ حالة النشر
+        run: |
+          git config user.name "mizan-bot"
+          git config user.email "mizan-bot@users.noreply.github.com"
+          git add data/social_posted.json 2>/dev/null || true
+          if ! git diff --cached --quiet; then
+            git commit -m "حالة النشر الاجتماعي"
+            git pull --rebase origin main
+            git push origin main
+          fi

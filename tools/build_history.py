@@ -140,10 +140,22 @@ def build_clubs():
         freq[re.sub(r"\s*\[.*?\]", "", r["home"]).strip()] += 1
         freq[re.sub(r"\s*\[.*?\]", "", r["away"]).strip()] += 1
     best = {}
-    for n, c in freq.items():
+    def rank_of(n):  # صيغة openfootball (…FC / …AFC) أولاً ثم الأكثر تكراراً: فهي الصيغة التي تعتمدها أسماء التطبيق العربية
+        return (bool(re.search(r"(\sFC|\sAFC)$|^AFC\s", n)), freq[n])
+    for n in freq:
         k = key_of(n)
-        if k not in best or c > freq[best[k]]:
+        if k not in best or rank_of(n) > rank_of(best[k]):
             best[k] = n
+    # أسماء الموسم الجاري في openfootball هي أسماء بيانات الدوري، فتُعتمد كما هي حتى تتطابق الموسوعة مع الجدول
+    for t, fn in ((1, "1-premierleague.txt"), (2, "2-championship.txt")):
+        try:
+            for r in of_rows(pr.CUR, fn, t):
+                for n in (r["home"], r["away"]):
+                    n = re.sub(r"\s*\[.*?\]", "", n).strip()
+                    if key_of(n) in best:
+                        best[key_of(n)] = n
+        except Exception as e:
+            print("تعذّر قراءة أسماء الموسم الجاري:", type(e).__name__, e)
     canon = lambda n: best[key_of(n)]
     for r in rows:
         r["home"], r["away"] = canon(r["home"]), canon(r["away"])

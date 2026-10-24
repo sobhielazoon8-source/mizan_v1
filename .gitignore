@@ -9,3 +9,4 @@ predict.log
 data_cl.json
 cl.log
 site_config.json.local
+social_out/
