@@ -4,11 +4,11 @@
   "date": "2026-10-28",
   "flag": false,
   "home": "AC Milan",
-  "logged_at": "2026-10-24T19:57Z",
+  "logged_at": "2026-10-24T23:04Z",
   "md": 9,
-  "pa": 0.1875,
-  "pd": 0.2497,
-  "ph": 0.5628,
+  "pa": 0.201,
+  "pd": 0.2572,
+  "ph": 0.5418,
   "shown": "1-0"
  },
  "AC Milan|FC Internazionale Milano": {
@@ -52,11 +52,11 @@
   "date": "2026-10-27",
   "flag": false,
   "home": "AS Roma",
-  "logged_at": "2026-10-24T19:57Z",
+  "logged_at": "2026-10-24T23:04Z",
   "md": 9,
-  "pa": 0.0947,
-  "pd": 0.1813,
-  "ph": 0.724,
+  "pa": 0.0872,
+  "pd": 0.1725,
+  "ph": 0.7403,
   "shown": "2-0"
  },
  "Atalanta BC|Frosinone Calcio": {
@@ -76,11 +76,11 @@
   "date": "2026-10-31",
   "flag": false,
   "home": "Bologna FC 1909",
-  "logged_at": "2026-10-24T19:57Z",
+  "logged_at": "2026-10-24T23:04Z",
   "md": 10,
-  "pa": 0.1549,
-  "pd": 0.2198,
-  "ph": 0.6253,
+  "pa": 0.1434,
+  "pd": 0.2116,
+  "ph": 0.6451,
   "shown": "2-0"
  },
  "Cagliari Calcio|Bologna FC 1909": {
