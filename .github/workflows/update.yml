@@ -2,7 +2,7 @@ name: update-and-deploy
 
 on:
   schedule:
-    - cron: "17 */3 * * *"       # كل 3 ساعات (ثماني مرات يومياً)
+    - cron: "17 * * * *"       # كل ساعة (المستودع عام: الدقائق مجانية)
   workflow_dispatch:             # تشغيل يدوي من تبويب Actions
   push:
     branches: [main]
