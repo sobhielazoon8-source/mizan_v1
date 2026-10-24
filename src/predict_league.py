@@ -13,6 +13,7 @@ from zoneinfo import ZoneInfo
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import backtest as bt
+import fd
 import leagues as L
 import league_names as N
 import scorers as S
@@ -75,9 +76,7 @@ def fetch_fd(code):
         return []
     try:
         import urllib.request
-        req = urllib.request.Request(f"https://api.football-data.org/v4/competitions/{FD_CODES[code]}/matches?status=FINISHED",
-                                     headers={"X-Auth-Token": tok})
-        j = json.load(urllib.request.urlopen(req, timeout=30))
+        j = fd.get(f"https://api.football-data.org/v4/competitions/{FD_CODES[code]}/matches?status=FINISHED", tok, 30)
         out = []
         for m in j.get("matches", []):
             ft = (m.get("score") or {}).get("fullTime") or {}

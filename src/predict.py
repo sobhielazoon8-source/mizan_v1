@@ -12,6 +12,7 @@ from zoneinfo import ZoneInfo
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import backtest as bt
+import fd
 
 OF = os.environ.get("OF_DIR", os.path.join(HERE, "..", "openfootball", "england"))
 OUT = os.environ.get("OUT_JSON", os.path.join(HERE, "..", "data.json"))
@@ -104,9 +105,7 @@ def fetch_fd_results():
         return []
     try:
         import urllib.request
-        req = urllib.request.Request("https://api.football-data.org/v4/competitions/PL/matches?status=FINISHED",
-                                     headers={"X-Auth-Token": tok})
-        j = json.load(urllib.request.urlopen(req, timeout=30))
+        j = fd.get("https://api.football-data.org/v4/competitions/PL/matches?status=FINISHED", tok, 30)
         out = []
         for m in j.get("matches", []):
             ft = (m.get("score") or {}).get("fullTime") or {}

@@ -10,6 +10,7 @@ from datetime import datetime, timedelta, timezone
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import backtest as bt
+import fd
 import cl_names as CN
 import league_names as N
 import leagues as L
@@ -72,8 +73,7 @@ def fetch_fd_cl(known):
         return None
     try:
         import urllib.request
-        req = urllib.request.Request("https://api.football-data.org/v4/competitions/CL/matches", headers={"X-Auth-Token": tok})
-        j = json.load(urllib.request.urlopen(req, timeout=40))
+        j = fd.get("https://api.football-data.org/v4/competitions/CL/matches", tok, 40)
         played, upcoming, season = [], [], None
         for m in j.get("matches", []):
             h, a = (m.get("homeTeam") or {}).get("name"), (m.get("awayTeam") or {}).get("name")

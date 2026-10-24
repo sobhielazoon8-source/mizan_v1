@@ -1,6 +1,7 @@
 """مسجّلو الأهداف من ملفات openfootball (متوفرة للموسم 2025-26 فصاعداً فقط).
 تُستخرج من أسطر «(مسجلو المضيف; مسجلو الضيف)» التي تلي سطر المباراة، ثم يُتحقق أن عدد أهداف كل جانب = النتيجة،
 وإلا نُسقط تفاصيل تلك المباراة بدل أن ننشر أرقاماً مشكوكاً فيها."""
+import fd
 import re, unicodedata
 
 TOKEN = re.compile(r"(?:(?P<name>[^\d,;()]+?)\s+)?(?P<min>\d+(?:\+\d+)?)'(?P<flag>\((?:p|og|pen|o\.g\.)\))?", re.I)
@@ -126,9 +127,7 @@ def fetch_fd_scorers(fd_code, ours, limit=30):
     if not tok:
         return None
     try:
-        req = urllib.request.Request(f"https://api.football-data.org/v4/competitions/{fd_code}/scorers?limit={limit}",
-                                     headers={"X-Auth-Token": tok})
-        j = json.load(urllib.request.urlopen(req, timeout=30))
+        j = fd.get(f"https://api.football-data.org/v4/competitions/{fd_code}/scorers?limit={limit}", tok, 30)
         top = []
         for x in j.get("scorers", []):
             pl, tm = x.get("player") or {}, x.get("team") or {}
