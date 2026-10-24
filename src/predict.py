@@ -16,6 +16,7 @@ import backtest as bt
 OF = os.environ.get("OF_DIR", os.path.join(HERE, "..", "openfootball", "england"))
 OUT = os.environ.get("OUT_JSON", os.path.join(HERE, "..", "data.json"))
 PATCH = os.path.join(HERE, "..", "data", "patch_results.json")
+ODDS = os.environ.get("ODDS_JSON", os.path.join(HERE, "..", "data", "odds_history.json"))
 LOG = os.environ.get("LOG_JSON", os.path.join(HERE, "..", "data", "predictions_log.json"))
 # المواسم المتاحة في openfootball من 2020-21 فصاعداً؛ الأحدث هو الموسم الجاري
 SEASONS_OF = sorted(d for d in os.listdir(OF) if re.fullmatch(r"\d{4}-\d{2}", d) and d >= "2020-21"
@@ -362,9 +363,26 @@ def main():
             rel=round(c["rel"] / N, 4), exp_pos=round(c["pos_sum"] / N, 1), exp_pts=round(c["pts_sum"] / N, 1)))
     teams_out.sort(key=lambda x: (-x["pts"], -(x["gf"] - x["ga"]), -x["gf"]))
 
+    # لقطة احتمالات نهاية الموسم لكل جولة، لعرض أسهم التغيّر (▲▼) بعد كل جولة
+    cur_md = min(tb[t]["p"] for t in teams)
+    try:
+        odds_hist = json.load(open(ODDS, encoding="utf-8"))
+    except (OSError, ValueError):
+        odds_hist = {}
+    prev_keys = sorted((int(k) for k in odds_hist if int(k) < cur_md))
+    prev = odds_hist[str(prev_keys[-1])] if prev_keys else {}
+    for t in teams_out:
+        pv = prev.get(t["name"])
+        t["prev_title"], t["prev_top4"], t["prev_rel"] = (pv if pv else (None, None, None))
+    odds_hist[str(cur_md)] = {t["name"]: [t["title"], t["top4"], t["rel"]] for t in teams_out}
+    os.makedirs(os.path.dirname(ODDS), exist_ok=True)
+    json.dump(odds_hist, open(ODDS, "w", encoding="utf-8"), ensure_ascii=False, sort_keys=True)
+    results = [dict(date=m["date"].strftime("%Y-%m-%d"), md=m.get("md"), home=m["home"], away=m["away"], hg=m["hg"], ag=m["ag"])
+               for m in sorted(cur_played, key=lambda x: x["date"])]
+
     out = dict(generated=TODAY.strftime("%Y-%m-%d"), updated_at=NOW.strftime("%Y-%m-%dT%H:%M:%SZ"),
                last_result_date=max(m["date"] for m in cur_played).strftime("%Y-%m-%d"), record=record, played_md=min(tb[t]["p"] for t in teams), through=str(HORIZON.date()), season=CUR, model="Elo + هجوم/دفاع (بواسون)",
-               backtest=dict(matches=5700, acc=0.545, base_acc=0.465, logloss=0.965), teams=teams_out, fixtures=fixtures)
+               backtest=dict(matches=5700, acc=0.545, base_acc=0.465, logloss=0.965, recent=dict(matches=2280, acc=0.525, base_acc=0.431, logloss=0.988, seasons="2020-21→2025-26")), teams=teams_out, fixtures=fixtures, results=results)
     json.dump(out, open(OUT, "w", encoding="utf-8"), ensure_ascii=False)
     print("تم. أفضل 5 بالقوة:", sorted(((round(v), k) for k, v in strength.items()), reverse=True)[:5])
     print("احتمال اللقب:", sorted(((t["title"], t["name"]) for t in teams_out), reverse=True)[:5])
