@@ -6,7 +6,7 @@
 - الرابط يوضع في أول تعليق (لا في نص المنشور) وليس بصيغة «علّق لتحصل على الرابط».
 - لا ينشر المباراة نفسها مرتين (data/social_posted.json)."""
 import json, os, sys, urllib.parse, urllib.request
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 
 from PIL import Image, ImageDraw, ImageFont
 
@@ -114,12 +114,43 @@ def card(d, f, league_ar, path):
     center(dr, 700, f"فوز {h} {p[0]}%  ·  تعادل {p[1]}%  ·  فوز {a} {p[2]}%", font(32, "Medium"), INK)
     sh = f["modal"] if f.get("draw_flag") else f["pick"]
     center(dr, 800, "أرجح نتيجة", font(40, "Medium"), (110, 110, 110))
-    center(dr, 860, sh["s"].replace("-", " – "), font(190, "ExtraBold"), GREEN)
+    hh, aa = sh["s"].split("-")   # المضيف على اليمين
+    center(dr, 860, f"{aa} – {hh}", font(190, "ExtraBold"), GREEN)
     if f.get("draw_flag"):
         center(dr, 1085, "مباراة مرشحة للتعادل", font(38, "Bold"), GOLD)
     center(dr, 1170, "هل تتفوق عليه؟ وجّه توقعك في التطبيق", font(44, "Bold"), INK)
     center(dr, 1245, "الرابط في أول تعليق", font(34, "Medium"), (110, 110, 110))
     dr.rectangle([0, H - 12, W, H], fill=GREEN)
+    im.save(path, "PNG", optimize=True)
+
+
+def upset_card(d, u, league_ar, path):
+    """بطاقة «مفاجأة»: نتيجة وقعت باحتمال منخفض قبل المباراة."""
+    W, H = 1080, 1350
+    im = Image.new("RGB", (W, H), CREAM)
+    dr = ImageDraw.Draw(im)
+    dr.rectangle([0, 0, W, 190], fill=(120, 40, 30))
+    center(dr, 40, "مفاجأة!", font(96, "ExtraBold"), CREAM)
+    center(dr, 140, "ميزان الكرة · كاشف المفاجآت", font(34, "Medium"), (240, 214, 208))
+    center(dr, 235, league_ar, font(46, "Bold"), (120, 40, 30))
+    h, a = name_ar(d, u["home"]), name_ar(d, u["away"])
+    for txt, cx in ((h, 810), (a, 270)):
+        t = shape(txt)
+        sz = 64
+        while dr.textlength(t, font=font(sz, "ExtraBold")) > 460 and sz > 30:
+            sz -= 4
+        ff = font(sz, "ExtraBold")
+        dr.text((cx - dr.textlength(t, font=ff) / 2, 380), t, font=ff, fill=INK)
+    center(dr, 395, "×", font(70, "Bold"), GOLD)
+    center(dr, 560, "النتيجة النهائية", font(40, "Medium"), (110, 110, 110))
+    # المضيف على اليمين: النص يُرسم من اليسار إلى اليمين فنكتب الضيف أولاً
+    center(dr, 620, f"{u['ag']} – {u['hg']}", font(220, "ExtraBold"), (120, 40, 30))
+    out = ["فوز " + h, "التعادل", "فوز " + a][u["o"]]
+    center(dr, 930, f"{out} كان احتماله {round(u['po'] * 100)}% فقط", font(46, "Bold"), INK)
+    center(dr, 1010, "حسب نموذجنا قبل المباراة", font(34, "Medium"), (110, 110, 110))
+    center(dr, 1170, "هل كنت تتوقعها؟ جرّب تحدّي ميزان الكرة", font(44, "Bold"), INK)
+    center(dr, 1245, "الرابط في أول تعليق", font(34, "Medium"), (110, 110, 110))
+    dr.rectangle([0, H - 12, W, H], fill=(120, 40, 30))
     im.save(path, "PNG", optimize=True)
 
 
@@ -144,11 +175,15 @@ def main():
     state = {}
     if os.path.exists(STATE):
         state = json.load(open(STATE, encoding="utf-8"))
-    cands = []
+    cands, upsets = [], []
+    since = (datetime.now(timezone.utc) - timedelta(days=2)).strftime("%Y-%m-%d")
     for code, fn, lar in LEAGUES:
         d = load(fn)
         if not d:
             continue
+        for u in d.get("upsets", []):
+            if u["date"] >= since and u["po"] <= 0.15:
+                upsets.append((u["po"], code, lar, d, u))
         for f in d.get("fixtures", []):
             if f["date"] == today:
                 cands.append((max(f["ph"], f["pd"], f["pa"]), code, lar, d, f))
@@ -165,6 +200,12 @@ def main():
         picked.append((k,) + c)
         if len(picked) >= MAX_CARDS:
             break
+    # مفاجآت آخر يومين (احتمال النتيجة ≤ 15%): بطاقة واحدة كحدّ أقصى في اليوم
+    up_picked = []
+    for po, code, lar, d, u in sorted(upsets, key=lambda x: x[0]):
+        k = f"upset|{code}|{u['date']}|{u['home']}|{u['away']}"
+        if k not in state and not up_picked:
+            up_picked.append((k, code, lar, d, u))
     os.makedirs(OUT, exist_ok=True)
     print(f"مباريات اليوم المرشحة: {len(cands)} | ستُنشأ بطاقات: {len(picked)}")
     live = os.environ.get("SOCIAL_LIVE") == "1" and os.environ.get("FB_PAGE_ID") and os.environ.get("FB_PAGE_TOKEN")
@@ -183,6 +224,25 @@ def main():
             r = fb(f"{os.environ['FB_PAGE_ID']}/photos", None, {"caption": cap, "published": "true"}, {"source": (os.path.basename(path), open(path, "rb").read())})
             pid = r.get("post_id") or r.get("id")
             fb(f"{pid}/comments", None, {"message": f"التوقعات الكاملة لكل الدوريات مجاناً: {SITE}"})
+            state[k] = {"post": pid, "at": datetime.now(timezone.utc).isoformat()}
+            changed = True
+            print("نُشر:", pid)
+        except Exception as e:
+            print("فشل النشر:", getattr(e, "read", lambda: b"")()[:300] or e)
+    for k, code, lar, d, u in up_picked:
+        path = os.path.join(OUT, f"{today}_upset_{code}.png")
+        upset_card(d, u, lar, path)
+        cap = (f"مفاجأة! {name_ar(d, u['home'])} {u['hg']}–{u['ag']} {name_ar(d, u['away'])}\n"
+               f"{lar} · كان احتمال هذه النتيجة {round(u['po'] * 100)}% فقط قبل المباراة حسب ميزان الكرة.\n"
+               "هل توقعتَها؟ 👇\n#كرة_القدم #ميزان_الكرة")
+        print("بطاقة مفاجأة:", path)
+        if not live:
+            print("(تشغيل تجريبي: لا نشر)")
+            continue
+        try:
+            r = fb(f"{os.environ['FB_PAGE_ID']}/photos", None, {"caption": cap, "published": "true"}, {"source": (os.path.basename(path), open(path, "rb").read())})
+            pid = r.get("post_id") or r.get("id")
+            fb(f"{pid}/comments", None, {"message": f"جرّب تحدّي ميزان الكرة مجاناً: {SITE}"})
             state[k] = {"post": pid, "at": datetime.now(timezone.utc).isoformat()}
             changed = True
             print("نُشر:", pid)

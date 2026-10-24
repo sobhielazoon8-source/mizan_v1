@@ -198,6 +198,13 @@ footer.foot { margin-top: 36px; padding-top: 16px; border-top: 1px solid var(--l
 .btn { font: inherit; font-size: 13px; padding: 5px 14px; border-radius: 999px; border: 1px solid var(--home); background: transparent; color: var(--home); cursor: pointer; text-decoration: none; display: inline-block; }
 .btn:hover { background: var(--home); color: var(--on-home); }
 .btn[hidden] { display: none; }
+/* ماذا لو؟ */
+.wipanel { margin-top: 10px; padding: 12px; border: 1px dashed var(--line); border-radius: 12px; background: var(--surface2); }
+.wi-row { padding: 8px 0; border-top: 1px solid var(--line); font-size: 14px; }
+.wi-row div { display: flex; justify-content: space-between; gap: 8px; color: var(--muted); font-size: 13px; }
+.wi-row div .num { color: var(--ink); font-weight: 600; }
+.wi-row .up { color: #1b7a3a; font-weight: 800; }
+.wi-row .dn { color: #b03a2e; font-weight: 800; }
 .pickrow { display: flex; gap: 6px; margin-top: 10px; align-items: center; flex-wrap: wrap; }
 .pickrow .lbl { font-size: 12.5px; color: var(--muted); }
 .pickrow .chip { padding: 3px 12px; }
@@ -285,6 +292,7 @@ footer.foot { margin-top: 36px; padding-top: 16px; border-top: 1px solid var(--l
     <div class="heading"><h2>سجلّ دقتنا</h2><span id="recsub"></span></div>
     <p class="sub2">يُحفظ توقعنا لكل مباراة قبل انطلاقها بأيام، ولا يُعدَّل بعد بدئها، ثم يُقارَن بالنتيجة الفعلية.</p>
     <div id="challenge"></div>
+    <div id="upsets"></div>
     <div id="reclive"></div>
     <h3 style="font-family:var(--font-display);font-size:20px;margin:24px 0 6px">الاختبار التاريخي</h3>
     <p class="sub2" id="btsub"></p>
@@ -435,6 +443,7 @@ footer.foot { margin-top: 36px; padding-top: 16px; border-top: 1px solid var(--l
   var byName = {}, mds = [];
   var state = { md: null, team: '', sort: 'date' };
   var expanded = {};
+  var wiOpen = {};   // مفتاح المباراة ← النتيجة المختارة في «ماذا لو؟»
   function key(f) { return f.home + '|' + f.away; }
   function seasonYear(date) { var y = +date.slice(0, 4), m = +date.slice(5, 7); return m >= 7 ? y : y - 1; }
   function pkey(f) { return cur + '|' + f.home + '|' + f.away + '|' + seasonYear(f.date); }
@@ -525,6 +534,7 @@ footer.foot { margin-top: 36px; padding-top: 16px; border-top: 1px solid var(--l
       '<div class="bar" role="img" aria-label="احتمالات الفوز والتعادل والخسارة"><i class="h" style="width:' + p[0] + '%"></i><i class="d" style="width:' + p[1] + '%"></i><i class="a" style="width:' + p[2] + '%"></i></div>' +
       (f.draw_flag ? '<p class="dnote">مباراة متقاربة: في مثل هذه المباريات انتهى نحو 30% منها بتعادل (مقابل 25% في المباريات عموماً).</p>' : '') +
       pickRow(f) +
+      wiPanel(f) +
       '<div class="m-foot"><span class="xg">الأهداف المتوقعة <b>' + f.xg_h.toFixed(1) + '</b> – <b>' + f.xg_a.toFixed(1) + '</b></span>' +
         '<span>الأقوى تصنيفاً: <b style="color:var(--ink);font-weight:600">' + ar(stronger) + '</b> <span class="num">(+' + gap + ')</span></span>' +
         '<button type="button" class="more" aria-expanded="' + open + '">' + (open ? 'إخفاء التفاصيل' : 'التفاصيل') + '</button></div>' +
@@ -552,7 +562,57 @@ footer.foot { margin-top: 36px; padding-top: 16px; border-top: 1px solid var(--l
       return '<button type="button" class="chip' + (mine && mine.p === i ? ' mine' : '') + '" data-pick="' + i + '"' + (late ? ' disabled' : '') + '>' + (i === 1 ? 'تعادل' : 'فوز ' + lab[i]) + '</button>';
     }).join('');
     return '<div class="pickrow"><span class="lbl">توقعك:</span>' + chips +
+      (f.wi ? '<button type="button" class="more" data-wi="1">ماذا لو؟</button>' : '') +
       '<button type="button" class="more" data-share="1">شارك التوقع</button></div>';
+  }
+  /* ---------- ماذا لو؟ ---------- */
+  function wiLabels() { return (D.table_labels && D.table_labels.length === 3) ? D.table_labels : ['اللقب', 'المراكز الأربعة', 'الهبوط']; }
+  function pc1(x) { var v = x * 100; return v >= 99.5 ? '99+%' : (v < 0.5 ? '<1%' : Math.round(v) + '%'); }
+  function wiMoves(f, o) {
+    var lb = wiLabels(), out = [];
+    D.teams.forEach(function (t) {
+      var v = f.wi.t[t.name]; if (!v) return;
+      var base = [t.title, t.top4, t.rel], ms = [];
+      for (var m = 0; m < 3; m++) {
+        var x = v[o * 3 + m]; if (x === null || x === undefined) continue;
+        if (base[m] < 0.005 && x < 0.005) continue;
+        ms.push({ l: lb[m], a: base[m], b: x, bad: m === 2 });
+      }
+      if (ms.length) out.push({ team: t.name, ms: ms, score: Math.max.apply(null, ms.map(function (e) { return Math.abs(e.b - e.a); })) });
+    });
+    var inv = [f.home, f.away];
+    var first = out.filter(function (m) { return inv.indexOf(m.team) >= 0; });
+    var rest = out.filter(function (m) { return inv.indexOf(m.team) < 0 && m.score >= 0.005; }).sort(function (a, b) { return b.score - a.score; }).slice(0, 5);
+    return first.concat(rest);
+  }
+  function wiPanel(f) {
+    var k = key(f); if (!f.wi || wiOpen[k] === undefined) return '';
+    var o = wiOpen[k], p = pct3(f.ph, f.pd, f.pa), names = ['فوز ' + ar(f.home), 'تعادل', 'فوز ' + ar(f.away)];
+    var chips = [0, 1, 2].map(function (i) { return '<button type="button" class="chip' + (o === i ? ' mine' : '') + '" data-wo="' + i + '">' + names[i] + ' · ' + p[i] + '%</button>'; }).join('');
+    var body;
+    if (f.wi.n[o] < 250) body = '<p class="note">هذه النتيجة نادرة جداً في محاكاتنا، فلا نعرض أثرها حتى لا نعطيك رقماً غير موثوق.</p>';
+    else {
+      var mv = wiMoves(f, o);
+      body = mv.length ? mv.map(function (m) {
+        return '<div class="wi-row"><b>' + ar(m.team) + '</b>' + m.ms.map(function (e) {
+          var d = (e.b - e.a) * 100, good = (d > 0) !== e.bad;
+          var arrow = Math.abs(d) < 0.5 ? '' : ' <span class="' + (good ? 'up' : 'dn') + '">' + (d > 0 ? '▲' : '▼') + Math.round(Math.abs(d)) + '</span>';
+          return '<div><span>' + e.l + '</span><span class="num">' + pc1(e.a) + ' ← ' + pc1(e.b) + arrow + '</span></div>';
+        }).join('') + '</div>';
+      }).join('') : '<p class="note">لا تغيّر هذه النتيجة فرص أي فريق بمقدار يُذكر.</p>';
+    }
+    return '<div class="wipanel"><div class="lbl" style="margin-bottom:6px">لو انتهت المباراة بـ:</div><div class="pickrow" style="margin:0 0 8px">' + chips + '</div>' + body +
+      '<p class="sub2" style="margin-top:8px">الأرقام من 10,000 محاكاة للموسم، مأخوذة من المحاكاات التي انتهت فيها هذه المباراة بالنتيجة المختارة. تقديرات إحصائية لا وعود.</p></div>';
+  }
+  function wiShareText(f) {
+    var o = wiOpen[key(f)]; if (o === undefined) return '';
+    var names = ['فوز ' + ar(f.home), 'تعادل', 'فوز ' + ar(f.away)], mv = wiMoves(f, o).slice(0, 3);
+    var t = 'ماذا لو: ' + names[o] + '؟ (' + ar(f.home) + ' × ' + ar(f.away) + ')';
+    mv.forEach(function (m) {
+      var big = m.ms.reduce(function (a, e) { return Math.abs(e.b - e.a) > Math.abs(a.b - a.a) ? e : a; });
+      t += '\n• ' + ar(m.team) + ': ' + big.l + ' ' + pc1(big.a) + ' ← ' + pc1(big.b);
+    });
+    return t + '\nحسب «ميزان الكرة»';
   }
   function shareText(f) {
     var p = pct3(f.ph, f.pd, f.pa), sh = f.draw_flag ? f.modal : f.pick;
@@ -628,10 +688,20 @@ footer.foot { margin-top: 36px; padding-top: 16px; border-top: 1px solid var(--l
       }
       return;
     }
+    var wb = e.target.closest('[data-wi]');
+    if (wb) {
+      var kw = wb.closest('.match').getAttribute('data-k'), fw = D.fixtures.filter(function (x) { return key(x) === kw; })[0];
+      if (fw) { if (wiOpen[kw] === undefined) wiOpen[kw] = fw.ph >= fw.pd && fw.ph >= fw.pa ? 0 : (fw.pa >= fw.pd ? 2 : 1); else delete wiOpen[kw]; renderMatches(); }
+      return;
+    }
+    var wo = e.target.closest('[data-wo]');
+    if (wo) {
+      var ko = wo.closest('.match').getAttribute('data-k'); wiOpen[ko] = +wo.getAttribute('data-wo'); renderMatches(); return;
+    }
     var sb = e.target.closest('[data-share]');
     if (sb) {
       var card1 = sb.closest('.match'), k1 = card1.getAttribute('data-k'), f1 = D.fixtures.filter(function (x) { return key(x) === k1; })[0];
-      if (f1) doShare('ميزان الكرة', shareText(f1));
+      if (f1) doShare('ميزان الكرة', (wiOpen[k1] !== undefined ? wiShareText(f1) : shareText(f1)));
       return;
     }
     var b = e.target.closest('.more'); if (!b) return;
@@ -745,6 +815,16 @@ footer.foot { margin-top: 36px; padding-top: 16px; border-top: 1px solid var(--l
     el.innerHTML = '<div class="kpis"><div class="kpi"><b class="num">' + you + '/' + n + '</b><span>إصاباتك</span></div><div class="kpi"><b class="num">' + our + '/' + n + '</b><span>إصابات ميزان الكرة في نفس المباريات</span></div><div class="kpi"><b class="num">' + pending + '</b><span>توقعات بانتظار النتيجة</span></div></div><p class="sub2"><b>' + verdict + '</b> · التحدي لهذا الدوري فقط.</p>';
   }
 
+  function renderUpsets() {
+    var U = (D.upsets || []).slice(0, 5), el = $('upsets');
+    if (!U.length) { el.innerHTML = ''; return; }
+    var rows = U.map(function (u) {
+      var out = u.o === 0 ? 'فوز ' + ar(u.home) : (u.o === 1 ? 'التعادل' : 'فوز ' + ar(u.away));
+      return '<div class="wi-row"><b>' + ar(u.home) + ' ' + u.hg + '–' + u.ag + ' ' + ar(u.away) + '</b><div><span>' + dshort(u.date) + ' · ' + out + '</span><span class="num">كان احتماله ' + Math.round(u.po * 100) + '%</span></div></div>';
+    }).join('');
+    el.innerHTML = '<h3 style="font-family:var(--font-display);font-size:20px;margin:20px 0 6px">🎯 كاشف المفاجآت</h3><p class="sub2">أقل نتائج هذا الموسم توقعاً: ما كان نموذجنا سيعطيه من احتمال للنتيجة التي وقعت، بالاعتماد على ما سبق المباراة فقط.</p><div class="wipanel" style="margin-top:6px">' + rows + '</div>';
+  }
+
   function renderLeagues() {
     $('leagues').innerHTML = LEAGUES.map(function (l) {
       return '<button type="button" class="chip" data-lg="' + l[0] + '" aria-pressed="' + (l[0] === cur) + '">' + l[1] + '</button>';
@@ -761,7 +841,7 @@ footer.foot { margin-top: 36px; padding-top: 16px; border-top: 1px solid var(--l
   });
 
   function renderAll() {
-    prepare(); renderLeagues(); renderHeader(); renderLag(); renderChips(); fillTeams(); renderMatches(); renderTable(); renderRecord(); renderBacktest(); renderScorers(); renderChallenge();
+    prepare(); renderLeagues(); renderHeader(); renderLag(); renderChips(); fillTeams(); renderMatches(); renderTable(); renderRecord(); renderBacktest(); renderScorers(); renderChallenge(); renderUpsets();
   }
 
   /* ---------- التثبيت والمشاركة ---------- */
