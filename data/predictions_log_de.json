@@ -100,11 +100,11 @@
   "date": "2026-10-31",
   "flag": true,
   "home": "FC Augsburg",
-  "logged_at": "2026-10-25T12:40Z",
+  "logged_at": "2026-10-25T19:00Z",
   "md": 8,
-  "pa": 0.3643,
+  "pa": 0.3608,
   "pd": 0.2515,
-  "ph": 0.3842,
+  "ph": 0.3876,
   "shown": "1-1"
  },
  "FC Bayern München|Borussia Dortmund": {
@@ -112,11 +112,11 @@
   "date": "2026-10-31",
   "flag": false,
   "home": "FC Bayern München",
-  "logged_at": "2026-10-25T12:40Z",
+  "logged_at": "2026-10-25T19:00Z",
   "md": 8,
-  "pa": 0.1725,
-  "pd": 0.1887,
-  "ph": 0.6388,
+  "pa": 0.1702,
+  "pd": 0.1875,
+  "ph": 0.6423,
   "shown": "2-1"
  },
  "FC Schalke 04|RB Leipzig": {
