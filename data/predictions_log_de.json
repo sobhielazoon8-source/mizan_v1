@@ -11,6 +11,18 @@
   "ph": 0.4969,
   "shown": "1-0"
  },
+ "1. FC Union Berlin|1. FC Köln": {
+  "away": "1. FC Köln",
+  "date": "2026-11-01",
+  "flag": false,
+  "home": "1. FC Union Berlin",
+  "logged_at": "2026-10-25T14:49Z",
+  "md": 8,
+  "pa": 0.2936,
+  "pd": 0.2552,
+  "ph": 0.4513,
+  "shown": "1-0"
+ },
  "1. FSV Mainz 05|SV Werder Bremen": {
   "away": "SV Werder Bremen",
   "date": "2026-10-24",
