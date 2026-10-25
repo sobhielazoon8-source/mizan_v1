@@ -119,6 +119,18 @@
   "ph": 0.6781,
   "shown": "2-0"
  },
+ "Olympique de Marseille|Toulouse FC": {
+  "away": "Toulouse FC",
+  "date": "2026-11-01",
+  "flag": false,
+  "home": "Olympique de Marseille",
+  "logged_at": "2026-10-25T19:58Z",
+  "md": 9,
+  "pa": 0.209,
+  "pd": 0.2208,
+  "ph": 0.5702,
+  "shown": "2-1"
+ },
  "Paris FC|AS Monaco FC": {
   "away": "AS Monaco FC",
   "date": "2026-11-01",

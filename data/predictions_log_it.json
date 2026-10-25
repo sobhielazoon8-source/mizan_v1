@@ -179,6 +179,18 @@
   "ph": 0.5167,
   "shown": "1-0"
  },
+ "Juventus FC|SSC Napoli": {
+  "away": "SSC Napoli",
+  "date": "2026-11-01",
+  "flag": true,
+  "home": "Juventus FC",
+  "logged_at": "2026-10-25T19:58Z",
+  "md": 10,
+  "pa": 0.3014,
+  "pd": 0.2932,
+  "ph": 0.4053,
+  "shown": "1-1"
+ },
  "Parma Calcio 1913|Udinese Calcio": {
   "away": "Udinese Calcio",
   "date": "2026-10-28",
