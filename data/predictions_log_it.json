@@ -16,11 +16,11 @@
   "date": "2026-10-31",
   "flag": false,
   "home": "AC Milan",
-  "logged_at": "2026-10-24T19:57Z",
+  "logged_at": "2026-10-25T13:50Z",
   "md": 10,
-  "pa": 0.5035,
-  "pd": 0.2535,
-  "ph": 0.243,
+  "pa": 0.4953,
+  "pd": 0.2559,
+  "ph": 0.2488,
   "shown": "1-2"
  },
  "AC Monza|SSC Napoli": {
@@ -40,11 +40,11 @@
   "date": "2026-10-29",
   "flag": false,
   "home": "ACF Fiorentina",
-  "logged_at": "2026-10-24T05:51Z",
+  "logged_at": "2026-10-25T13:50Z",
   "md": 9,
-  "pa": 0.4399,
-  "pd": 0.2799,
-  "ph": 0.2801,
+  "pa": 0.4327,
+  "pd": 0.2822,
+  "ph": 0.285,
   "shown": "0-1"
  },
  "AS Roma|Cagliari Calcio": {
@@ -268,11 +268,11 @@
   "date": "2026-10-28",
   "flag": false,
   "home": "Venezia FC",
-  "logged_at": "2026-10-24T05:51Z",
+  "logged_at": "2026-10-25T13:50Z",
   "md": 9,
-  "pa": 0.8185,
-  "pd": 0.1198,
-  "ph": 0.0617,
-  "shown": "0-3"
+  "pa": 0.8117,
+  "pd": 0.1236,
+  "ph": 0.0647,
+  "shown": "0-2"
  }
 }
