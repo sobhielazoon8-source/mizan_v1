@@ -52,11 +52,11 @@
   "date": "2026-10-31",
   "flag": false,
   "home": "Brentford FC",
-  "logged_at": "2026-10-25T10:04Z",
+  "logged_at": "2026-10-25T10:34Z",
   "md": 9,
-  "pa": 0.2268,
-  "pd": 0.2417,
-  "ph": 0.5315,
+  "pa": 0.2262,
+  "pd": 0.2421,
+  "ph": 0.5317,
   "shown": "1-0"
  },
  "Chelsea FC|Manchester United FC": {
@@ -136,11 +136,11 @@
   "date": "2026-10-31",
   "flag": false,
   "home": "Hull City AFC",
-  "logged_at": "2026-10-25T10:04Z",
+  "logged_at": "2026-10-25T10:34Z",
   "md": 9,
-  "pa": 0.2124,
-  "pd": 0.2265,
-  "ph": 0.561,
+  "pa": 0.213,
+  "pd": 0.2273,
+  "ph": 0.5597,
   "shown": "2-1"
  },
  "Liverpool FC|Brighton & Hove Albion FC": {
