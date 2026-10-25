@@ -119,6 +119,18 @@
   "ph": 0.6781,
   "shown": "2-0"
  },
+ "Paris FC|AS Monaco FC": {
+  "away": "AS Monaco FC",
+  "date": "2026-11-01",
+  "flag": true,
+  "home": "Paris FC",
+  "logged_at": "2026-10-25T16:51Z",
+  "md": 9,
+  "pa": 0.3365,
+  "pd": 0.2565,
+  "ph": 0.4071,
+  "shown": "1-1"
+ },
  "Paris Saint-Germain FC|Olympique Lyonnais": {
   "away": "Olympique Lyonnais",
   "date": "2026-10-25",

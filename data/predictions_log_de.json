@@ -40,11 +40,11 @@
   "date": "2026-10-31",
   "flag": false,
   "home": "Bayer 04 Leverkusen",
-  "logged_at": "2026-10-24T14:34Z",
+  "logged_at": "2026-10-25T16:50Z",
   "md": 8,
-  "pa": 0.2349,
-  "pd": 0.2161,
-  "ph": 0.549,
+  "pa": 0.2488,
+  "pd": 0.2207,
+  "ph": 0.5305,
   "shown": "2-1"
  },
  "Borussia Dortmund|Eintracht Frankfurt": {
@@ -69,6 +69,18 @@
   "pa": 0.2519,
   "pd": 0.2391,
   "ph": 0.509,
+  "shown": "2-1"
+ },
+ "Eintracht Frankfurt|Hamburger SV": {
+  "away": "Hamburger SV",
+  "date": "2026-11-01",
+  "flag": false,
+  "home": "Eintracht Frankfurt",
+  "logged_at": "2026-10-25T16:50Z",
+  "md": 8,
+  "pa": 0.2142,
+  "pd": 0.2227,
+  "ph": 0.5631,
   "shown": "2-1"
  },
  "FC Augsburg|1. FC Union Berlin": {
@@ -172,11 +184,11 @@
   "date": "2026-10-31",
   "flag": false,
   "home": "SV Werder Bremen",
-  "logged_at": "2026-10-25T12:40Z",
+  "logged_at": "2026-10-25T16:50Z",
   "md": 8,
-  "pa": 0.3537,
-  "pd": 0.2409,
-  "ph": 0.4054,
+  "pa": 0.3702,
+  "pd": 0.2418,
+  "ph": 0.3879,
   "shown": "2-1"
  },
  "TSG 1899 Hoffenheim|Bayer 04 Leverkusen": {
