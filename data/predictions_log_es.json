@@ -52,11 +52,11 @@
   "date": "2026-11-01",
   "flag": false,
   "home": "Deportivo La Coruña",
-  "logged_at": "2026-10-25T03:54Z",
+  "logged_at": "2026-10-25T05:00Z",
   "md": 11,
-  "pa": 0.2688,
-  "pd": 0.2497,
-  "ph": 0.4815,
+  "pa": 0.2689,
+  "pd": 0.2516,
+  "ph": 0.4795,
   "shown": "1-0"
  },
  "Elche CF|Valencia CF": {
@@ -64,11 +64,11 @@
   "date": "2026-11-01",
   "flag": false,
   "home": "Elche CF",
-  "logged_at": "2026-10-25T03:54Z",
+  "logged_at": "2026-10-25T05:00Z",
   "md": 11,
-  "pa": 0.2893,
-  "pd": 0.2602,
-  "ph": 0.4505,
+  "pa": 0.2634,
+  "pd": 0.254,
+  "ph": 0.4826,
   "shown": "1-0"
  },
  "FC Barcelona|Deportivo Alavés": {
@@ -112,11 +112,11 @@
   "date": "2026-11-01",
   "flag": false,
   "home": "Levante UD",
-  "logged_at": "2026-10-25T03:54Z",
+  "logged_at": "2026-10-25T05:00Z",
   "md": 11,
-  "pa": 0.4801,
-  "pd": 0.243,
-  "ph": 0.2769,
+  "pa": 0.4793,
+  "pd": 0.2443,
+  "ph": 0.2765,
   "shown": "1-2"
  },
  "Racing Santander|Espanyol": {
@@ -136,24 +136,24 @@
   "date": "2026-11-01",
   "flag": false,
   "home": "Racing Santander",
-  "logged_at": "2026-10-25T03:54Z",
+  "logged_at": "2026-10-25T05:00Z",
   "md": 11,
-  "pa": 0.6165,
-  "pd": 0.2039,
-  "ph": 0.1796,
+  "pa": 0.6103,
+  "pd": 0.2061,
+  "ph": 0.1837,
   "shown": "1-2"
  },
  "Rayo Vallecano|Celta Vigo": {
   "away": "Celta Vigo",
   "date": "2026-11-01",
-  "flag": false,
+  "flag": true,
   "home": "Rayo Vallecano",
-  "logged_at": "2026-10-25T03:54Z",
+  "logged_at": "2026-10-25T05:00Z",
   "md": 11,
-  "pa": 0.3018,
-  "pd": 0.2655,
-  "ph": 0.4327,
-  "shown": "1-0"
+  "pa": 0.3225,
+  "pd": 0.268,
+  "ph": 0.4095,
+  "shown": "1-1"
  },
  "Rayo Vallecano|Elche CF": {
   "away": "Elche CF",
@@ -220,11 +220,11 @@
   "date": "2026-11-01",
   "flag": false,
   "home": "Villarreal CF",
-  "logged_at": "2026-10-25T03:54Z",
+  "logged_at": "2026-10-25T05:00Z",
   "md": 11,
-  "pa": 0.1581,
-  "pd": 0.1993,
-  "ph": 0.6426,
+  "pa": 0.1505,
+  "pd": 0.1939,
+  "ph": 0.6557,
   "shown": "2-0"
  }
 }
