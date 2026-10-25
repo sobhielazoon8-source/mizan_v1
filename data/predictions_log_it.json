@@ -131,6 +131,18 @@
   "ph": 0.8219,
   "shown": "3-0"
  },
+ "Frosinone Calcio|Torino FC": {
+  "away": "Torino FC",
+  "date": "2026-11-01",
+  "flag": true,
+  "home": "Frosinone Calcio",
+  "logged_at": "2026-10-25T14:12Z",
+  "md": 10,
+  "pa": 0.3294,
+  "pd": 0.2776,
+  "ph": 0.3931,
+  "shown": "1-1"
+ },
  "Frosinone Calcio|US Lecce": {
   "away": "US Lecce",
   "date": "2026-10-29",
@@ -178,6 +190,18 @@
   "pd": 0.302,
   "ph": 0.3452,
   "shown": "1-1"
+ },
+ "SS Lazio|Cagliari Calcio": {
+  "away": "Cagliari Calcio",
+  "date": "2026-11-01",
+  "flag": false,
+  "home": "SS Lazio",
+  "logged_at": "2026-10-25T14:12Z",
+  "md": 10,
+  "pa": 0.1554,
+  "pd": 0.2381,
+  "ph": 0.6065,
+  "shown": "1-0"
  },
  "SS Lazio|Parma Calcio 1913": {
   "away": "Parma Calcio 1913",

@@ -131,6 +131,18 @@
   "ph": 0.6264,
   "shown": "2-1"
  },
+ "RC Strasbourg Alsace|AJ Auxerre": {
+  "away": "AJ Auxerre",
+  "date": "2026-11-01",
+  "flag": false,
+  "home": "RC Strasbourg Alsace",
+  "logged_at": "2026-10-25T14:12Z",
+  "md": 9,
+  "pa": 0.2029,
+  "pd": 0.2195,
+  "ph": 0.5776,
+  "shown": "2-1"
+ },
  "Racing Club de Lens|Paris FC": {
   "away": "Paris FC",
   "date": "2026-10-24",
