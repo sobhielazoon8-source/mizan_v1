@@ -4,11 +4,11 @@
   "date": "2026-10-28",
   "flag": false,
   "home": "AC Milan",
-  "logged_at": "2026-10-25T12:02Z",
+  "logged_at": "2026-10-25T21:49Z",
   "md": 9,
-  "pa": 0.201,
-  "pd": 0.2572,
-  "ph": 0.5418,
+  "pa": 0.1915,
+  "pd": 0.2532,
+  "ph": 0.5552,
   "shown": "1-0"
  },
  "AC Milan|FC Internazionale Milano": {
@@ -16,11 +16,11 @@
   "date": "2026-10-31",
   "flag": false,
   "home": "AC Milan",
-  "logged_at": "2026-10-25T13:50Z",
+  "logged_at": "2026-10-25T21:49Z",
   "md": 10,
-  "pa": 0.4953,
-  "pd": 0.2559,
-  "ph": 0.2488,
+  "pa": 0.4793,
+  "pd": 0.26,
+  "ph": 0.2607,
   "shown": "1-2"
  },
  "AC Monza|SSC Napoli": {
@@ -196,11 +196,11 @@
   "date": "2026-10-28",
   "flag": true,
   "home": "Parma Calcio 1913",
-  "logged_at": "2026-10-25T12:02Z",
+  "logged_at": "2026-10-25T21:49Z",
   "md": 9,
-  "pa": 0.3528,
-  "pd": 0.302,
-  "ph": 0.3452,
+  "pa": 0.3396,
+  "pd": 0.3028,
+  "ph": 0.3576,
   "shown": "1-1"
  },
  "SS Lazio|Cagliari Calcio": {
@@ -304,11 +304,11 @@
   "date": "2026-10-31",
   "flag": false,
   "home": "Udinese Calcio",
-  "logged_at": "2026-10-25T12:02Z",
+  "logged_at": "2026-10-25T21:49Z",
   "md": 10,
-  "pa": 0.6283,
-  "pd": 0.2209,
-  "ph": 0.1508,
+  "pa": 0.6412,
+  "pd": 0.2158,
+  "ph": 0.143,
   "shown": "0-2"
  },
  "Venezia FC|FC Internazionale Milano": {
