@@ -16,11 +16,11 @@
   "date": "2026-11-01",
   "flag": false,
   "home": "Athletic Club",
-  "logged_at": "2026-10-25T15:11Z",
+  "logged_at": "2026-10-25T19:31Z",
   "md": 11,
-  "pa": 0.2715,
-  "pd": 0.2463,
-  "ph": 0.4823,
+  "pa": 0.2751,
+  "pd": 0.2476,
+  "ph": 0.4773,
   "shown": "2-1"
  },
  "Atlético Madrid|Deportivo La Coruña": {
@@ -112,11 +112,11 @@
   "date": "2026-11-01",
   "flag": false,
   "home": "Levante UD",
-  "logged_at": "2026-10-25T12:01Z",
+  "logged_at": "2026-10-25T19:31Z",
   "md": 11,
-  "pa": 0.4793,
-  "pd": 0.2443,
-  "ph": 0.2765,
+  "pa": 0.4835,
+  "pd": 0.2437,
+  "ph": 0.2728,
   "shown": "1-2"
  },
  "Racing Santander|Espanyol": {
