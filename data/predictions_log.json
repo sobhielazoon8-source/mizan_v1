@@ -28,11 +28,11 @@
   "date": "2026-10-31",
   "flag": false,
   "home": "Aston Villa FC",
-  "logged_at": "2026-10-25T03:13Z",
+  "logged_at": "2026-10-25T03:54Z",
   "md": 9,
-  "pa": 0.2165,
-  "pd": 0.2394,
-  "ph": 0.5441,
+  "pa": 0.2176,
+  "pd": 0.2386,
+  "ph": 0.5439,
   "shown": "1-0"
  },
  "Aston Villa FC|Manchester City FC": {
@@ -64,11 +64,11 @@
   "date": "2026-10-31",
   "flag": false,
   "home": "Chelsea FC",
-  "logged_at": "2026-10-25T03:13Z",
+  "logged_at": "2026-10-25T03:54Z",
   "md": 9,
-  "pa": 0.3053,
-  "pd": 0.247,
-  "ph": 0.4477,
+  "pa": 0.2861,
+  "pd": 0.2428,
+  "ph": 0.4711,
   "shown": "2-1"
  },
  "Chelsea FC|Tottenham Hotspur FC": {
@@ -100,11 +100,11 @@
   "date": "2026-10-31",
   "flag": false,
   "home": "Coventry City FC",
-  "logged_at": "2026-10-25T03:13Z",
+  "logged_at": "2026-10-25T03:54Z",
   "md": 9,
-  "pa": 0.2819,
-  "pd": 0.2596,
-  "ph": 0.4584,
+  "pa": 0.274,
+  "pd": 0.2566,
+  "ph": 0.4694,
   "shown": "1-0"
  },
  "Crystal Palace FC|Newcastle United FC": {
@@ -160,11 +160,11 @@
   "date": "2026-10-31",
   "flag": false,
   "home": "Manchester City FC",
-  "logged_at": "2026-10-25T03:13Z",
+  "logged_at": "2026-10-25T03:54Z",
   "md": 9,
-  "pa": 0.186,
-  "pd": 0.2084,
-  "ph": 0.6056,
+  "pa": 0.1787,
+  "pd": 0.2045,
+  "ph": 0.6168,
   "shown": "2-1"
  },
  "Manchester United FC|AFC Bournemouth": {
@@ -196,11 +196,11 @@
   "date": "2026-10-31",
   "flag": false,
   "home": "Tottenham Hotspur FC",
-  "logged_at": "2026-10-25T03:13Z",
+  "logged_at": "2026-10-25T03:54Z",
   "md": 9,
-  "pa": 0.2691,
-  "pd": 0.2522,
-  "ph": 0.4787,
+  "pa": 0.2873,
+  "pd": 0.2551,
+  "ph": 0.4576,
   "shown": "1-0"
  }
 }
