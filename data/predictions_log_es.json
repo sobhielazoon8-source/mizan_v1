@@ -16,11 +16,11 @@
   "date": "2026-11-01",
   "flag": false,
   "home": "Athletic Club",
-  "logged_at": "2026-10-25T00:21Z",
+  "logged_at": "2026-10-25T15:11Z",
   "md": 11,
-  "pa": 0.2872,
-  "pd": 0.2512,
-  "ph": 0.4616,
+  "pa": 0.2715,
+  "pd": 0.2463,
+  "ph": 0.4823,
   "shown": "2-1"
  },
  "Atlético Madrid|Deportivo La Coruña": {
@@ -100,11 +100,11 @@
   "date": "2026-11-01",
   "flag": false,
   "home": "Getafe CF",
-  "logged_at": "2026-10-25T00:21Z",
+  "logged_at": "2026-10-25T15:11Z",
   "md": 11,
-  "pa": 0.2764,
-  "pd": 0.2788,
-  "ph": 0.4448,
+  "pa": 0.2915,
+  "pd": 0.2793,
+  "ph": 0.4291,
   "shown": "1-0"
  },
  "Levante UD|Atlético Madrid": {
