@@ -239,6 +239,18 @@
   "ph": 0.2167,
   "shown": "0-1"
  },
+ "US Lecce|Genoa CFC": {
+  "away": "Genoa CFC",
+  "date": "2026-11-01",
+  "flag": true,
+  "home": "US Lecce",
+  "logged_at": "2026-10-25T17:20Z",
+  "md": 10,
+  "pa": 0.3135,
+  "pd": 0.3073,
+  "ph": 0.3791,
+  "shown": "1-0"
+ },
  "US Lecce|Juventus FC": {
   "away": "Juventus FC",
   "date": "2026-10-25",

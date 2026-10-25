@@ -148,11 +148,11 @@
   "date": "2026-11-01",
   "flag": true,
   "home": "Rayo Vallecano",
-  "logged_at": "2026-10-25T12:01Z",
+  "logged_at": "2026-10-25T17:20Z",
   "md": 11,
-  "pa": 0.3225,
-  "pd": 0.268,
-  "ph": 0.4095,
+  "pa": 0.3205,
+  "pd": 0.2702,
+  "ph": 0.4093,
   "shown": "1-1"
  },
  "Rayo Vallecano|Elche CF": {
@@ -172,11 +172,11 @@
   "date": "2026-11-01",
   "flag": false,
   "home": "Real Betis",
-  "logged_at": "2026-10-25T00:21Z",
+  "logged_at": "2026-10-25T17:20Z",
   "md": 11,
-  "pa": 0.135,
-  "pd": 0.1857,
-  "ph": 0.6793,
+  "pa": 0.1349,
+  "pd": 0.1876,
+  "ph": 0.6775,
   "shown": "2-0"
  },
  "Real Sociedad|Levante UD": {
