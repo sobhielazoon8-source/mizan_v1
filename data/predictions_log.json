@@ -4,11 +4,11 @@
   "date": "2026-10-31",
   "flag": false,
   "home": "AFC Bournemouth",
-  "logged_at": "2026-10-25T19:00Z",
+  "logged_at": "2026-10-26T01:30Z",
   "md": 9,
-  "pa": 0.2264,
-  "pd": 0.2398,
-  "ph": 0.5338,
+  "pa": 0.2439,
+  "pd": 0.2439,
+  "ph": 0.5122,
   "shown": "1-0"
  },
  "Arsenal FC|Everton FC": {
@@ -52,11 +52,11 @@
   "date": "2026-10-31",
   "flag": false,
   "home": "Brentford FC",
-  "logged_at": "2026-10-25T16:12Z",
+  "logged_at": "2026-10-26T01:30Z",
   "md": 9,
-  "pa": 0.2265,
-  "pd": 0.2427,
-  "ph": 0.5308,
+  "pa": 0.2262,
+  "pd": 0.2421,
+  "ph": 0.5317,
   "shown": "1-0"
  },
  "Chelsea FC|Manchester United FC": {
@@ -64,11 +64,11 @@
   "date": "2026-10-31",
   "flag": false,
   "home": "Chelsea FC",
-  "logged_at": "2026-10-25T16:12Z",
+  "logged_at": "2026-10-26T01:30Z",
   "md": 9,
-  "pa": 0.2839,
-  "pd": 0.2433,
-  "ph": 0.4728,
+  "pa": 0.3053,
+  "pd": 0.247,
+  "ph": 0.4477,
   "shown": "2-1"
  },
  "Chelsea FC|Tottenham Hotspur FC": {
@@ -100,11 +100,11 @@
   "date": "2026-10-31",
   "flag": false,
   "home": "Coventry City FC",
-  "logged_at": "2026-10-25T19:00Z",
+  "logged_at": "2026-10-26T01:30Z",
   "md": 9,
-  "pa": 0.2808,
-  "pd": 0.2615,
-  "ph": 0.4577,
+  "pa": 0.2819,
+  "pd": 0.2596,
+  "ph": 0.4584,
   "shown": "1-0"
  },
  "Crystal Palace FC|Newcastle United FC": {
@@ -136,11 +136,11 @@
   "date": "2026-10-31",
   "flag": false,
   "home": "Hull City AFC",
-  "logged_at": "2026-10-25T16:12Z",
+  "logged_at": "2026-10-26T01:30Z",
   "md": 9,
-  "pa": 0.2128,
-  "pd": 0.2278,
-  "ph": 0.5594,
+  "pa": 0.213,
+  "pd": 0.2273,
+  "ph": 0.5597,
   "shown": "2-1"
  },
  "Liverpool FC|Arsenal FC": {
@@ -148,11 +148,11 @@
   "date": "2026-11-01",
   "flag": true,
   "home": "Liverpool FC",
-  "logged_at": "2026-10-25T16:50Z",
+  "logged_at": "2026-10-26T01:30Z",
   "md": 9,
-  "pa": 0.3916,
-  "pd": 0.2697,
-  "ph": 0.3386,
+  "pa": 0.4033,
+  "pd": 0.2682,
+  "ph": 0.3285,
   "shown": "1-1"
  },
  "Liverpool FC|Brighton & Hove Albion FC": {
@@ -172,11 +172,11 @@
   "date": "2026-10-31",
   "flag": false,
   "home": "Manchester City FC",
-  "logged_at": "2026-10-25T16:12Z",
+  "logged_at": "2026-10-26T01:30Z",
   "md": 9,
-  "pa": 0.1784,
-  "pd": 0.2051,
-  "ph": 0.6165,
+  "pa": 0.186,
+  "pd": 0.2084,
+  "ph": 0.6056,
   "shown": "2-1"
  },
  "Manchester United FC|AFC Bournemouth": {
@@ -208,11 +208,11 @@
   "date": "2026-10-31",
   "flag": false,
   "home": "Tottenham Hotspur FC",
-  "logged_at": "2026-10-25T16:12Z",
+  "logged_at": "2026-10-26T01:30Z",
   "md": 9,
-  "pa": 0.256,
-  "pd": 0.2497,
-  "ph": 0.4943,
+  "pa": 0.2691,
+  "pd": 0.2522,
+  "ph": 0.4787,
   "shown": "1-0"
  }
 }
