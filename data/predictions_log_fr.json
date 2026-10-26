@@ -64,11 +64,11 @@
   "date": "2026-10-30",
   "flag": false,
   "home": "Le Havre AC",
-  "logged_at": "2026-10-26T16:29Z",
+  "logged_at": "2026-10-26T21:52Z",
   "md": 9,
-  "pa": 0.6375,
-  "pd": 0.2031,
-  "ph": 0.1595,
+  "pa": 0.643,
+  "pd": 0.2014,
+  "ph": 0.1556,
   "shown": "0-1"
  },
  "Lille OSC|Racing Club de Lens": {
@@ -100,11 +100,11 @@
   "date": "2026-10-31",
   "flag": false,
   "home": "Olympique Lyonnais",
-  "logged_at": "2026-10-26T16:29Z",
+  "logged_at": "2026-10-26T21:52Z",
   "md": 9,
-  "pa": 0.1112,
-  "pd": 0.1728,
-  "ph": 0.716,
+  "pa": 0.1145,
+  "pd": 0.1767,
+  "ph": 0.7088,
   "shown": "2-0"
  },
  "Olympique de Marseille|Le Havre AC": {
