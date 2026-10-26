@@ -275,6 +275,18 @@
   "ph": 0.2007,
   "shown": "0-1"
  },
+ "US Sassuolo Calcio|ACF Fiorentina": {
+  "away": "ACF Fiorentina",
+  "date": "2026-11-02",
+  "flag": true,
+  "home": "US Sassuolo Calcio",
+  "logged_at": "2026-10-26T17:57Z",
+  "md": 10,
+  "pa": 0.3048,
+  "pd": 0.2765,
+  "ph": 0.4187,
+  "shown": "1-1"
+ },
  "US Sassuolo Calcio|SS Lazio": {
   "away": "SS Lazio",
   "date": "2026-10-27",
