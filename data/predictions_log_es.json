@@ -52,11 +52,11 @@
   "date": "2026-11-01",
   "flag": false,
   "home": "Deportivo La Coruña",
-  "logged_at": "2026-10-25T12:01Z",
+  "logged_at": "2026-10-26T22:26Z",
   "md": 11,
-  "pa": 0.2689,
-  "pd": 0.2516,
-  "ph": 0.4795,
+  "pa": 0.2602,
+  "pd": 0.25,
+  "ph": 0.4897,
   "shown": "1-0"
  },
  "Elche CF|Valencia CF": {
@@ -98,13 +98,13 @@
  "Getafe CF|Sevilla FC": {
   "away": "Sevilla FC",
   "date": "2026-11-01",
-  "flag": false,
+  "flag": true,
   "home": "Getafe CF",
-  "logged_at": "2026-10-26T20:02Z",
+  "logged_at": "2026-10-26T22:26Z",
   "md": 11,
-  "pa": 0.2915,
-  "pd": 0.2793,
-  "ph": 0.4291,
+  "pa": 0.2998,
+  "pd": 0.2815,
+  "ph": 0.4187,
   "shown": "1-0"
  },
  "Levante UD|Atlético Madrid": {
