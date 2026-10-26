@@ -191,6 +191,18 @@
   "ph": 0.5215,
   "shown": "2-1"
  },
+ "Newcastle United FC|Everton FC": {
+  "away": "Everton FC",
+  "date": "2026-11-02",
+  "flag": false,
+  "home": "Newcastle United FC",
+  "logged_at": "2026-10-26T20:02Z",
+  "md": 9,
+  "pa": 0.2498,
+  "pd": 0.2501,
+  "ph": 0.5,
+  "shown": "1-0"
+ },
  "Sunderland AFC|Leeds United FC": {
   "away": "Leeds United FC",
   "date": "2026-10-25",

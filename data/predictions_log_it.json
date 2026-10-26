@@ -71,6 +71,18 @@
   "ph": 0.5824,
   "shown": "1-0"
  },
+ "Atalanta BC|Parma Calcio 1913": {
+  "away": "Parma Calcio 1913",
+  "date": "2026-11-02",
+  "flag": false,
+  "home": "Atalanta BC",
+  "logged_at": "2026-10-26T20:03Z",
+  "md": 10,
+  "pa": 0.1401,
+  "pd": 0.226,
+  "ph": 0.6339,
+  "shown": "1-0"
+ },
  "Bologna FC 1909|AC Monza": {
   "away": "AC Monza",
   "date": "2026-10-31",
