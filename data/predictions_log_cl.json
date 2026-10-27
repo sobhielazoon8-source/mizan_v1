@@ -1,4 +1,52 @@
 {
+ "Atlético Madrid|FC Bayern München": {
+  "away": "FC Bayern München",
+  "date": "2026-11-03",
+  "flag": false,
+  "home": "Atlético Madrid",
+  "logged_at": "2026-10-27T20:53Z",
+  "md": 4,
+  "pa": 0.4855,
+  "pd": 0.219,
+  "ph": 0.2955,
+  "shown": "1-2"
+ },
+ "Bodø/Glimt|Lille OSC": {
+  "away": "Lille OSC",
+  "date": "2026-11-03",
+  "flag": false,
+  "home": "Bodø/Glimt",
+  "logged_at": "2026-10-27T20:53Z",
+  "md": 4,
+  "pa": 0.2604,
+  "pd": 0.2196,
+  "ph": 0.52,
+  "shown": "2-1"
+ },
+ "FC Barcelona|Aston Villa FC": {
+  "away": "Aston Villa FC",
+  "date": "2026-11-03",
+  "flag": false,
+  "home": "FC Barcelona",
+  "logged_at": "2026-10-27T20:53Z",
+  "md": 4,
+  "pa": 0.2568,
+  "pd": 0.1994,
+  "ph": 0.5438,
+  "shown": "2-1"
+ },
+ "Feyenoord|FC Internazionale Milano": {
+  "away": "FC Internazionale Milano",
+  "date": "2026-11-03",
+  "flag": false,
+  "home": "Feyenoord",
+  "logged_at": "2026-10-27T20:53Z",
+  "md": 4,
+  "pa": 0.4609,
+  "pd": 0.2405,
+  "ph": 0.2987,
+  "shown": "1-2"
+ },
  "Galatasaray|VfB Stuttgart": {
   "away": "VfB Stuttgart",
   "date": "2026-11-03",
@@ -9,6 +57,30 @@
   "pa": 0.3604,
   "pd": 0.2422,
   "ph": 0.3974,
+  "shown": "2-1"
+ },
+ "LASK Linz|Slovan Bratislava": {
+  "away": "Slovan Bratislava",
+  "date": "2026-11-03",
+  "flag": false,
+  "home": "LASK Linz",
+  "logged_at": "2026-10-27T20:53Z",
+  "md": 4,
+  "pa": 0.1374,
+  "pd": 0.1669,
+  "ph": 0.6957,
+  "shown": "2-1"
+ },
+ "Manchester United FC|AS Roma": {
+  "away": "AS Roma",
+  "date": "2026-11-03",
+  "flag": false,
+  "home": "Manchester United FC",
+  "logged_at": "2026-10-27T20:53Z",
+  "md": 4,
+  "pa": 0.3624,
+  "pd": 0.2357,
+  "ph": 0.4019,
   "shown": "2-1"
  },
  "Shakhtar Donetsk|Sporting CP": {
@@ -22,5 +94,17 @@
   "pd": 0.2521,
   "ph": 0.286,
   "shown": "0-1"
+ },
+ "Villarreal CF|Paris Saint-Germain FC": {
+  "away": "Paris Saint-Germain FC",
+  "date": "2026-11-03",
+  "flag": false,
+  "home": "Villarreal CF",
+  "logged_at": "2026-10-27T20:53Z",
+  "md": 4,
+  "pa": 0.8016,
+  "pd": 0.1166,
+  "ph": 0.0818,
+  "shown": "1-3"
  }
 }

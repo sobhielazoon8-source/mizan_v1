@@ -220,11 +220,11 @@
   "date": "2026-11-01",
   "flag": false,
   "home": "SS Lazio",
-  "logged_at": "2026-10-25T14:12Z",
+  "logged_at": "2026-10-27T20:52Z",
   "md": 10,
-  "pa": 0.1554,
-  "pd": 0.2381,
-  "ph": 0.6065,
+  "pa": 0.1399,
+  "pd": 0.2204,
+  "ph": 0.6397,
   "shown": "1-0"
  },
  "SS Lazio|Parma Calcio 1913": {
@@ -292,11 +292,11 @@
   "date": "2026-11-02",
   "flag": true,
   "home": "US Sassuolo Calcio",
-  "logged_at": "2026-10-26T19:25Z",
+  "logged_at": "2026-10-27T20:52Z",
   "md": 10,
-  "pa": 0.3048,
-  "pd": 0.2765,
-  "ph": 0.4187,
+  "pa": 0.332,
+  "pd": 0.2734,
+  "ph": 0.3945,
   "shown": "1-1"
  },
  "US Sassuolo Calcio|SS Lazio": {
