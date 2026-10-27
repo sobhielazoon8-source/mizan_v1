@@ -40,11 +40,11 @@
   "date": "2026-10-31",
   "flag": false,
   "home": "Bayer 04 Leverkusen",
-  "logged_at": "2026-10-26T22:26Z",
+  "logged_at": "2026-10-27T01:06Z",
   "md": 8,
-  "pa": 0.2488,
-  "pd": 0.2207,
-  "ph": 0.5305,
+  "pa": 0.2349,
+  "pd": 0.2161,
+  "ph": 0.549,
   "shown": "2-1"
  },
  "Borussia Dortmund|Eintracht Frankfurt": {
@@ -100,11 +100,11 @@
   "date": "2026-10-31",
   "flag": true,
   "home": "FC Augsburg",
-  "logged_at": "2026-10-26T22:26Z",
+  "logged_at": "2026-10-27T01:06Z",
   "md": 8,
-  "pa": 0.3608,
+  "pa": 0.3643,
   "pd": 0.2515,
-  "ph": 0.3876,
+  "ph": 0.3842,
   "shown": "1-1"
  },
  "FC Bayern München|Borussia Dortmund": {
@@ -112,11 +112,11 @@
   "date": "2026-10-31",
   "flag": false,
   "home": "FC Bayern München",
-  "logged_at": "2026-10-26T22:26Z",
+  "logged_at": "2026-10-27T01:06Z",
   "md": 8,
-  "pa": 0.1702,
-  "pd": 0.1875,
-  "ph": 0.6423,
+  "pa": 0.1725,
+  "pd": 0.1887,
+  "ph": 0.6388,
   "shown": "2-1"
  },
  "FC Schalke 04|RB Leipzig": {
@@ -184,11 +184,11 @@
   "date": "2026-10-31",
   "flag": false,
   "home": "SV Werder Bremen",
-  "logged_at": "2026-10-26T22:26Z",
+  "logged_at": "2026-10-27T01:06Z",
   "md": 8,
-  "pa": 0.3702,
-  "pd": 0.2418,
-  "ph": 0.3879,
+  "pa": 0.3537,
+  "pd": 0.2409,
+  "ph": 0.4054,
   "shown": "2-1"
  },
  "TSG 1899 Hoffenheim|Bayer 04 Leverkusen": {
