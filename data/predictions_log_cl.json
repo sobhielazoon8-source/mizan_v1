@@ -1,1 +1,26 @@
-{}
+{
+ "Galatasaray|VfB Stuttgart": {
+  "away": "VfB Stuttgart",
+  "date": "2026-11-03",
+  "flag": false,
+  "home": "Galatasaray",
+  "logged_at": "2026-10-27T19:00Z",
+  "md": 4,
+  "pa": 0.3604,
+  "pd": 0.2422,
+  "ph": 0.3974,
+  "shown": "2-1"
+ },
+ "Shakhtar Donetsk|Sporting CP": {
+  "away": "Sporting CP",
+  "date": "2026-11-03",
+  "flag": false,
+  "home": "Shakhtar Donetsk",
+  "logged_at": "2026-10-27T19:00Z",
+  "md": 4,
+  "pa": 0.4618,
+  "pd": 0.2521,
+  "ph": 0.286,
+  "shown": "0-1"
+ }
+}
