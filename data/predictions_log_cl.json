@@ -23,6 +23,18 @@
   "ph": 0.52,
   "shown": "2-1"
  },
+ "Borussia Dortmund|Real Betis": {
+  "away": "Real Betis",
+  "date": "2026-11-04",
+  "flag": false,
+  "home": "Borussia Dortmund",
+  "logged_at": "2026-10-28T20:59Z",
+  "md": 4,
+  "pa": 0.2636,
+  "pd": 0.2295,
+  "ph": 0.5069,
+  "shown": "2-1"
+ },
  "FC Barcelona|Aston Villa FC": {
   "away": "Aston Villa FC",
   "date": "2026-11-03",
@@ -33,6 +45,18 @@
   "pa": 0.2568,
   "pd": 0.1994,
   "ph": 0.5438,
+  "shown": "2-1"
+ },
+ "FC Porto|SSC Napoli": {
+  "away": "SSC Napoli",
+  "date": "2026-11-04",
+  "flag": false,
+  "home": "FC Porto",
+  "logged_at": "2026-10-28T20:59Z",
+  "md": 4,
+  "pa": 0.2856,
+  "pd": 0.2455,
+  "ph": 0.4689,
   "shown": "2-1"
  },
  "Fenerbahçe|Liverpool FC": {
@@ -107,6 +131,42 @@
   "ph": 0.1551,
   "shown": "1-2"
  },
+ "PSV Eindhoven|Club Brugge": {
+  "away": "Club Brugge",
+  "date": "2026-11-04",
+  "flag": false,
+  "home": "PSV Eindhoven",
+  "logged_at": "2026-10-28T20:59Z",
+  "md": 4,
+  "pa": 0.3116,
+  "pd": 0.2246,
+  "ph": 0.4638,
+  "shown": "2-1"
+ },
+ "RB Leipzig|Manchester City FC": {
+  "away": "Manchester City FC",
+  "date": "2026-11-04",
+  "flag": false,
+  "home": "RB Leipzig",
+  "logged_at": "2026-10-28T20:59Z",
+  "md": 4,
+  "pa": 0.5379,
+  "pd": 0.2198,
+  "ph": 0.2423,
+  "shown": "1-2"
+ },
+ "Racing Club de Lens|Como 1907": {
+  "away": "Como 1907",
+  "date": "2026-11-04",
+  "flag": false,
+  "home": "Racing Club de Lens",
+  "logged_at": "2026-10-28T20:59Z",
+  "md": 4,
+  "pa": 0.4456,
+  "pd": 0.2427,
+  "ph": 0.3117,
+  "shown": "1-2"
+ },
  "Shakhtar Donetsk|Sporting CP": {
   "away": "Sporting CP",
   "date": "2026-11-03",
@@ -118,6 +178,30 @@
   "pd": 0.2521,
   "ph": 0.286,
   "shown": "0-1"
+ },
+ "Slavia Prague|Arsenal FC": {
+  "away": "Arsenal FC",
+  "date": "2026-11-04",
+  "flag": false,
+  "home": "Slavia Prague",
+  "logged_at": "2026-10-28T20:59Z",
+  "md": 4,
+  "pa": 0.7726,
+  "pd": 0.1487,
+  "ph": 0.0787,
+  "shown": "0-2"
+ },
+ "Viking FK|Sabah FK": {
+  "away": "Sabah FK",
+  "date": "2026-11-04",
+  "flag": false,
+  "home": "Viking FK",
+  "logged_at": "2026-10-28T20:59Z",
+  "md": 4,
+  "pa": 0.2819,
+  "pd": 0.2461,
+  "ph": 0.472,
+  "shown": "2-1"
  },
  "Villarreal CF|Paris Saint-Germain FC": {
   "away": "Paris Saint-Germain FC",
