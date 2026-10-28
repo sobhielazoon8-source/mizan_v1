@@ -35,6 +35,18 @@
   "ph": 0.5438,
   "shown": "2-1"
  },
+ "Fenerbahçe|Liverpool FC": {
+  "away": "Liverpool FC",
+  "date": "2026-11-04",
+  "flag": false,
+  "home": "Fenerbahçe",
+  "logged_at": "2026-10-28T19:08Z",
+  "md": 4,
+  "pa": 0.6695,
+  "pd": 0.1794,
+  "ph": 0.1511,
+  "shown": "1-2"
+ },
  "Feyenoord|FC Internazionale Milano": {
   "away": "FC Internazionale Milano",
   "date": "2026-11-03",
@@ -82,6 +94,18 @@
   "pd": 0.2357,
   "ph": 0.4019,
   "shown": "2-1"
+ },
+ "PAE AEK|Real Madrid": {
+  "away": "Real Madrid",
+  "date": "2026-11-04",
+  "flag": false,
+  "home": "PAE AEK",
+  "logged_at": "2026-10-28T19:08Z",
+  "md": 4,
+  "pa": 0.6704,
+  "pd": 0.1746,
+  "ph": 0.1551,
+  "shown": "1-2"
  },
  "Shakhtar Donetsk|Sporting CP": {
   "away": "Sporting CP",
