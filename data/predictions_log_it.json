@@ -88,11 +88,11 @@
   "date": "2026-10-31",
   "flag": false,
   "home": "Bologna FC 1909",
-  "logged_at": "2026-10-28T20:58Z",
+  "logged_at": "2026-10-28T22:54Z",
   "md": 10,
-  "pa": 0.1275,
-  "pd": 0.1954,
-  "ph": 0.6771,
+  "pa": 0.1196,
+  "pd": 0.1873,
+  "ph": 0.6932,
   "shown": "2-0"
  },
  "Cagliari Calcio|Bologna FC 1909": {
@@ -196,11 +196,11 @@
   "date": "2026-11-01",
   "flag": true,
   "home": "Juventus FC",
-  "logged_at": "2026-10-26T19:25Z",
+  "logged_at": "2026-10-28T22:54Z",
   "md": 10,
-  "pa": 0.3014,
-  "pd": 0.2932,
-  "ph": 0.4053,
+  "pa": 0.3376,
+  "pd": 0.2942,
+  "ph": 0.3682,
   "shown": "1-1"
  },
  "Parma Calcio 1913|Udinese Calcio": {
@@ -268,12 +268,12 @@
   "date": "2026-11-01",
   "flag": true,
   "home": "US Lecce",
-  "logged_at": "2026-10-26T19:25Z",
+  "logged_at": "2026-10-28T22:54Z",
   "md": 10,
-  "pa": 0.3244,
-  "pd": 0.3086,
-  "ph": 0.367,
-  "shown": "1-1"
+  "pa": 0.3471,
+  "pd": 0.3098,
+  "ph": 0.3431,
+  "shown": "0-1"
  },
  "US Lecce|Juventus FC": {
   "away": "Juventus FC",
