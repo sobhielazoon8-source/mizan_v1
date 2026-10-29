@@ -76,11 +76,11 @@
   "date": "2026-11-02",
   "flag": false,
   "home": "Atalanta BC",
-  "logged_at": "2026-10-28T20:58Z",
+  "logged_at": "2026-10-29T22:55Z",
   "md": 10,
-  "pa": 0.1404,
-  "pd": 0.229,
-  "ph": 0.6306,
+  "pa": 0.1415,
+  "pd": 0.2284,
+  "ph": 0.6301,
   "shown": "1-0"
  },
  "Bologna FC 1909|AC Monza": {
@@ -292,11 +292,11 @@
   "date": "2026-11-02",
   "flag": true,
   "home": "US Sassuolo Calcio",
-  "logged_at": "2026-10-27T20:52Z",
+  "logged_at": "2026-10-29T22:55Z",
   "md": 10,
-  "pa": 0.332,
-  "pd": 0.2734,
-  "ph": 0.3945,
+  "pa": 0.3349,
+  "pd": 0.2724,
+  "ph": 0.3926,
   "shown": "1-1"
  },
  "US Sassuolo Calcio|SS Lazio": {
