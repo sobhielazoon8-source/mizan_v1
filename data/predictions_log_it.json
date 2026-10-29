@@ -146,14 +146,14 @@
  "Frosinone Calcio|Torino FC": {
   "away": "Torino FC",
   "date": "2026-11-01",
-  "flag": true,
+  "flag": false,
   "home": "Frosinone Calcio",
-  "logged_at": "2026-10-27T22:50Z",
+  "logged_at": "2026-10-29T20:59Z",
   "md": 10,
-  "pa": 0.3118,
-  "pd": 0.2694,
-  "ph": 0.4189,
-  "shown": "1-1"
+  "pa": 0.288,
+  "pd": 0.2627,
+  "ph": 0.4493,
+  "shown": "2-1"
  },
  "Frosinone Calcio|US Lecce": {
   "away": "US Lecce",
@@ -268,11 +268,11 @@
   "date": "2026-11-01",
   "flag": true,
   "home": "US Lecce",
-  "logged_at": "2026-10-28T22:54Z",
+  "logged_at": "2026-10-29T20:59Z",
   "md": 10,
-  "pa": 0.3471,
-  "pd": 0.3098,
-  "ph": 0.3431,
+  "pa": 0.3725,
+  "pd": 0.3044,
+  "ph": 0.3231,
   "shown": "0-1"
  },
  "US Lecce|Juventus FC": {
