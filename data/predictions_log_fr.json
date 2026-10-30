@@ -202,5 +202,17 @@
   "pd": 0.1893,
   "ph": 0.6693,
   "shown": "2-0"
+ },
+ "Toulouse FC|RC Strasbourg Alsace": {
+  "away": "RC Strasbourg Alsace",
+  "date": "2026-11-06",
+  "flag": false,
+  "home": "Toulouse FC",
+  "logged_at": "2026-10-30T20:01Z",
+  "md": 10,
+  "pa": 0.2917,
+  "pd": 0.2491,
+  "ph": 0.4592,
+  "shown": "2-1"
  }
 }

@@ -346,5 +346,17 @@
   "pd": 0.1226,
   "ph": 0.0635,
   "shown": "0-2"
+ },
+ "Venezia FC|Udinese Calcio": {
+  "away": "Udinese Calcio",
+  "date": "2026-11-06",
+  "flag": true,
+  "home": "Venezia FC",
+  "logged_at": "2026-10-30T20:00Z",
+  "md": 11,
+  "pa": 0.4065,
+  "pd": 0.2939,
+  "ph": 0.2996,
+  "shown": "1-1"
  }
 }

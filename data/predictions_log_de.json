@@ -131,6 +131,18 @@
   "ph": 0.1965,
   "shown": "1-2"
  },
+ "Hamburger SV|Borussia Mönchengladbach": {
+  "away": "Borussia Mönchengladbach",
+  "date": "2026-11-06",
+  "flag": true,
+  "home": "Hamburger SV",
+  "logged_at": "2026-10-30T20:00Z",
+  "md": 9,
+  "pa": 0.3344,
+  "pd": 0.2534,
+  "ph": 0.4122,
+  "shown": "1-1"
+ },
  "RB Leipzig|SV 07 Elversberg": {
   "away": "SV 07 Elversberg",
   "date": "2026-10-24",
