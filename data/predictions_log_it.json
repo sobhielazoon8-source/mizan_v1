@@ -107,6 +107,18 @@
   "ph": 0.3595,
   "shown": "1-1"
  },
+ "Cagliari Calcio|Frosinone Calcio": {
+  "away": "Frosinone Calcio",
+  "date": "2026-11-07",
+  "flag": true,
+  "home": "Cagliari Calcio",
+  "logged_at": "2026-10-31T14:32Z",
+  "md": 11,
+  "pa": 0.3501,
+  "pd": 0.2784,
+  "ph": 0.3715,
+  "shown": "1-1"
+ },
  "Como 1907|US Sassuolo Calcio": {
   "away": "US Sassuolo Calcio",
   "date": "2026-10-24",
@@ -262,6 +274,18 @@
   "pd": 0.2592,
   "ph": 0.2167,
   "shown": "0-1"
+ },
+ "Torino FC|US Lecce": {
+  "away": "US Lecce",
+  "date": "2026-11-07",
+  "flag": false,
+  "home": "Torino FC",
+  "logged_at": "2026-10-31T14:32Z",
+  "md": 11,
+  "pa": 0.2028,
+  "pd": 0.2574,
+  "ph": 0.5398,
+  "shown": "1-0"
  },
  "US Lecce|Genoa CFC": {
   "away": "Genoa CFC",

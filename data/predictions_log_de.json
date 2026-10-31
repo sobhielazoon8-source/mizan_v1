@@ -23,6 +23,18 @@
   "ph": 0.4513,
   "shown": "1-0"
  },
+ "1. FSV Mainz 05|FC Bayern München": {
+  "away": "FC Bayern München",
+  "date": "2026-11-07",
+  "flag": false,
+  "home": "1. FSV Mainz 05",
+  "logged_at": "2026-10-31T14:32Z",
+  "md": 9,
+  "pa": 0.6934,
+  "pd": 0.1676,
+  "ph": 0.139,
+  "shown": "1-2"
+ },
  "1. FSV Mainz 05|SV Werder Bremen": {
   "away": "SV Werder Bremen",
   "date": "2026-10-24",
@@ -58,6 +70,18 @@
   "pd": 0.1839,
   "ph": 0.6607,
   "shown": "2-1"
+ },
+ "Borussia Dortmund|SV 07 Elversberg": {
+  "away": "SV 07 Elversberg",
+  "date": "2026-11-07",
+  "flag": false,
+  "home": "Borussia Dortmund",
+  "logged_at": "2026-10-31T14:32Z",
+  "md": 9,
+  "pa": 0.1402,
+  "pd": 0.1847,
+  "ph": 0.6751,
+  "shown": "2-0"
  },
  "Borussia Mönchengladbach|SC Paderborn 07": {
   "away": "SC Paderborn 07",
@@ -143,6 +167,18 @@
   "ph": 0.4122,
   "shown": "1-1"
  },
+ "RB Leipzig|FC Augsburg": {
+  "away": "FC Augsburg",
+  "date": "2026-11-07",
+  "flag": false,
+  "home": "RB Leipzig",
+  "logged_at": "2026-10-31T14:32Z",
+  "md": 9,
+  "pa": 0.169,
+  "pd": 0.1954,
+  "ph": 0.6356,
+  "shown": "2-1"
+ },
  "RB Leipzig|SV 07 Elversberg": {
   "away": "SV 07 Elversberg",
   "date": "2026-10-24",
@@ -165,6 +201,18 @@
   "pa": 0.658,
   "pd": 0.1807,
   "ph": 0.1612,
+  "shown": "1-2"
+ },
+ "SC Paderborn 07|Eintracht Frankfurt": {
+  "away": "Eintracht Frankfurt",
+  "date": "2026-11-07",
+  "flag": false,
+  "home": "SC Paderborn 07",
+  "logged_at": "2026-10-31T14:32Z",
+  "md": 9,
+  "pa": 0.4307,
+  "pd": 0.2471,
+  "ph": 0.3222,
   "shown": "1-2"
  },
  "SC Paderborn 07|Hamburger SV": {
