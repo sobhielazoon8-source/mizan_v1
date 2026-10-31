@@ -11,6 +11,18 @@
   "ph": 0.4859,
   "shown": "2-1"
  },
+ "AJ Auxerre|Paris FC": {
+  "away": "Paris FC",
+  "date": "2026-11-07",
+  "flag": true,
+  "home": "AJ Auxerre",
+  "logged_at": "2026-10-31T16:28Z",
+  "md": 10,
+  "pa": 0.3498,
+  "pd": 0.264,
+  "ph": 0.3861,
+  "shown": "1-1"
+ },
  "AS Monaco FC|Lille OSC": {
   "away": "Lille OSC",
   "date": "2026-10-25",
