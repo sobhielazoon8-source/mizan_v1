@@ -155,6 +155,18 @@
   "ph": 0.4071,
   "shown": "1-1"
  },
+ "Paris Saint-Germain FC|ES Troyes AC": {
+  "away": "ES Troyes AC",
+  "date": "2026-11-07",
+  "flag": false,
+  "home": "Paris Saint-Germain FC",
+  "logged_at": "2026-10-31T20:15Z",
+  "md": 10,
+  "pa": 0.0459,
+  "pd": 0.0876,
+  "ph": 0.8665,
+  "shown": "3-0"
+ },
  "Paris Saint-Germain FC|Olympique Lyonnais": {
   "away": "Olympique Lyonnais",
   "date": "2026-10-25",
