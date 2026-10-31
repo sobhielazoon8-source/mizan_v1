@@ -136,11 +136,11 @@
   "date": "2026-11-07",
   "flag": false,
   "home": "Crystal Palace FC",
-  "logged_at": "2026-10-31T15:12Z",
+  "logged_at": "2026-10-31T19:41Z",
   "md": 10,
-  "pa": 0.4558,
-  "pd": 0.254,
-  "ph": 0.2902,
+  "pa": 0.4663,
+  "pd": 0.2527,
+  "ph": 0.281,
   "shown": "0-1"
  },
  "Crystal Palace FC|Newcastle United FC": {
@@ -220,11 +220,11 @@
   "date": "2026-11-07",
   "flag": false,
   "home": "Leeds United FC",
-  "logged_at": "2026-10-31T17:06Z",
+  "logged_at": "2026-10-31T19:41Z",
   "md": 10,
-  "pa": 0.2476,
-  "pd": 0.2512,
-  "ph": 0.5012,
+  "pa": 0.2558,
+  "pd": 0.2543,
+  "ph": 0.4899,
   "shown": "1-0"
  },
  "Liverpool FC|Arsenal FC": {
