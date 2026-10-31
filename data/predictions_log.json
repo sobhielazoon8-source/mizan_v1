@@ -172,11 +172,11 @@
   "date": "2026-11-07",
   "flag": false,
   "home": "Fulham FC",
-  "logged_at": "2026-10-31T15:12Z",
+  "logged_at": "2026-10-31T22:38Z",
   "md": 10,
-  "pa": 0.3046,
-  "pd": 0.2595,
-  "ph": 0.4359,
+  "pa": 0.3009,
+  "pd": 0.2594,
+  "ph": 0.4397,
   "shown": "1-0"
  },
  "Hull City AFC|Brentford FC": {
@@ -280,11 +280,11 @@
   "date": "2026-11-07",
   "flag": false,
   "home": "Manchester United FC",
-  "logged_at": "2026-10-31T15:12Z",
+  "logged_at": "2026-10-31T22:38Z",
   "md": 10,
-  "pa": 0.2886,
-  "pd": 0.2516,
-  "ph": 0.4598,
+  "pa": 0.2851,
+  "pd": 0.2514,
+  "ph": 0.4636,
   "shown": "2-1"
  },
  "Newcastle United FC|Everton FC": {
