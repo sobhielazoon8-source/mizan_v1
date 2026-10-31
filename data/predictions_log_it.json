@@ -215,6 +215,18 @@
   "ph": 0.3682,
   "shown": "1-1"
  },
+ "Parma Calcio 1913|Bologna FC 1909": {
+  "away": "Bologna FC 1909",
+  "date": "2026-11-07",
+  "flag": false,
+  "home": "Parma Calcio 1913",
+  "logged_at": "2026-10-31T17:07Z",
+  "md": 11,
+  "pa": 0.4583,
+  "pd": 0.2929,
+  "ph": 0.2489,
+  "shown": "0-1"
+ },
  "Parma Calcio 1913|Udinese Calcio": {
   "away": "Udinese Calcio",
   "date": "2026-10-28",
