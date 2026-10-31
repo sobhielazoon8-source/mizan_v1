@@ -262,5 +262,17 @@
   "pd": 0.2272,
   "ph": 0.2851,
   "shown": "1-2"
+ },
+ "VfB Stuttgart|SV Werder Bremen": {
+  "away": "SV Werder Bremen",
+  "date": "2026-11-07",
+  "flag": false,
+  "home": "VfB Stuttgart",
+  "logged_at": "2026-10-31T17:38Z",
+  "md": 9,
+  "pa": 0.1857,
+  "pd": 0.2027,
+  "ph": 0.6115,
+  "shown": "2-1"
  }
 }
