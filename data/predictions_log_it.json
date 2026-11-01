@@ -220,11 +220,11 @@
   "date": "2026-11-08",
   "flag": false,
   "home": "Genoa CFC",
-  "logged_at": "2026-11-01T14:14Z",
+  "logged_at": "2026-11-01T19:21Z",
   "md": 11,
-  "pa": 0.4998,
-  "pd": 0.2704,
-  "ph": 0.2298,
+  "pa": 0.4898,
+  "pd": 0.2725,
+  "ph": 0.2378,
   "shown": "0-1"
  },
  "Genoa CFC|Juventus FC": {
@@ -352,11 +352,11 @@
   "date": "2026-11-07",
   "flag": false,
   "home": "Torino FC",
-  "logged_at": "2026-11-01T16:41Z",
+  "logged_at": "2026-11-01T19:21Z",
   "md": 11,
-  "pa": 0.2143,
-  "pd": 0.2645,
-  "ph": 0.5212,
+  "pa": 0.2066,
+  "pd": 0.2599,
+  "ph": 0.5334,
   "shown": "1-0"
  },
  "US Lecce|Genoa CFC": {
