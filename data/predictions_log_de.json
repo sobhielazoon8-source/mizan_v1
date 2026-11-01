@@ -28,11 +28,11 @@
   "date": "2026-11-07",
   "flag": false,
   "home": "1. FSV Mainz 05",
-  "logged_at": "2026-10-31T23:51Z",
+  "logged_at": "2026-11-01T00:41Z",
   "md": 9,
-  "pa": 0.6934,
-  "pd": 0.1676,
-  "ph": 0.139,
+  "pa": 0.6881,
+  "pd": 0.1697,
+  "ph": 0.1423,
   "shown": "1-2"
  },
  "1. FSV Mainz 05|SV Werder Bremen": {
@@ -76,11 +76,11 @@
   "date": "2026-11-07",
   "flag": false,
   "home": "Borussia Dortmund",
-  "logged_at": "2026-10-31T23:51Z",
+  "logged_at": "2026-11-01T00:41Z",
   "md": 9,
-  "pa": 0.1402,
-  "pd": 0.1847,
-  "ph": 0.6751,
+  "pa": 0.1372,
+  "pd": 0.1826,
+  "ph": 0.6802,
   "shown": "2-0"
  },
  "Borussia Mönchengladbach|SC Paderborn 07": {
@@ -160,11 +160,11 @@
   "date": "2026-11-06",
   "flag": true,
   "home": "Hamburger SV",
-  "logged_at": "2026-10-31T23:51Z",
+  "logged_at": "2026-11-01T00:41Z",
   "md": 9,
-  "pa": 0.3344,
-  "pd": 0.2534,
-  "ph": 0.4122,
+  "pa": 0.331,
+  "pd": 0.2552,
+  "ph": 0.4137,
   "shown": "1-1"
  },
  "RB Leipzig|FC Augsburg": {
@@ -172,11 +172,11 @@
   "date": "2026-11-07",
   "flag": false,
   "home": "RB Leipzig",
-  "logged_at": "2026-10-31T23:51Z",
+  "logged_at": "2026-11-01T00:41Z",
   "md": 9,
-  "pa": 0.169,
-  "pd": 0.1954,
-  "ph": 0.6356,
+  "pa": 0.1619,
+  "pd": 0.1919,
+  "ph": 0.6462,
   "shown": "2-1"
  },
  "RB Leipzig|SV 07 Elversberg": {
@@ -208,11 +208,11 @@
   "date": "2026-11-07",
   "flag": false,
   "home": "SC Paderborn 07",
-  "logged_at": "2026-10-31T23:51Z",
+  "logged_at": "2026-11-01T00:41Z",
   "md": 9,
-  "pa": 0.4307,
-  "pd": 0.2471,
-  "ph": 0.3222,
+  "pa": 0.4265,
+  "pd": 0.2492,
+  "ph": 0.3242,
   "shown": "1-2"
  },
  "SC Paderborn 07|Hamburger SV": {
@@ -268,11 +268,11 @@
   "date": "2026-11-07",
   "flag": false,
   "home": "VfB Stuttgart",
-  "logged_at": "2026-10-31T23:51Z",
+  "logged_at": "2026-11-01T00:41Z",
   "md": 9,
-  "pa": 0.1883,
-  "pd": 0.2046,
-  "ph": 0.6071,
+  "pa": 0.1857,
+  "pd": 0.2027,
+  "ph": 0.6115,
   "shown": "2-1"
  }
 }

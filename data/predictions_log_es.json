@@ -35,6 +35,42 @@
   "ph": 0.7045,
   "shown": "2-0"
  },
+ "Atlético Madrid|FC Barcelona": {
+  "away": "FC Barcelona",
+  "date": "2026-11-08",
+  "flag": false,
+  "home": "Atlético Madrid",
+  "logged_at": "2026-11-01T00:41Z",
+  "md": 12,
+  "pa": 0.4572,
+  "pd": 0.2382,
+  "ph": 0.3045,
+  "shown": "1-2"
+ },
+ "CA Osasuna|Athletic Club": {
+  "away": "Athletic Club",
+  "date": "2026-11-08",
+  "flag": true,
+  "home": "CA Osasuna",
+  "logged_at": "2026-11-01T00:41Z",
+  "md": 12,
+  "pa": 0.3496,
+  "pd": 0.2688,
+  "ph": 0.3816,
+  "shown": "1-1"
+ },
+ "Celta Vigo|Levante UD": {
+  "away": "Levante UD",
+  "date": "2026-11-08",
+  "flag": false,
+  "home": "Celta Vigo",
+  "logged_at": "2026-11-01T00:41Z",
+  "md": 12,
+  "pa": 0.2309,
+  "pd": 0.2375,
+  "ph": 0.5316,
+  "shown": "1-0"
+ },
  "Celta Vigo|Real Betis": {
   "away": "Real Betis",
   "date": "2026-10-25",
@@ -59,6 +95,18 @@
   "ph": 0.4897,
   "shown": "1-0"
  },
+ "Elche CF|Real Betis": {
+  "away": "Real Betis",
+  "date": "2026-11-08",
+  "flag": true,
+  "home": "Elche CF",
+  "logged_at": "2026-11-01T00:41Z",
+  "md": 12,
+  "pa": 0.3974,
+  "pd": 0.2573,
+  "ph": 0.3453,
+  "shown": "1-1"
+ },
  "Elche CF|Valencia CF": {
   "away": "Valencia CF",
   "date": "2026-11-01",
@@ -69,6 +117,18 @@
   "pa": 0.2634,
   "pd": 0.254,
   "ph": 0.4826,
+  "shown": "1-0"
+ },
+ "Espanyol|Deportivo La Coruña": {
+  "away": "Deportivo La Coruña",
+  "date": "2026-11-08",
+  "flag": false,
+  "home": "Espanyol",
+  "logged_at": "2026-11-01T00:41Z",
+  "md": 12,
+  "pa": 0.273,
+  "pd": 0.2591,
+  "ph": 0.4679,
   "shown": "1-0"
  },
  "FC Barcelona|Deportivo Alavés": {
@@ -118,6 +178,18 @@
   "pd": 0.2437,
   "ph": 0.2728,
   "shown": "1-2"
+ },
+ "Málaga CF|Racing Santander": {
+  "away": "Racing Santander",
+  "date": "2026-11-08",
+  "flag": true,
+  "home": "Málaga CF",
+  "logged_at": "2026-11-01T00:41Z",
+  "md": 12,
+  "pa": 0.3225,
+  "pd": 0.2551,
+  "ph": 0.4224,
+  "shown": "1-1"
  },
  "Racing Santander|Espanyol": {
   "away": "Espanyol",
@@ -191,6 +263,18 @@
   "ph": 0.5353,
   "shown": "2-1"
  },
+ "Real Sociedad|Rayo Vallecano": {
+  "away": "Rayo Vallecano",
+  "date": "2026-11-08",
+  "flag": false,
+  "home": "Real Sociedad",
+  "logged_at": "2026-11-01T00:41Z",
+  "md": 12,
+  "pa": 0.2501,
+  "pd": 0.2396,
+  "ph": 0.5103,
+  "shown": "2-1"
+ },
  "Sevilla FC|CA Osasuna": {
   "away": "CA Osasuna",
   "date": "2026-10-25",
@@ -202,6 +286,30 @@
   "pd": 0.2459,
   "ph": 0.4988,
   "shown": "1-0"
+ },
+ "Sevilla FC|Deportivo Alavés": {
+  "away": "Deportivo Alavés",
+  "date": "2026-11-08",
+  "flag": false,
+  "home": "Sevilla FC",
+  "logged_at": "2026-11-01T00:41Z",
+  "md": 12,
+  "pa": 0.2574,
+  "pd": 0.249,
+  "ph": 0.4937,
+  "shown": "1-0"
+ },
+ "Valencia CF|Real Madrid": {
+  "away": "Real Madrid",
+  "date": "2026-11-08",
+  "flag": false,
+  "home": "Valencia CF",
+  "logged_at": "2026-11-01T00:41Z",
+  "md": 12,
+  "pa": 0.5943,
+  "pd": 0.2205,
+  "ph": 0.1851,
+  "shown": "0-1"
  },
  "Valencia CF|Villarreal CF": {
   "away": "Villarreal CF",
@@ -226,5 +334,17 @@
   "pd": 0.1939,
   "ph": 0.6557,
   "shown": "2-0"
+ },
+ "Villarreal CF|Getafe CF": {
+  "away": "Getafe CF",
+  "date": "2026-11-08",
+  "flag": false,
+  "home": "Villarreal CF",
+  "logged_at": "2026-11-01T00:41Z",
+  "md": 12,
+  "pa": 0.1632,
+  "pd": 0.2244,
+  "ph": 0.6124,
+  "shown": "1-0"
  }
 }
