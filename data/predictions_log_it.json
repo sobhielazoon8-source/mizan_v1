@@ -179,6 +179,18 @@
   "ph": 0.8219,
   "shown": "3-0"
  },
+ "FC Internazionale Milano|Como 1907": {
+  "away": "Como 1907",
+  "date": "2026-11-08",
+  "flag": false,
+  "home": "FC Internazionale Milano",
+  "logged_at": "2026-11-01T17:16Z",
+  "md": 11,
+  "pa": 0.2247,
+  "pd": 0.2476,
+  "ph": 0.5278,
+  "shown": "2-1"
+ },
  "Frosinone Calcio|Torino FC": {
   "away": "Torino FC",
   "date": "2026-11-01",
