@@ -1,4 +1,16 @@
 {
+ "1. FC Köln|Bayer 04 Leverkusen": {
+  "away": "Bayer 04 Leverkusen",
+  "date": "2026-11-08",
+  "flag": false,
+  "home": "1. FC Köln",
+  "logged_at": "2026-11-01T14:54Z",
+  "md": 9,
+  "pa": 0.5527,
+  "pd": 0.2231,
+  "ph": 0.2241,
+  "shown": "1-2"
+ },
  "1. FC Köln|FC Schalke 04": {
   "away": "FC Schalke 04",
   "date": "2026-10-24",
