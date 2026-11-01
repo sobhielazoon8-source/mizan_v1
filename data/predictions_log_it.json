@@ -23,6 +23,18 @@
   "ph": 0.237,
   "shown": "1-2"
  },
+ "AC Monza|Atalanta BC": {
+  "away": "Atalanta BC",
+  "date": "2026-11-08",
+  "flag": false,
+  "home": "AC Monza",
+  "logged_at": "2026-11-01T14:14Z",
+  "md": 11,
+  "pa": 0.6033,
+  "pd": 0.2232,
+  "ph": 0.1735,
+  "shown": "1-2"
+ },
  "AC Monza|SSC Napoli": {
   "away": "SSC Napoli",
   "date": "2026-10-28",
@@ -190,6 +202,18 @@
   "pd": 0.2682,
   "ph": 0.5008,
   "shown": "1-0"
+ },
+ "Genoa CFC|AC Milan": {
+  "away": "AC Milan",
+  "date": "2026-11-08",
+  "flag": false,
+  "home": "Genoa CFC",
+  "logged_at": "2026-11-01T14:14Z",
+  "md": 11,
+  "pa": 0.4998,
+  "pd": 0.2704,
+  "ph": 0.2298,
+  "shown": "0-1"
  },
  "Genoa CFC|Juventus FC": {
   "away": "Juventus FC",
@@ -412,11 +436,11 @@
   "date": "2026-11-06",
   "flag": true,
   "home": "Venezia FC",
-  "logged_at": "2026-11-01T01:48Z",
+  "logged_at": "2026-11-01T14:14Z",
   "md": 11,
-  "pa": 0.3961,
-  "pd": 0.2905,
-  "ph": 0.3134,
+  "pa": 0.3918,
+  "pd": 0.293,
+  "ph": 0.3152,
   "shown": "1-1"
  }
 }

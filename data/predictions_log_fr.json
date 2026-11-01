@@ -203,6 +203,18 @@
   "ph": 0.5761,
   "shown": "1-0"
  },
+ "Stade Rennais FC 1901|Lille OSC": {
+  "away": "Lille OSC",
+  "date": "2026-11-08",
+  "flag": true,
+  "home": "Stade Rennais FC 1901",
+  "logged_at": "2026-11-01T14:14Z",
+  "md": 10,
+  "pa": 0.327,
+  "pd": 0.2561,
+  "ph": 0.4169,
+  "shown": "1-1"
+ },
  "Stade Rennais FC 1901|RC Strasbourg Alsace": {
   "away": "RC Strasbourg Alsace",
   "date": "2026-10-25",
