@@ -287,6 +287,18 @@
   "ph": 0.3144,
   "shown": "1-1"
  },
+ "SSC Napoli|SS Lazio": {
+  "away": "SS Lazio",
+  "date": "2026-11-08",
+  "flag": false,
+  "home": "SSC Napoli",
+  "logged_at": "2026-11-01T11:55Z",
+  "md": 11,
+  "pa": 0.2736,
+  "pd": 0.2796,
+  "ph": 0.4468,
+  "shown": "1-0"
+ },
  "Torino FC|Como 1907": {
   "away": "Como 1907",
   "date": "2026-10-27",
