@@ -64,11 +64,11 @@
   "date": "2026-11-07",
   "flag": false,
   "home": "AS Roma",
-  "logged_at": "2026-11-01T00:41Z",
+  "logged_at": "2026-11-01T01:48Z",
   "md": 11,
-  "pa": 0.0735,
-  "pd": 0.1367,
-  "ph": 0.7898,
+  "pa": 0.0672,
+  "pd": 0.127,
+  "ph": 0.8058,
   "shown": "3-0"
  },
  "Atalanta BC|Frosinone Calcio": {
@@ -232,11 +232,11 @@
   "date": "2026-11-07",
   "flag": false,
   "home": "Parma Calcio 1913",
-  "logged_at": "2026-11-01T00:41Z",
+  "logged_at": "2026-11-01T01:48Z",
   "md": 11,
-  "pa": 0.4583,
-  "pd": 0.2929,
-  "ph": 0.2489,
+  "pa": 0.4584,
+  "pd": 0.2931,
+  "ph": 0.2485,
   "shown": "0-1"
  },
  "Parma Calcio 1913|Udinese Calcio": {
@@ -400,11 +400,11 @@
   "date": "2026-11-06",
   "flag": true,
   "home": "Venezia FC",
-  "logged_at": "2026-11-01T00:41Z",
+  "logged_at": "2026-11-01T01:48Z",
   "md": 11,
-  "pa": 0.4065,
-  "pd": 0.2939,
-  "ph": 0.2996,
+  "pa": 0.3961,
+  "pd": 0.2905,
+  "ph": 0.3134,
   "shown": "1-1"
  }
 }
