@@ -182,14 +182,14 @@
  "Málaga CF|Racing Santander": {
   "away": "Racing Santander",
   "date": "2026-11-08",
-  "flag": true,
+  "flag": false,
   "home": "Málaga CF",
-  "logged_at": "2026-11-01T00:41Z",
+  "logged_at": "2026-11-01T17:51Z",
   "md": 12,
-  "pa": 0.3225,
-  "pd": 0.2551,
-  "ph": 0.4224,
-  "shown": "1-1"
+  "pa": 0.3125,
+  "pd": 0.2543,
+  "ph": 0.4332,
+  "shown": "2-1"
  },
  "Racing Santander|Espanyol": {
   "away": "Espanyol",
@@ -304,11 +304,11 @@
   "date": "2026-11-08",
   "flag": false,
   "home": "Valencia CF",
-  "logged_at": "2026-11-01T00:41Z",
+  "logged_at": "2026-11-01T17:51Z",
   "md": 12,
-  "pa": 0.5943,
-  "pd": 0.2205,
-  "ph": 0.1851,
+  "pa": 0.6046,
+  "pd": 0.2172,
+  "ph": 0.1782,
   "shown": "0-1"
  },
  "Valencia CF|Villarreal CF": {
