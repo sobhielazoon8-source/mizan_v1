@@ -232,11 +232,11 @@
   "date": "2026-11-08",
   "flag": false,
   "home": "Racing Club de Lens",
-  "logged_at": "2026-11-01T20:00Z",
+  "logged_at": "2026-11-01T21:53Z",
   "md": 10,
-  "pa": 0.245,
-  "pd": 0.2309,
-  "ph": 0.5241,
+  "pa": 0.2479,
+  "pd": 0.232,
+  "ph": 0.5202,
   "shown": "2-1"
  },
  "Racing Club de Lens|Paris FC": {
@@ -304,11 +304,11 @@
   "date": "2026-11-06",
   "flag": false,
   "home": "Toulouse FC",
-  "logged_at": "2026-11-01T16:05Z",
+  "logged_at": "2026-11-01T21:53Z",
   "md": 10,
-  "pa": 0.307,
-  "pd": 0.2494,
-  "ph": 0.4436,
+  "pa": 0.3102,
+  "pd": 0.2501,
+  "ph": 0.4398,
   "shown": "2-1"
  }
 }

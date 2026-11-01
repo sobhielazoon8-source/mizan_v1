@@ -64,11 +64,11 @@
   "date": "2026-11-08",
   "flag": false,
   "home": "ACF Fiorentina",
-  "logged_at": "2026-11-01T20:00Z",
+  "logged_at": "2026-11-01T21:53Z",
   "md": 11,
-  "pa": 0.4578,
-  "pd": 0.2796,
-  "ph": 0.2625,
+  "pa": 0.477,
+  "pd": 0.2758,
+  "ph": 0.2472,
   "shown": "0-1"
  },
  "AS Roma|Cagliari Calcio": {
@@ -340,11 +340,11 @@
   "date": "2026-11-08",
   "flag": false,
   "home": "SSC Napoli",
-  "logged_at": "2026-11-01T20:35Z",
+  "logged_at": "2026-11-01T21:53Z",
   "md": 11,
-  "pa": 0.2756,
-  "pd": 0.2798,
-  "ph": 0.4446,
+  "pa": 0.292,
+  "pd": 0.2833,
+  "ph": 0.4247,
   "shown": "1-0"
  },
  "Torino FC|Como 1907": {
