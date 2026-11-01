@@ -59,6 +59,18 @@
   "ph": 0.293,
   "shown": "0-1"
  },
+ "ACF Fiorentina|Juventus FC": {
+  "away": "Juventus FC",
+  "date": "2026-11-08",
+  "flag": false,
+  "home": "ACF Fiorentina",
+  "logged_at": "2026-11-01T20:00Z",
+  "md": 11,
+  "pa": 0.4578,
+  "pd": 0.2796,
+  "ph": 0.2625,
+  "shown": "0-1"
+ },
  "AS Roma|Cagliari Calcio": {
   "away": "Cagliari Calcio",
   "date": "2026-10-27",
@@ -136,11 +148,11 @@
   "date": "2026-11-07",
   "flag": true,
   "home": "Cagliari Calcio",
-  "logged_at": "2026-11-01T16:41Z",
+  "logged_at": "2026-11-01T20:00Z",
   "md": 11,
-  "pa": 0.3676,
-  "pd": 0.2797,
-  "ph": 0.3527,
+  "pa": 0.3501,
+  "pd": 0.2784,
+  "ph": 0.3715,
   "shown": "1-1"
  },
  "Como 1907|US Sassuolo Calcio": {
@@ -184,11 +196,11 @@
   "date": "2026-11-08",
   "flag": false,
   "home": "FC Internazionale Milano",
-  "logged_at": "2026-11-01T17:16Z",
+  "logged_at": "2026-11-01T20:00Z",
   "md": 11,
-  "pa": 0.2247,
-  "pd": 0.2476,
-  "ph": 0.5278,
+  "pa": 0.228,
+  "pd": 0.2457,
+  "ph": 0.5263,
   "shown": "2-1"
  },
  "Frosinone Calcio|Torino FC": {
@@ -220,11 +232,11 @@
   "date": "2026-11-08",
   "flag": false,
   "home": "Genoa CFC",
-  "logged_at": "2026-11-01T19:21Z",
+  "logged_at": "2026-11-01T20:00Z",
   "md": 11,
-  "pa": 0.4898,
-  "pd": 0.2725,
-  "ph": 0.2378,
+  "pa": 0.4998,
+  "pd": 0.2704,
+  "ph": 0.2298,
   "shown": "0-1"
  },
  "Genoa CFC|Juventus FC": {
@@ -328,11 +340,11 @@
   "date": "2026-11-08",
   "flag": false,
   "home": "SSC Napoli",
-  "logged_at": "2026-11-01T16:41Z",
+  "logged_at": "2026-11-01T20:00Z",
   "md": 11,
-  "pa": 0.2756,
-  "pd": 0.2798,
-  "ph": 0.4446,
+  "pa": 0.2736,
+  "pd": 0.2796,
+  "ph": 0.4468,
   "shown": "1-0"
  },
  "Torino FC|Como 1907": {
@@ -352,11 +364,11 @@
   "date": "2026-11-07",
   "flag": false,
   "home": "Torino FC",
-  "logged_at": "2026-11-01T19:21Z",
+  "logged_at": "2026-11-01T20:00Z",
   "md": 11,
-  "pa": 0.2066,
-  "pd": 0.2599,
-  "ph": 0.5334,
+  "pa": 0.2028,
+  "pd": 0.2574,
+  "ph": 0.5398,
   "shown": "1-0"
  },
  "US Lecce|Genoa CFC": {
@@ -448,11 +460,11 @@
   "date": "2026-11-06",
   "flag": true,
   "home": "Venezia FC",
-  "logged_at": "2026-11-01T16:41Z",
+  "logged_at": "2026-11-01T20:00Z",
   "md": 11,
-  "pa": 0.3918,
-  "pd": 0.293,
-  "ph": 0.3152,
+  "pa": 0.3961,
+  "pd": 0.2905,
+  "ph": 0.3134,
   "shown": "1-1"
  }
 }

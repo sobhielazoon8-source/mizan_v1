@@ -227,6 +227,18 @@
   "ph": 0.5646,
   "shown": "2-1"
  },
+ "Racing Club de Lens|Olympique de Marseille": {
+  "away": "Olympique de Marseille",
+  "date": "2026-11-08",
+  "flag": false,
+  "home": "Racing Club de Lens",
+  "logged_at": "2026-11-01T20:00Z",
+  "md": 10,
+  "pa": 0.245,
+  "pd": 0.2309,
+  "ph": 0.5241,
+  "shown": "2-1"
+ },
  "Racing Club de Lens|Paris FC": {
   "away": "Paris FC",
   "date": "2026-10-24",
