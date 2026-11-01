@@ -287,6 +287,18 @@
   "ph": 0.2851,
   "shown": "1-2"
  },
+ "TSG 1899 Hoffenheim|FC Schalke 04": {
+  "away": "FC Schalke 04",
+  "date": "2026-11-08",
+  "flag": false,
+  "home": "TSG 1899 Hoffenheim",
+  "logged_at": "2026-11-01T18:30Z",
+  "md": 9,
+  "pa": 0.1739,
+  "pd": 0.2058,
+  "ph": 0.6203,
+  "shown": "2-1"
+ },
  "VfB Stuttgart|SV Werder Bremen": {
   "away": "SV Werder Bremen",
   "date": "2026-11-07",

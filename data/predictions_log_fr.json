@@ -16,11 +16,11 @@
   "date": "2026-11-07",
   "flag": true,
   "home": "AJ Auxerre",
-  "logged_at": "2026-11-01T16:05Z",
+  "logged_at": "2026-11-01T18:30Z",
   "md": 10,
-  "pa": 0.3664,
-  "pd": 0.2622,
-  "ph": 0.3714,
+  "pa": 0.3796,
+  "pd": 0.2613,
+  "ph": 0.3591,
   "shown": "1-1"
  },
  "AS Monaco FC|Lille OSC": {
@@ -52,11 +52,11 @@
   "date": "2026-11-08",
   "flag": true,
   "home": "Angers SCO",
-  "logged_at": "2026-11-01T16:41Z",
+  "logged_at": "2026-11-01T18:30Z",
   "md": 10,
-  "pa": 0.387,
-  "pd": 0.2718,
-  "ph": 0.3412,
+  "pa": 0.3912,
+  "pd": 0.2722,
+  "ph": 0.3365,
   "shown": "1-1"
  },
  "ES Troyes AC|Le Mans FC": {
@@ -110,14 +110,14 @@
  "Le Mans FC|AS Monaco FC": {
   "away": "AS Monaco FC",
   "date": "2026-11-08",
-  "flag": false,
+  "flag": true,
   "home": "Le Mans FC",
-  "logged_at": "2026-11-01T16:41Z",
+  "logged_at": "2026-11-01T18:30Z",
   "md": 10,
-  "pa": 0.4417,
-  "pd": 0.25,
-  "ph": 0.3083,
-  "shown": "1-2"
+  "pa": 0.4285,
+  "pd": 0.2508,
+  "ph": 0.3207,
+  "shown": "1-1"
  },
  "Lille OSC|Racing Club de Lens": {
   "away": "Racing Club de Lens",
@@ -244,11 +244,11 @@
   "date": "2026-11-08",
   "flag": true,
   "home": "Stade Brestois 29",
-  "logged_at": "2026-11-01T16:41Z",
+  "logged_at": "2026-11-01T18:30Z",
   "md": 10,
-  "pa": 0.4033,
-  "pd": 0.2552,
-  "ph": 0.3415,
+  "pa": 0.4078,
+  "pd": 0.2555,
+  "ph": 0.3367,
   "shown": "1-1"
  },
  "Stade Rennais FC 1901|Lille OSC": {
