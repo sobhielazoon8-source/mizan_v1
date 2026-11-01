@@ -4,11 +4,11 @@
   "date": "2026-11-08",
   "flag": false,
   "home": "1. FC Köln",
-  "logged_at": "2026-11-01T16:41Z",
+  "logged_at": "2026-11-01T20:35Z",
   "md": 9,
-  "pa": 0.5508,
-  "pd": 0.224,
-  "ph": 0.2253,
+  "pa": 0.5527,
+  "pd": 0.2231,
+  "ph": 0.2241,
   "shown": "1-2"
  },
  "1. FC Köln|FC Schalke 04": {
@@ -172,11 +172,11 @@
   "date": "2026-11-06",
   "flag": true,
   "home": "Hamburger SV",
-  "logged_at": "2026-11-01T19:20Z",
+  "logged_at": "2026-11-01T20:35Z",
   "md": 9,
-  "pa": 0.3368,
+  "pa": 0.331,
   "pd": 0.2552,
-  "ph": 0.408,
+  "ph": 0.4137,
   "shown": "1-1"
  },
  "RB Leipzig|FC Augsburg": {
@@ -208,11 +208,11 @@
   "date": "2026-11-08",
   "flag": false,
   "home": "SC Freiburg",
-  "logged_at": "2026-11-01T16:41Z",
+  "logged_at": "2026-11-01T20:35Z",
   "md": 9,
-  "pa": 0.2018,
+  "pa": 0.2027,
   "pd": 0.2244,
-  "ph": 0.5738,
+  "ph": 0.573,
   "shown": "1-0"
  },
  "SC Freiburg|FC Bayern München": {
@@ -232,11 +232,11 @@
   "date": "2026-11-07",
   "flag": false,
   "home": "SC Paderborn 07",
-  "logged_at": "2026-11-01T19:20Z",
+  "logged_at": "2026-11-01T20:35Z",
   "md": 9,
-  "pa": 0.4332,
-  "pd": 0.2481,
-  "ph": 0.3187,
+  "pa": 0.4265,
+  "pd": 0.2492,
+  "ph": 0.3242,
   "shown": "1-2"
  },
  "SC Paderborn 07|Hamburger SV": {

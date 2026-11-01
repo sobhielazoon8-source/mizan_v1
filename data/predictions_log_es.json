@@ -100,11 +100,11 @@
   "date": "2026-11-08",
   "flag": true,
   "home": "Elche CF",
-  "logged_at": "2026-11-01T00:41Z",
+  "logged_at": "2026-11-01T20:35Z",
   "md": 12,
-  "pa": 0.3974,
-  "pd": 0.2573,
-  "ph": 0.3453,
+  "pa": 0.408,
+  "pd": 0.2577,
+  "ph": 0.3343,
   "shown": "1-1"
  },
  "Elche CF|Valencia CF": {
@@ -182,14 +182,14 @@
  "Málaga CF|Racing Santander": {
   "away": "Racing Santander",
   "date": "2026-11-08",
-  "flag": true,
+  "flag": false,
   "home": "Málaga CF",
-  "logged_at": "2026-11-01T20:00Z",
+  "logged_at": "2026-11-01T20:35Z",
   "md": 12,
-  "pa": 0.3225,
-  "pd": 0.2551,
-  "ph": 0.4224,
-  "shown": "1-1"
+  "pa": 0.3125,
+  "pd": 0.2543,
+  "ph": 0.4332,
+  "shown": "2-1"
  },
  "Racing Santander|Espanyol": {
   "away": "Espanyol",
@@ -292,11 +292,11 @@
   "date": "2026-11-08",
   "flag": false,
   "home": "Sevilla FC",
-  "logged_at": "2026-11-01T20:00Z",
+  "logged_at": "2026-11-01T20:35Z",
   "md": 12,
-  "pa": 0.2574,
-  "pd": 0.249,
-  "ph": 0.4937,
+  "pa": 0.2677,
+  "pd": 0.2502,
+  "ph": 0.4821,
   "shown": "1-0"
  },
  "Valencia CF|Real Madrid": {
@@ -304,11 +304,11 @@
   "date": "2026-11-08",
   "flag": false,
   "home": "Valencia CF",
-  "logged_at": "2026-11-01T20:00Z",
+  "logged_at": "2026-11-01T20:35Z",
   "md": 12,
-  "pa": 0.5943,
-  "pd": 0.2205,
-  "ph": 0.1851,
+  "pa": 0.5919,
+  "pd": 0.2225,
+  "ph": 0.1856,
   "shown": "0-1"
  },
  "Valencia CF|Villarreal CF": {
@@ -340,11 +340,11 @@
   "date": "2026-11-08",
   "flag": false,
   "home": "Villarreal CF",
-  "logged_at": "2026-11-01T20:00Z",
+  "logged_at": "2026-11-01T20:35Z",
   "md": 12,
-  "pa": 0.1632,
-  "pd": 0.2244,
-  "ph": 0.6124,
+  "pa": 0.1702,
+  "pd": 0.2272,
+  "ph": 0.6026,
   "shown": "1-0"
  }
 }

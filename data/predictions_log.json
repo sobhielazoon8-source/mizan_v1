@@ -28,11 +28,11 @@
   "date": "2026-11-07",
   "flag": false,
   "home": "Arsenal FC",
-  "logged_at": "2026-10-31T17:06Z",
+  "logged_at": "2026-11-01T20:35Z",
   "md": 10,
-  "pa": 0.0876,
-  "pd": 0.1535,
-  "ph": 0.7589,
+  "pa": 0.0852,
+  "pd": 0.1517,
+  "ph": 0.763,
   "shown": "2-0"
  },
  "Aston Villa FC|Fulham FC": {
@@ -136,11 +136,11 @@
   "date": "2026-11-07",
   "flag": false,
   "home": "Crystal Palace FC",
-  "logged_at": "2026-10-31T19:41Z",
+  "logged_at": "2026-11-01T20:35Z",
   "md": 10,
-  "pa": 0.4663,
-  "pd": 0.2527,
-  "ph": 0.281,
+  "pa": 0.4574,
+  "pd": 0.2552,
+  "ph": 0.2874,
   "shown": "0-1"
  },
  "Crystal Palace FC|Newcastle United FC": {
