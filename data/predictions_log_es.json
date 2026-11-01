@@ -292,11 +292,11 @@
   "date": "2026-11-08",
   "flag": false,
   "home": "Sevilla FC",
-  "logged_at": "2026-11-01T00:41Z",
+  "logged_at": "2026-11-01T15:27Z",
   "md": 12,
-  "pa": 0.2574,
-  "pd": 0.249,
-  "ph": 0.4937,
+  "pa": 0.2677,
+  "pd": 0.2502,
+  "ph": 0.4821,
   "shown": "1-0"
  },
  "Valencia CF|Real Madrid": {
@@ -340,11 +340,11 @@
   "date": "2026-11-08",
   "flag": false,
   "home": "Villarreal CF",
-  "logged_at": "2026-11-01T00:41Z",
+  "logged_at": "2026-11-01T15:27Z",
   "md": 12,
-  "pa": 0.1632,
-  "pd": 0.2244,
-  "ph": 0.6124,
+  "pa": 0.1702,
+  "pd": 0.2272,
+  "ph": 0.6026,
   "shown": "1-0"
  }
 }
