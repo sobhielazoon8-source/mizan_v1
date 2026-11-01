@@ -136,11 +136,11 @@
   "date": "2026-11-07",
   "flag": true,
   "home": "Cagliari Calcio",
-  "logged_at": "2026-10-31T14:32Z",
+  "logged_at": "2026-11-01T16:41Z",
   "md": 11,
-  "pa": 0.3501,
-  "pd": 0.2784,
-  "ph": 0.3715,
+  "pa": 0.3676,
+  "pd": 0.2797,
+  "ph": 0.3527,
   "shown": "1-1"
  },
  "Como 1907|US Sassuolo Calcio": {
@@ -316,11 +316,11 @@
   "date": "2026-11-08",
   "flag": false,
   "home": "SSC Napoli",
-  "logged_at": "2026-11-01T11:55Z",
+  "logged_at": "2026-11-01T16:41Z",
   "md": 11,
-  "pa": 0.2736,
-  "pd": 0.2796,
-  "ph": 0.4468,
+  "pa": 0.2756,
+  "pd": 0.2798,
+  "ph": 0.4446,
   "shown": "1-0"
  },
  "Torino FC|Como 1907": {
@@ -340,11 +340,11 @@
   "date": "2026-11-07",
   "flag": false,
   "home": "Torino FC",
-  "logged_at": "2026-10-31T14:32Z",
+  "logged_at": "2026-11-01T16:41Z",
   "md": 11,
-  "pa": 0.2028,
-  "pd": 0.2574,
-  "ph": 0.5398,
+  "pa": 0.2143,
+  "pd": 0.2645,
+  "ph": 0.5212,
   "shown": "1-0"
  },
  "US Lecce|Genoa CFC": {
@@ -436,11 +436,11 @@
   "date": "2026-11-06",
   "flag": true,
   "home": "Venezia FC",
-  "logged_at": "2026-11-01T16:05Z",
+  "logged_at": "2026-11-01T16:41Z",
   "md": 11,
-  "pa": 0.3961,
-  "pd": 0.2905,
-  "ph": 0.3134,
+  "pa": 0.3918,
+  "pd": 0.293,
+  "ph": 0.3152,
   "shown": "1-1"
  }
 }

@@ -4,11 +4,11 @@
   "date": "2026-11-08",
   "flag": false,
   "home": "1. FC Köln",
-  "logged_at": "2026-11-01T14:54Z",
+  "logged_at": "2026-11-01T16:41Z",
   "md": 9,
-  "pa": 0.5527,
-  "pd": 0.2231,
-  "ph": 0.2241,
+  "pa": 0.5508,
+  "pd": 0.224,
+  "ph": 0.2253,
   "shown": "1-2"
  },
  "1. FC Köln|FC Schalke 04": {
@@ -202,6 +202,18 @@
   "pd": 0.2037,
   "ph": 0.6153,
   "shown": "2-1"
+ },
+ "SC Freiburg|1. FC Union Berlin": {
+  "away": "1. FC Union Berlin",
+  "date": "2026-11-08",
+  "flag": false,
+  "home": "SC Freiburg",
+  "logged_at": "2026-11-01T16:41Z",
+  "md": 9,
+  "pa": 0.2018,
+  "pd": 0.2244,
+  "ph": 0.5738,
+  "shown": "1-0"
  },
  "SC Freiburg|FC Bayern München": {
   "away": "FC Bayern München",
