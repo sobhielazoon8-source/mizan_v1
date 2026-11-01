@@ -232,11 +232,11 @@
   "date": "2026-11-08",
   "flag": false,
   "home": "Racing Club de Lens",
-  "logged_at": "2026-11-01T21:53Z",
+  "logged_at": "2026-11-01T22:27Z",
   "md": 10,
-  "pa": 0.2479,
-  "pd": 0.232,
-  "ph": 0.5202,
+  "pa": 0.252,
+  "pd": 0.2338,
+  "ph": 0.5142,
   "shown": "2-1"
  },
  "Racing Club de Lens|Paris FC": {
@@ -302,13 +302,13 @@
  "Toulouse FC|RC Strasbourg Alsace": {
   "away": "RC Strasbourg Alsace",
   "date": "2026-11-06",
-  "flag": false,
+  "flag": true,
   "home": "Toulouse FC",
-  "logged_at": "2026-11-01T21:53Z",
+  "logged_at": "2026-11-01T22:27Z",
   "md": 10,
-  "pa": 0.3102,
-  "pd": 0.2501,
-  "ph": 0.4398,
-  "shown": "2-1"
+  "pa": 0.3145,
+  "pd": 0.2513,
+  "ph": 0.4342,
+  "shown": "1-1"
  }
 }

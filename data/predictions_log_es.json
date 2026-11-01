@@ -52,11 +52,11 @@
   "date": "2026-11-08",
   "flag": true,
   "home": "CA Osasuna",
-  "logged_at": "2026-11-01T00:41Z",
+  "logged_at": "2026-11-01T22:27Z",
   "md": 12,
-  "pa": 0.3496,
-  "pd": 0.2688,
-  "ph": 0.3816,
+  "pa": 0.355,
+  "pd": 0.269,
+  "ph": 0.376,
   "shown": "1-1"
  },
  "Celta Vigo|Levante UD": {
@@ -268,11 +268,11 @@
   "date": "2026-11-08",
   "flag": false,
   "home": "Real Sociedad",
-  "logged_at": "2026-11-01T00:41Z",
+  "logged_at": "2026-11-01T22:27Z",
   "md": 12,
-  "pa": 0.2501,
-  "pd": 0.2396,
-  "ph": 0.5103,
+  "pa": 0.2547,
+  "pd": 0.241,
+  "ph": 0.5043,
   "shown": "2-1"
  },
  "Sevilla FC|CA Osasuna": {
