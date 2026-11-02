@@ -28,11 +28,11 @@
   "date": "2026-11-08",
   "flag": false,
   "home": "AC Monza",
-  "logged_at": "2026-11-01T14:14Z",
+  "logged_at": "2026-11-02T21:58Z",
   "md": 11,
-  "pa": 0.6033,
-  "pd": 0.2232,
-  "ph": 0.1735,
+  "pa": 0.5634,
+  "pd": 0.2366,
+  "ph": 0.1999,
   "shown": "1-2"
  },
  "AC Monza|SSC Napoli": {
@@ -280,11 +280,11 @@
   "date": "2026-11-07",
   "flag": false,
   "home": "Parma Calcio 1913",
-  "logged_at": "2026-11-01T01:48Z",
+  "logged_at": "2026-11-02T21:58Z",
   "md": 11,
-  "pa": 0.4584,
-  "pd": 0.2931,
-  "ph": 0.2485,
+  "pa": 0.4223,
+  "pd": 0.2997,
+  "ph": 0.278,
   "shown": "0-1"
  },
  "Parma Calcio 1913|Udinese Calcio": {
