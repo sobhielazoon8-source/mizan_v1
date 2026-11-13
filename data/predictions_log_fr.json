@@ -59,6 +59,18 @@
   "ph": 0.3365,
   "shown": "1-1"
  },
+ "ES Troyes AC|Le Havre AC": {
+  "away": "Le Havre AC",
+  "date": "2026-11-20",
+  "flag": false,
+  "home": "ES Troyes AC",
+  "logged_at": "2026-11-13T20:21Z",
+  "md": 11,
+  "pa": 0.2781,
+  "pd": 0.2585,
+  "ph": 0.4634,
+  "shown": "1-0"
+ },
  "ES Troyes AC|Le Mans FC": {
   "away": "Le Mans FC",
   "date": "2026-10-31",

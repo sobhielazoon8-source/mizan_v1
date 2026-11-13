@@ -143,6 +143,18 @@
   "ph": 0.3876,
   "shown": "1-1"
  },
+ "FC Bayern München|1. FC Köln": {
+  "away": "1. FC Köln",
+  "date": "2026-11-20",
+  "flag": false,
+  "home": "FC Bayern München",
+  "logged_at": "2026-11-13T20:21Z",
+  "md": 10,
+  "pa": 0.0451,
+  "pd": 0.0808,
+  "ph": 0.8741,
+  "shown": "3-0"
+ },
  "FC Bayern München|Borussia Dortmund": {
   "away": "Borussia Dortmund",
   "date": "2026-10-31",
