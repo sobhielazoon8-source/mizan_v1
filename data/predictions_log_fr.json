@@ -143,6 +143,18 @@
   "ph": 0.448,
   "shown": "1-0"
  },
+ "OGC Nice|Paris Saint-Germain FC": {
+  "away": "Paris Saint-Germain FC",
+  "date": "2026-11-21",
+  "flag": false,
+  "home": "OGC Nice",
+  "logged_at": "2026-11-14T18:26Z",
+  "md": 11,
+  "pa": 0.5447,
+  "pd": 0.2334,
+  "ph": 0.2219,
+  "shown": "0-1"
+ },
  "OGC Nice|Stade Rennais FC 1901": {
   "away": "Stade Rennais FC 1901",
   "date": "2026-10-31",

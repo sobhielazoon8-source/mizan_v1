@@ -155,6 +155,18 @@
   "ph": 0.3527,
   "shown": "1-1"
  },
+ "Como 1907|Cagliari Calcio": {
+  "away": "Cagliari Calcio",
+  "date": "2026-11-21",
+  "flag": false,
+  "home": "Como 1907",
+  "logged_at": "2026-11-14T18:26Z",
+  "md": 12,
+  "pa": 0.1159,
+  "pd": 0.2039,
+  "ph": 0.6802,
+  "shown": "1-0"
+ },
  "Como 1907|US Sassuolo Calcio": {
   "away": "US Sassuolo Calcio",
   "date": "2026-10-24",
@@ -275,6 +287,18 @@
   "ph": 0.3682,
   "shown": "1-1"
  },
+ "Parma Calcio 1913|AS Roma": {
+  "away": "AS Roma",
+  "date": "2026-11-21",
+  "flag": false,
+  "home": "Parma Calcio 1913",
+  "logged_at": "2026-11-14T18:26Z",
+  "md": 12,
+  "pa": 0.6746,
+  "pd": 0.2058,
+  "ph": 0.1196,
+  "shown": "0-2"
+ },
  "Parma Calcio 1913|Bologna FC 1909": {
   "away": "Bologna FC 1909",
   "date": "2026-11-07",
@@ -322,6 +346,18 @@
   "pd": 0.227,
   "ph": 0.6448,
   "shown": "1-0"
+ },
+ "SS Lazio|US Lecce": {
+  "away": "US Lecce",
+  "date": "2026-11-21",
+  "flag": false,
+  "home": "SS Lazio",
+  "logged_at": "2026-11-14T18:26Z",
+  "md": 12,
+  "pa": 0.0983,
+  "pd": 0.1821,
+  "ph": 0.7197,
+  "shown": "2-0"
  },
  "SSC Napoli|AS Roma": {
   "away": "AS Roma",
