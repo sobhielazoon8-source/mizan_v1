@@ -107,6 +107,18 @@
   "ph": 0.493,
   "shown": "1-0"
  },
+ "FC Lorient|Stade Rennais FC 1901": {
+  "away": "Stade Rennais FC 1901",
+  "date": "2026-11-22",
+  "flag": true,
+  "home": "FC Lorient",
+  "logged_at": "2026-11-15T16:30Z",
+  "md": 11,
+  "pa": 0.3383,
+  "pd": 0.2511,
+  "ph": 0.4106,
+  "shown": "1-1"
+ },
  "Le Havre AC|FC Lorient": {
   "away": "FC Lorient",
   "date": "2026-11-08",
@@ -238,6 +250,18 @@
   "pd": 0.2565,
   "ph": 0.4071,
   "shown": "1-1"
+ },
+ "Paris FC|Angers SCO": {
+  "away": "Angers SCO",
+  "date": "2026-11-22",
+  "flag": false,
+  "home": "Paris FC",
+  "logged_at": "2026-11-15T16:30Z",
+  "md": 11,
+  "pa": 0.1326,
+  "pd": 0.1952,
+  "ph": 0.6722,
+  "shown": "1-0"
  },
  "Paris Saint-Germain FC|ES Troyes AC": {
   "away": "ES Troyes AC",

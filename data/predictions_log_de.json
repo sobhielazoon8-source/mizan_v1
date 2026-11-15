@@ -179,6 +179,18 @@
   "ph": 0.5083,
   "shown": "1-0"
  },
+ "FC Augsburg|1. FSV Mainz 05": {
+  "away": "1. FSV Mainz 05",
+  "date": "2026-11-22",
+  "flag": false,
+  "home": "FC Augsburg",
+  "logged_at": "2026-11-15T16:30Z",
+  "md": 10,
+  "pa": 0.3471,
+  "pd": 0.2498,
+  "ph": 0.4031,
+  "shown": "2-1"
+ },
  "FC Augsburg|SC Freiburg": {
   "away": "SC Freiburg",
   "date": "2026-10-31",
@@ -346,6 +358,18 @@
   "pd": 0.2521,
   "ph": 0.3832,
   "shown": "1-1"
+ },
+ "SV Werder Bremen|Hamburger SV": {
+  "away": "Hamburger SV",
+  "date": "2026-11-22",
+  "flag": false,
+  "home": "SV Werder Bremen",
+  "logged_at": "2026-11-15T16:30Z",
+  "md": 10,
+  "pa": 0.2505,
+  "pd": 0.2469,
+  "ph": 0.5026,
+  "shown": "1-0"
  },
  "SV Werder Bremen|TSG 1899 Hoffenheim": {
   "away": "TSG 1899 Hoffenheim",

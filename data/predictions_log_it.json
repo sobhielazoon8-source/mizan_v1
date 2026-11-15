@@ -23,6 +23,18 @@
   "ph": 0.237,
   "shown": "1-2"
  },
+ "AC Milan|Frosinone Calcio": {
+  "away": "Frosinone Calcio",
+  "date": "2026-11-22",
+  "flag": false,
+  "home": "AC Milan",
+  "logged_at": "2026-11-15T16:30Z",
+  "md": 12,
+  "pa": 0.1595,
+  "pd": 0.2143,
+  "ph": 0.6262,
+  "shown": "2-1"
+ },
  "AC Monza|Atalanta BC": {
   "away": "Atalanta BC",
   "date": "2026-11-08",
@@ -453,6 +465,18 @@
   "pa": 0.3349,
   "pd": 0.2724,
   "ph": 0.3926,
+  "shown": "1-1"
+ },
+ "US Sassuolo Calcio|Genoa CFC": {
+  "away": "Genoa CFC",
+  "date": "2026-11-22",
+  "flag": true,
+  "home": "US Sassuolo Calcio",
+  "logged_at": "2026-11-15T16:30Z",
+  "md": 12,
+  "pa": 0.347,
+  "pd": 0.2808,
+  "ph": 0.3722,
   "shown": "1-1"
  },
  "US Sassuolo Calcio|SS Lazio": {
