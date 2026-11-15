@@ -107,6 +107,18 @@
   "ph": 0.8245,
   "shown": "3-0"
  },
+ "Atalanta BC|FC Internazionale Milano": {
+  "away": "FC Internazionale Milano",
+  "date": "2026-11-22",
+  "flag": false,
+  "home": "Atalanta BC",
+  "logged_at": "2026-11-15T21:11Z",
+  "md": 12,
+  "pa": 0.5811,
+  "pd": 0.2294,
+  "ph": 0.1895,
+  "shown": "1-2"
+ },
  "Atalanta BC|Frosinone Calcio": {
   "away": "Frosinone Calcio",
   "date": "2026-10-25",
@@ -142,6 +154,18 @@
   "pd": 0.1873,
   "ph": 0.6932,
   "shown": "2-0"
+ },
+ "Bologna FC 1909|Udinese Calcio": {
+  "away": "Udinese Calcio",
+  "date": "2026-11-22",
+  "flag": false,
+  "home": "Bologna FC 1909",
+  "logged_at": "2026-11-15T21:11Z",
+  "md": 12,
+  "pa": 0.1736,
+  "pd": 0.2325,
+  "ph": 0.594,
+  "shown": "1-0"
  },
  "Cagliari Calcio|Bologna FC 1909": {
   "away": "Bologna FC 1909",

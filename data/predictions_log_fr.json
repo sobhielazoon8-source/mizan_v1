@@ -227,6 +227,18 @@
   "ph": 0.6781,
   "shown": "2-0"
  },
+ "Olympique de Marseille|Le Mans FC": {
+  "away": "Le Mans FC",
+  "date": "2026-11-22",
+  "flag": false,
+  "home": "Olympique de Marseille",
+  "logged_at": "2026-11-15T21:12Z",
+  "md": 11,
+  "pa": 0.1429,
+  "pd": 0.182,
+  "ph": 0.6751,
+  "shown": "2-1"
+ },
  "Olympique de Marseille|Toulouse FC": {
   "away": "Toulouse FC",
   "date": "2026-11-01",
