@@ -35,6 +35,18 @@
   "ph": 0.6262,
   "shown": "2-1"
  },
+ "AC Monza|ACF Fiorentina": {
+  "away": "ACF Fiorentina",
+  "date": "2026-11-23",
+  "flag": false,
+  "home": "AC Monza",
+  "logged_at": "2026-11-16T18:10Z",
+  "md": 12,
+  "pa": 0.4919,
+  "pd": 0.2574,
+  "ph": 0.2507,
+  "shown": "1-2"
+ },
  "AC Monza|Atalanta BC": {
   "away": "Atalanta BC",
   "date": "2026-11-08",
