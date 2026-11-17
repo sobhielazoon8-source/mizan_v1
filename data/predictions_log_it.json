@@ -335,6 +335,18 @@
   "ph": 0.3682,
   "shown": "1-1"
  },
+ "Juventus FC|Venezia FC": {
+  "away": "Venezia FC",
+  "date": "2026-11-23",
+  "flag": false,
+  "home": "Juventus FC",
+  "logged_at": "2026-11-17T01:31Z",
+  "md": 12,
+  "pa": 0.0955,
+  "pd": 0.1826,
+  "ph": 0.722,
+  "shown": "1-0"
+ },
  "Parma Calcio 1913|AS Roma": {
   "away": "AS Roma",
   "date": "2026-11-21",
