@@ -1,4 +1,16 @@
 {
+ "Arsenal FC|Borussia Dortmund": {
+  "away": "Borussia Dortmund",
+  "date": "2026-11-24",
+  "flag": false,
+  "home": "Arsenal FC",
+  "logged_at": "2026-11-17T21:02Z",
+  "md": 5,
+  "pa": 0.1263,
+  "pd": 0.1863,
+  "ph": 0.6873,
+  "shown": "2-0"
+ },
  "Atlético Madrid|FC Bayern München": {
   "away": "FC Bayern München",
   "date": "2026-11-03",
@@ -10,6 +22,18 @@
   "pd": 0.219,
   "ph": 0.2955,
   "shown": "1-2"
+ },
+ "Bodø/Glimt|LASK Linz": {
+  "away": "LASK Linz",
+  "date": "2026-11-24",
+  "flag": false,
+  "home": "Bodø/Glimt",
+  "logged_at": "2026-11-17T21:02Z",
+  "md": 5,
+  "pa": 0.2879,
+  "pd": 0.2334,
+  "ph": 0.4787,
+  "shown": "2-1"
  },
  "Bodø/Glimt|Lille OSC": {
   "away": "Lille OSC",
@@ -34,6 +58,18 @@
   "pd": 0.2295,
   "ph": 0.5069,
   "shown": "2-1"
+ },
+ "Como 1907|PAE AEK": {
+  "away": "PAE AEK",
+  "date": "2026-11-24",
+  "flag": false,
+  "home": "Como 1907",
+  "logged_at": "2026-11-17T21:02Z",
+  "md": 5,
+  "pa": 0.1427,
+  "pd": 0.1665,
+  "ph": 0.6908,
+  "shown": "3-1"
  },
  "FC Barcelona|Aston Villa FC": {
   "away": "Aston Villa FC",
@@ -83,6 +119,30 @@
   "ph": 0.2987,
   "shown": "1-2"
  },
+ "Feyenoord|FC Porto": {
+  "away": "FC Porto",
+  "date": "2026-11-24",
+  "flag": false,
+  "home": "Feyenoord",
+  "logged_at": "2026-11-17T21:02Z",
+  "md": 5,
+  "pa": 0.4348,
+  "pd": 0.2395,
+  "ph": 0.3257,
+  "shown": "1-2"
+ },
+ "Galatasaray|Aston Villa FC": {
+  "away": "Aston Villa FC",
+  "date": "2026-11-24",
+  "flag": false,
+  "home": "Galatasaray",
+  "logged_at": "2026-11-17T21:02Z",
+  "md": 5,
+  "pa": 0.4766,
+  "pd": 0.2334,
+  "ph": 0.29,
+  "shown": "1-2"
+ },
  "Galatasaray|VfB Stuttgart": {
   "away": "VfB Stuttgart",
   "date": "2026-11-03",
@@ -105,6 +165,18 @@
   "pa": 0.1374,
   "pd": 0.1669,
   "ph": 0.6957,
+  "shown": "2-1"
+ },
+ "Manchester City FC|SSC Napoli": {
+  "away": "SSC Napoli",
+  "date": "2026-11-24",
+  "flag": false,
+  "home": "Manchester City FC",
+  "logged_at": "2026-11-17T21:02Z",
+  "md": 5,
+  "pa": 0.1314,
+  "pd": 0.1591,
+  "ph": 0.7095,
   "shown": "2-1"
  },
  "Manchester United FC|AS Roma": {
@@ -155,6 +227,18 @@
   "ph": 0.2423,
   "shown": "1-2"
  },
+ "RB Leipzig|Racing Club de Lens": {
+  "away": "Racing Club de Lens",
+  "date": "2026-11-24",
+  "flag": false,
+  "home": "RB Leipzig",
+  "logged_at": "2026-11-17T21:02Z",
+  "md": 5,
+  "pa": 0.1941,
+  "pd": 0.1983,
+  "ph": 0.6076,
+  "shown": "2-1"
+ },
  "Racing Club de Lens|Como 1907": {
   "away": "Como 1907",
   "date": "2026-11-04",
@@ -166,6 +250,18 @@
   "pd": 0.2427,
   "ph": 0.3117,
   "shown": "1-2"
+ },
+ "Real Madrid|PSV Eindhoven": {
+  "away": "PSV Eindhoven",
+  "date": "2026-11-24",
+  "flag": false,
+  "home": "Real Madrid",
+  "logged_at": "2026-11-17T21:02Z",
+  "md": 5,
+  "pa": 0.119,
+  "pd": 0.147,
+  "ph": 0.734,
+  "shown": "3-1"
  },
  "Shakhtar Donetsk|Sporting CP": {
   "away": "Sporting CP",
@@ -190,6 +286,18 @@
   "pd": 0.1487,
   "ph": 0.0787,
   "shown": "0-2"
+ },
+ "Slovan Bratislava|Real Betis": {
+  "away": "Real Betis",
+  "date": "2026-11-24",
+  "flag": false,
+  "home": "Slovan Bratislava",
+  "logged_at": "2026-11-17T21:02Z",
+  "md": 5,
+  "pa": 0.6162,
+  "pd": 0.2019,
+  "ph": 0.182,
+  "shown": "1-2"
  },
  "Viking FK|Sabah FK": {
   "away": "Sabah FK",
