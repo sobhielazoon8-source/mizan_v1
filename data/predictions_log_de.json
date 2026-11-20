@@ -359,6 +359,18 @@
   "ph": 0.3832,
   "shown": "1-1"
  },
+ "SV Werder Bremen|Borussia Mönchengladbach": {
+  "away": "Borussia Mönchengladbach",
+  "date": "2026-11-27",
+  "flag": false,
+  "home": "SV Werder Bremen",
+  "logged_at": "2026-11-20T22:12Z",
+  "md": 11,
+  "pa": 0.2682,
+  "pd": 0.2387,
+  "ph": 0.4931,
+  "shown": "2-1"
+ },
  "SV Werder Bremen|Hamburger SV": {
   "away": "Hamburger SV",
   "date": "2026-11-22",
