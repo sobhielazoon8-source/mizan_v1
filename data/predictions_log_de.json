@@ -23,6 +23,18 @@
   "ph": 0.4969,
   "shown": "1-0"
  },
+ "1. FC Köln|SV 07 Elversberg": {
+  "away": "SV 07 Elversberg",
+  "date": "2026-11-28",
+  "flag": true,
+  "home": "1. FC Köln",
+  "logged_at": "2026-11-21T18:08Z",
+  "md": 11,
+  "pa": 0.3505,
+  "pd": 0.2596,
+  "ph": 0.3898,
+  "shown": "1-1"
+ },
  "1. FC Union Berlin|1. FC Köln": {
   "away": "1. FC Köln",
   "date": "2026-11-01",
@@ -46,6 +58,18 @@
   "pd": 0.2263,
   "ph": 0.2228,
   "shown": "1-2"
+ },
+ "1. FSV Mainz 05|1. FC Union Berlin": {
+  "away": "1. FC Union Berlin",
+  "date": "2026-11-28",
+  "flag": false,
+  "home": "1. FSV Mainz 05",
+  "logged_at": "2026-11-21T18:08Z",
+  "md": 11,
+  "pa": 0.2127,
+  "pd": 0.2297,
+  "ph": 0.5576,
+  "shown": "1-0"
  },
  "1. FSV Mainz 05|FC Bayern München": {
   "away": "FC Bayern München",
@@ -263,6 +287,18 @@
   "ph": 0.408,
   "shown": "1-1"
  },
+ "Hamburger SV|FC Bayern München": {
+  "away": "FC Bayern München",
+  "date": "2026-11-28",
+  "flag": false,
+  "home": "Hamburger SV",
+  "logged_at": "2026-11-21T18:08Z",
+  "md": 11,
+  "pa": 0.7502,
+  "pd": 0.1471,
+  "ph": 0.1026,
+  "shown": "0-3"
+ },
  "RB Leipzig|FC Augsburg": {
   "away": "FC Augsburg",
   "date": "2026-11-07",
@@ -323,6 +359,18 @@
   "ph": 0.3187,
   "shown": "1-2"
  },
+ "SC Paderborn 07|FC Schalke 04": {
+  "away": "FC Schalke 04",
+  "date": "2026-11-28",
+  "flag": false,
+  "home": "SC Paderborn 07",
+  "logged_at": "2026-11-21T18:08Z",
+  "md": 11,
+  "pa": 0.2752,
+  "pd": 0.2635,
+  "ph": 0.4612,
+  "shown": "1-0"
+ },
  "SC Paderborn 07|Hamburger SV": {
   "away": "Hamburger SV",
   "date": "2026-10-24",
@@ -364,11 +412,11 @@
   "date": "2026-11-27",
   "flag": false,
   "home": "SV Werder Bremen",
-  "logged_at": "2026-11-20T22:12Z",
+  "logged_at": "2026-11-21T18:08Z",
   "md": 11,
-  "pa": 0.2682,
-  "pd": 0.2387,
-  "ph": 0.4931,
+  "pa": 0.2666,
+  "pd": 0.2397,
+  "ph": 0.4938,
   "shown": "2-1"
  },
  "SV Werder Bremen|Hamburger SV": {
@@ -417,6 +465,18 @@
   "pa": 0.1739,
   "pd": 0.2058,
   "ph": 0.6203,
+  "shown": "2-1"
+ },
+ "VfB Stuttgart|Eintracht Frankfurt": {
+  "away": "Eintracht Frankfurt",
+  "date": "2026-11-28",
+  "flag": false,
+  "home": "VfB Stuttgart",
+  "logged_at": "2026-11-21T18:08Z",
+  "md": 11,
+  "pa": 0.221,
+  "pd": 0.2113,
+  "ph": 0.5676,
   "shown": "2-1"
  },
  "VfB Stuttgart|SV Werder Bremen": {

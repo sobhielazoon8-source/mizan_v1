@@ -71,6 +71,18 @@
   "ph": 0.3365,
   "shown": "1-1"
  },
+ "Angers SCO|Racing Club de Lens": {
+  "away": "Racing Club de Lens",
+  "date": "2026-11-28",
+  "flag": false,
+  "home": "Angers SCO",
+  "logged_at": "2026-11-21T18:08Z",
+  "md": 12,
+  "pa": 0.5371,
+  "pd": 0.2435,
+  "ph": 0.2194,
+  "shown": "0-1"
+ },
  "ES Troyes AC|Le Havre AC": {
   "away": "Le Havre AC",
   "date": "2026-11-20",
