@@ -52,11 +52,11 @@
   "date": "2026-11-28",
   "flag": false,
   "home": "Arsenal FC",
-  "logged_at": "2026-11-21T18:08Z",
+  "logged_at": "2026-11-21T23:11Z",
   "md": 12,
-  "pa": 0.2325,
-  "pd": 0.2512,
-  "ph": 0.5163,
+  "pa": 0.2351,
+  "pd": 0.2508,
+  "ph": 0.5141,
   "shown": "1-0"
  },
  "Aston Villa FC|Fulham FC": {
@@ -136,11 +136,11 @@
   "date": "2026-11-28",
   "flag": false,
   "home": "Brighton & Hove Albion FC",
-  "logged_at": "2026-11-21T18:08Z",
+  "logged_at": "2026-11-21T23:11Z",
   "md": 12,
-  "pa": 0.1748,
+  "pa": 0.1768,
   "pd": 0.2086,
-  "ph": 0.6166,
+  "ph": 0.6146,
   "shown": "2-1"
  },
  "Chelsea FC|Leeds United FC": {

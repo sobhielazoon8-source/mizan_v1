@@ -76,11 +76,11 @@
   "date": "2026-11-28",
   "flag": false,
   "home": "Angers SCO",
-  "logged_at": "2026-11-21T18:08Z",
+  "logged_at": "2026-11-21T23:12Z",
   "md": 12,
-  "pa": 0.5371,
-  "pd": 0.2435,
-  "ph": 0.2194,
+  "pa": 0.5314,
+  "pd": 0.2456,
+  "ph": 0.223,
   "shown": "0-1"
  },
  "ES Troyes AC|Le Havre AC": {
@@ -155,6 +155,18 @@
   "ph": 0.1556,
   "shown": "0-1"
  },
+ "Le Havre AC|RC Strasbourg Alsace": {
+  "away": "RC Strasbourg Alsace",
+  "date": "2026-11-28",
+  "flag": false,
+  "home": "Le Havre AC",
+  "logged_at": "2026-11-21T23:12Z",
+  "md": 12,
+  "pa": 0.4434,
+  "pd": 0.2507,
+  "ph": 0.3059,
+  "shown": "1-2"
+ },
  "Le Mans FC|AS Monaco FC": {
   "away": "AS Monaco FC",
   "date": "2026-11-08",
@@ -166,6 +178,18 @@
   "pd": 0.2508,
   "ph": 0.3207,
   "shown": "1-1"
+ },
+ "Le Mans FC|Lille OSC": {
+  "away": "Lille OSC",
+  "date": "2026-11-28",
+  "flag": false,
+  "home": "Le Mans FC",
+  "logged_at": "2026-11-21T23:12Z",
+  "md": 12,
+  "pa": 0.4472,
+  "pd": 0.2665,
+  "ph": 0.2863,
+  "shown": "0-1"
  },
  "Lille OSC|Olympique Lyonnais": {
   "away": "Olympique Lyonnais",
@@ -189,6 +213,18 @@
   "pa": 0.2892,
   "pd": 0.2627,
   "ph": 0.448,
+  "shown": "1-0"
+ },
+ "OGC Nice|ES Troyes AC": {
+  "away": "ES Troyes AC",
+  "date": "2026-11-28",
+  "flag": false,
+  "home": "OGC Nice",
+  "logged_at": "2026-11-21T23:12Z",
+  "md": 12,
+  "pa": 0.1775,
+  "pd": 0.2156,
+  "ph": 0.607,
   "shown": "1-0"
  },
  "OGC Nice|Paris Saint-Germain FC": {
@@ -299,6 +335,18 @@
   "ph": 0.8576,
   "shown": "3-0"
  },
+ "Paris Saint-Germain FC|FC Lorient": {
+  "away": "FC Lorient",
+  "date": "2026-11-28",
+  "flag": false,
+  "home": "Paris Saint-Germain FC",
+  "logged_at": "2026-11-21T23:12Z",
+  "md": 12,
+  "pa": 0.0967,
+  "pd": 0.1519,
+  "ph": 0.7514,
+  "shown": "2-0"
+ },
  "Paris Saint-Germain FC|Olympique Lyonnais": {
   "away": "Olympique Lyonnais",
   "date": "2026-10-25",
@@ -386,14 +434,14 @@
  "Stade Brestois 29|Paris FC": {
   "away": "Paris FC",
   "date": "2026-11-27",
-  "flag": true,
+  "flag": false,
   "home": "Stade Brestois 29",
-  "logged_at": "2026-11-20T22:12Z",
+  "logged_at": "2026-11-21T23:12Z",
   "md": 12,
-  "pa": 0.3172,
-  "pd": 0.2564,
-  "ph": 0.4264,
-  "shown": "1-1"
+  "pa": 0.3059,
+  "pd": 0.2567,
+  "ph": 0.4374,
+  "shown": "1-0"
  },
  "Stade Rennais FC 1901|Lille OSC": {
   "away": "Lille OSC",

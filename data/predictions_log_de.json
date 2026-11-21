@@ -364,11 +364,11 @@
   "date": "2026-11-28",
   "flag": false,
   "home": "SC Paderborn 07",
-  "logged_at": "2026-11-21T18:08Z",
+  "logged_at": "2026-11-21T23:11Z",
   "md": 11,
-  "pa": 0.2752,
-  "pd": 0.2635,
-  "ph": 0.4612,
+  "pa": 0.2776,
+  "pd": 0.2664,
+  "ph": 0.456,
   "shown": "1-0"
  },
  "SC Paderborn 07|Hamburger SV": {
@@ -472,11 +472,11 @@
   "date": "2026-11-28",
   "flag": false,
   "home": "VfB Stuttgart",
-  "logged_at": "2026-11-21T18:08Z",
+  "logged_at": "2026-11-21T23:11Z",
   "md": 11,
-  "pa": 0.221,
-  "pd": 0.2113,
-  "ph": 0.5676,
+  "pa": 0.2244,
+  "pd": 0.2141,
+  "ph": 0.5614,
   "shown": "2-1"
  },
  "VfB Stuttgart|SV Werder Bremen": {
