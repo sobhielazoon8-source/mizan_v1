@@ -112,11 +112,11 @@
   "date": "2026-11-29",
   "flag": true,
   "home": "Celta Vigo",
-  "logged_at": "2026-11-22T03:17Z",
+  "logged_at": "2026-11-22T18:41Z",
   "md": 14,
-  "pa": 0.3606,
-  "pd": 0.2637,
-  "ph": 0.3757,
+  "pa": 0.3631,
+  "pd": 0.2635,
+  "ph": 0.3735,
   "shown": "1-1"
  },
  "Deportivo Alavés|Deportivo La Coruña": {
@@ -148,11 +148,11 @@
   "date": "2026-11-29",
   "flag": false,
   "home": "Deportivo La Coruña",
-  "logged_at": "2026-11-22T03:17Z",
+  "logged_at": "2026-11-22T18:41Z",
   "md": 14,
-  "pa": 0.7203,
-  "pd": 0.1599,
-  "ph": 0.1198,
+  "pa": 0.7182,
+  "pd": 0.1606,
+  "ph": 0.1212,
   "shown": "1-2"
  },
  "Elche CF|Atlético Madrid": {
@@ -304,11 +304,11 @@
   "date": "2026-11-29",
   "flag": false,
   "home": "Levante UD",
-  "logged_at": "2026-11-22T03:17Z",
+  "logged_at": "2026-11-22T18:41Z",
   "md": 14,
-  "pa": 0.2561,
-  "pd": 0.2342,
-  "ph": 0.5096,
+  "pa": 0.2627,
+  "pd": 0.235,
+  "ph": 0.5023,
   "shown": "2-1"
  },
  "Málaga CF|Athletic Club": {
@@ -484,11 +484,11 @@
   "date": "2026-11-29",
   "flag": false,
   "home": "Real Sociedad",
-  "logged_at": "2026-11-22T03:17Z",
+  "logged_at": "2026-11-22T18:41Z",
   "md": 14,
-  "pa": 0.2299,
-  "pd": 0.2292,
-  "ph": 0.5409,
+  "pa": 0.2359,
+  "pd": 0.2304,
+  "ph": 0.5337,
   "shown": "2-1"
  },
  "Sevilla FC|CA Osasuna": {

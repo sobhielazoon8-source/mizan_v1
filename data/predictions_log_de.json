@@ -64,11 +64,11 @@
   "date": "2026-11-28",
   "flag": false,
   "home": "1. FSV Mainz 05",
-  "logged_at": "2026-11-21T18:08Z",
+  "logged_at": "2026-11-22T18:41Z",
   "md": 11,
-  "pa": 0.2127,
-  "pd": 0.2297,
-  "ph": 0.5576,
+  "pa": 0.2196,
+  "pd": 0.2318,
+  "ph": 0.5486,
   "shown": "1-0"
  },
  "1. FSV Mainz 05|FC Bayern München": {
@@ -117,6 +117,18 @@
   "pa": 0.2488,
   "pd": 0.2207,
   "ph": 0.5305,
+  "shown": "2-1"
+ },
+ "Borussia Dortmund|Bayer 04 Leverkusen": {
+  "away": "Bayer 04 Leverkusen",
+  "date": "2026-11-29",
+  "flag": false,
+  "home": "Borussia Dortmund",
+  "logged_at": "2026-11-22T18:41Z",
+  "md": 11,
+  "pa": 0.2635,
+  "pd": 0.2342,
+  "ph": 0.5023,
   "shown": "2-1"
  },
  "Borussia Dortmund|Eintracht Frankfurt": {
@@ -292,11 +304,11 @@
   "date": "2026-11-28",
   "flag": false,
   "home": "Hamburger SV",
-  "logged_at": "2026-11-21T18:08Z",
+  "logged_at": "2026-11-22T18:41Z",
   "md": 11,
-  "pa": 0.7502,
-  "pd": 0.1471,
-  "ph": 0.1026,
+  "pa": 0.7631,
+  "pd": 0.1407,
+  "ph": 0.0961,
   "shown": "0-3"
  },
  "RB Leipzig|FC Augsburg": {
@@ -345,6 +357,18 @@
   "pa": 0.658,
   "pd": 0.1807,
   "ph": 0.1612,
+  "shown": "1-2"
+ },
+ "SC Freiburg|RB Leipzig": {
+  "away": "RB Leipzig",
+  "date": "2026-11-29",
+  "flag": false,
+  "home": "SC Freiburg",
+  "logged_at": "2026-11-22T18:41Z",
+  "md": 11,
+  "pa": 0.4219,
+  "pd": 0.2416,
+  "ph": 0.3364,
   "shown": "1-2"
  },
  "SC Paderborn 07|Eintracht Frankfurt": {
@@ -412,11 +436,11 @@
   "date": "2026-11-27",
   "flag": false,
   "home": "SV Werder Bremen",
-  "logged_at": "2026-11-21T18:08Z",
+  "logged_at": "2026-11-22T18:41Z",
   "md": 11,
-  "pa": 0.2666,
-  "pd": 0.2397,
-  "ph": 0.4938,
+  "pa": 0.2548,
+  "pd": 0.2359,
+  "ph": 0.5093,
   "shown": "2-1"
  },
  "SV Werder Bremen|Hamburger SV": {
@@ -454,6 +478,18 @@
   "pd": 0.2272,
   "ph": 0.2851,
   "shown": "1-2"
+ },
+ "TSG 1899 Hoffenheim|FC Augsburg": {
+  "away": "FC Augsburg",
+  "date": "2026-11-29",
+  "flag": false,
+  "home": "TSG 1899 Hoffenheim",
+  "logged_at": "2026-11-22T18:41Z",
+  "md": 11,
+  "pa": 0.2631,
+  "pd": 0.2283,
+  "ph": 0.5087,
+  "shown": "2-1"
  },
  "TSG 1899 Hoffenheim|FC Schalke 04": {
   "away": "FC Schalke 04",

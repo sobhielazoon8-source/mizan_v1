@@ -136,11 +136,11 @@
   "date": "2026-11-28",
   "flag": false,
   "home": "Brighton & Hove Albion FC",
-  "logged_at": "2026-11-21T23:11Z",
+  "logged_at": "2026-11-22T18:40Z",
   "md": 12,
-  "pa": 0.1768,
-  "pd": 0.2086,
-  "ph": 0.6146,
+  "pa": 0.1883,
+  "pd": 0.2153,
+  "ph": 0.5964,
   "shown": "2-1"
  },
  "Chelsea FC|Leeds United FC": {
@@ -218,14 +218,14 @@
  "Crystal Palace FC|Hull City AFC": {
   "away": "Hull City AFC",
   "date": "2026-11-28",
-  "flag": false,
+  "flag": true,
   "home": "Crystal Palace FC",
-  "logged_at": "2026-11-21T18:08Z",
+  "logged_at": "2026-11-22T18:40Z",
   "md": 12,
-  "pa": 0.3002,
-  "pd": 0.2591,
-  "ph": 0.4407,
-  "shown": "1-0"
+  "pa": 0.3153,
+  "pd": 0.2618,
+  "ph": 0.423,
+  "shown": "1-1"
  },
  "Crystal Palace FC|Liverpool FC": {
   "away": "Liverpool FC",
@@ -268,11 +268,11 @@
   "date": "2026-11-28",
   "flag": true,
   "home": "Everton FC",
-  "logged_at": "2026-11-21T18:08Z",
+  "logged_at": "2026-11-22T18:40Z",
   "md": 12,
-  "pa": 0.3785,
-  "pd": 0.2704,
-  "ph": 0.3512,
+  "pa": 0.394,
+  "pd": 0.2691,
+  "ph": 0.3369,
   "shown": "1-1"
  },
  "Fulham FC|AFC Bournemouth": {
@@ -472,11 +472,11 @@
   "date": "2026-11-28",
   "flag": false,
   "home": "Manchester United FC",
-  "logged_at": "2026-11-21T18:08Z",
+  "logged_at": "2026-11-22T18:40Z",
   "md": 12,
-  "pa": 0.2872,
-  "pd": 0.2471,
-  "ph": 0.4656,
+  "pa": 0.3019,
+  "pd": 0.2489,
+  "ph": 0.4492,
   "shown": "2-1"
  },
  "Newcastle United FC|Arsenal FC": {
