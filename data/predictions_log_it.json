@@ -196,11 +196,11 @@
   "date": "2026-11-29",
   "flag": false,
   "home": "Cagliari Calcio",
-  "logged_at": "2026-11-22T03:17Z",
+  "logged_at": "2026-11-22T23:53Z",
   "md": 13,
-  "pa": 0.5291,
-  "pd": 0.26,
-  "ph": 0.2109,
+  "pa": 0.5526,
+  "pd": 0.2507,
+  "ph": 0.1967,
   "shown": "0-1"
  },
  "Cagliari Calcio|Bologna FC 1909": {
@@ -304,11 +304,11 @@
   "date": "2026-11-29",
   "flag": false,
   "home": "FC Internazionale Milano",
-  "logged_at": "2026-11-22T18:41Z",
+  "logged_at": "2026-11-22T23:53Z",
   "md": 13,
-  "pa": 0.0801,
-  "pd": 0.1471,
-  "ph": 0.7728,
+  "pa": 0.0812,
+  "pd": 0.1449,
+  "ph": 0.774,
   "shown": "2-0"
  },
  "Frosinone Calcio|Parma Calcio 1913": {
@@ -316,11 +316,11 @@
   "date": "2026-11-29",
   "flag": false,
   "home": "Frosinone Calcio",
-  "logged_at": "2026-11-22T03:17Z",
+  "logged_at": "2026-11-22T23:53Z",
   "md": 13,
-  "pa": 0.2116,
-  "pd": 0.2609,
-  "ph": 0.5276,
+  "pa": 0.2264,
+  "pd": 0.2634,
+  "ph": 0.5102,
   "shown": "1-0"
  },
  "Frosinone Calcio|Torino FC": {
@@ -556,11 +556,11 @@
   "date": "2026-11-29",
   "flag": false,
   "home": "US Lecce",
-  "logged_at": "2026-11-22T03:17Z",
+  "logged_at": "2026-11-22T23:53Z",
   "md": 13,
-  "pa": 0.5086,
-  "pd": 0.2688,
-  "ph": 0.2226,
+  "pa": 0.522,
+  "pd": 0.261,
+  "ph": 0.217,
   "shown": "0-1"
  },
  "US Lecce|Genoa CFC": {

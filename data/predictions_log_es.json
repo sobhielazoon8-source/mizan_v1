@@ -160,11 +160,11 @@
   "date": "2026-11-29",
   "flag": false,
   "home": "Elche CF",
-  "logged_at": "2026-11-22T03:17Z",
+  "logged_at": "2026-11-22T23:53Z",
   "md": 14,
-  "pa": 0.5084,
-  "pd": 0.2464,
-  "ph": 0.2452,
+  "pa": 0.5243,
+  "pd": 0.2419,
+  "ph": 0.2338,
   "shown": "0-1"
  },
  "Elche CF|Real Betis": {
@@ -208,11 +208,11 @@
   "date": "2026-11-29",
   "flag": false,
   "home": "Espanyol",
-  "logged_at": "2026-11-22T03:17Z",
+  "logged_at": "2026-11-22T23:53Z",
   "md": 14,
-  "pa": 0.2549,
-  "pd": 0.285,
-  "ph": 0.46,
+  "pa": 0.2445,
+  "pd": 0.2809,
+  "ph": 0.4746,
   "shown": "1-0"
  },
  "FC Barcelona|Deportivo Alavés": {
@@ -316,11 +316,11 @@
   "date": "2026-11-29",
   "flag": true,
   "home": "Málaga CF",
-  "logged_at": "2026-11-22T03:17Z",
+  "logged_at": "2026-11-22T23:53Z",
   "md": 14,
-  "pa": 0.3924,
-  "pd": 0.2737,
-  "ph": 0.3339,
+  "pa": 0.3962,
+  "pd": 0.2748,
+  "ph": 0.329,
   "shown": "1-1"
  },
  "Málaga CF|Racing Santander": {
@@ -532,11 +532,11 @@
   "date": "2026-11-29",
   "flag": false,
   "home": "Valencia CF",
-  "logged_at": "2026-11-22T03:17Z",
+  "logged_at": "2026-11-22T23:53Z",
   "md": 14,
-  "pa": 0.2446,
-  "pd": 0.2523,
-  "ph": 0.5031,
+  "pa": 0.2481,
+  "pd": 0.2549,
+  "ph": 0.497,
   "shown": "1-0"
  },
  "Valencia CF|Real Madrid": {

@@ -16,11 +16,11 @@
   "date": "2026-11-29",
   "flag": false,
   "home": "AJ Auxerre",
-  "logged_at": "2026-11-22T18:41Z",
+  "logged_at": "2026-11-22T23:53Z",
   "md": 12,
-  "pa": 0.4562,
-  "pd": 0.2476,
-  "ph": 0.2962,
+  "pa": 0.4403,
+  "pd": 0.2488,
+  "ph": 0.3109,
   "shown": "1-2"
  },
  "AJ Auxerre|Paris FC": {
@@ -196,11 +196,11 @@
   "date": "2026-11-28",
   "flag": false,
   "home": "Le Mans FC",
-  "logged_at": "2026-11-21T23:12Z",
+  "logged_at": "2026-11-22T23:53Z",
   "md": 12,
-  "pa": 0.4472,
-  "pd": 0.2665,
-  "ph": 0.2863,
+  "pa": 0.4324,
+  "pd": 0.2676,
+  "ph": 0.3,
   "shown": "0-1"
  },
  "Lille OSC|Olympique Lyonnais": {
@@ -262,6 +262,18 @@
   "pd": 0.2537,
   "ph": 0.3597,
   "shown": "1-1"
+ },
+ "Olympique Lyonnais|AS Monaco FC": {
+  "away": "AS Monaco FC",
+  "date": "2026-11-29",
+  "flag": false,
+  "home": "Olympique Lyonnais",
+  "logged_at": "2026-11-22T23:53Z",
+  "md": 12,
+  "pa": 0.2499,
+  "pd": 0.2423,
+  "ph": 0.5078,
+  "shown": "2-1"
  },
  "Olympique Lyonnais|Angers SCO": {
   "away": "Angers SCO",
