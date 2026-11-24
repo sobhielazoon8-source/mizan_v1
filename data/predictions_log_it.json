@@ -100,11 +100,11 @@
   "date": "2026-11-29",
   "flag": false,
   "home": "AS Roma",
-  "logged_at": "2026-11-22T03:17Z",
+  "logged_at": "2026-11-24T03:51Z",
   "md": 13,
-  "pa": 0.0328,
-  "pd": 0.0751,
-  "ph": 0.8922,
+  "pa": 0.0388,
+  "pd": 0.0855,
+  "ph": 0.8757,
   "shown": "4-0"
  },
  "AS Roma|Cagliari Calcio": {
@@ -652,11 +652,11 @@
   "date": "2026-11-29",
   "flag": true,
   "home": "Udinese Calcio",
-  "logged_at": "2026-11-22T18:41Z",
+  "logged_at": "2026-11-24T03:51Z",
   "md": 13,
-  "pa": 0.3698,
-  "pd": 0.2786,
-  "ph": 0.3516,
+  "pa": 0.3379,
+  "pd": 0.2785,
+  "ph": 0.3837,
   "shown": "1-1"
  },
  "Udinese Calcio|AS Roma": {

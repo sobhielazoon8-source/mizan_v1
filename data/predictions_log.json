@@ -268,11 +268,11 @@
   "date": "2026-11-28",
   "flag": true,
   "home": "Everton FC",
-  "logged_at": "2026-11-22T18:40Z",
+  "logged_at": "2026-11-24T03:51Z",
   "md": 12,
-  "pa": 0.394,
-  "pd": 0.2691,
-  "ph": 0.3369,
+  "pa": 0.4121,
+  "pd": 0.2667,
+  "ph": 0.3212,
   "shown": "1-1"
  },
  "Fulham FC|AFC Bournemouth": {
@@ -472,11 +472,11 @@
   "date": "2026-11-28",
   "flag": false,
   "home": "Manchester United FC",
-  "logged_at": "2026-11-22T18:40Z",
+  "logged_at": "2026-11-24T03:51Z",
   "md": 12,
-  "pa": 0.3019,
-  "pd": 0.2489,
-  "ph": 0.4492,
+  "pa": 0.3191,
+  "pd": 0.2499,
+  "ph": 0.431,
   "shown": "2-1"
  },
  "Newcastle United FC|Arsenal FC": {

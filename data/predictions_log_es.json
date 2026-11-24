@@ -160,11 +160,11 @@
   "date": "2026-11-29",
   "flag": false,
   "home": "Elche CF",
-  "logged_at": "2026-11-22T23:53Z",
+  "logged_at": "2026-11-24T03:51Z",
   "md": 14,
-  "pa": 0.5243,
-  "pd": 0.2419,
-  "ph": 0.2338,
+  "pa": 0.5204,
+  "pd": 0.2434,
+  "ph": 0.2361,
   "shown": "0-1"
  },
  "Elche CF|Real Betis": {
@@ -304,11 +304,11 @@
   "date": "2026-11-29",
   "flag": false,
   "home": "Levante UD",
-  "logged_at": "2026-11-22T18:41Z",
+  "logged_at": "2026-11-24T03:51Z",
   "md": 14,
-  "pa": 0.2627,
-  "pd": 0.235,
-  "ph": 0.5023,
+  "pa": 0.2655,
+  "pd": 0.2362,
+  "ph": 0.4983,
   "shown": "2-1"
  },
  "Málaga CF|Athletic Club": {
