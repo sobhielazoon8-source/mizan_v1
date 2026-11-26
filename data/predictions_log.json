@@ -1,4 +1,16 @@
 {
+ "AFC Bournemouth|Brighton & Hove Albion FC": {
+  "away": "Brighton & Hove Albion FC",
+  "date": "2026-12-02",
+  "flag": false,
+  "home": "AFC Bournemouth",
+  "logged_at": "2026-11-26T01:48Z",
+  "md": 13,
+  "pa": 0.3114,
+  "pd": 0.2555,
+  "ph": 0.4331,
+  "shown": "1-0"
+ },
  "AFC Bournemouth|Leeds United FC": {
   "away": "Leeds United FC",
   "date": "2026-10-31",
@@ -59,6 +71,18 @@
   "ph": 0.5141,
   "shown": "1-0"
  },
+ "Aston Villa FC|Everton FC": {
+  "away": "Everton FC",
+  "date": "2026-12-02",
+  "flag": false,
+  "home": "Aston Villa FC",
+  "logged_at": "2026-11-26T01:48Z",
+  "md": 13,
+  "pa": 0.2272,
+  "pd": 0.2446,
+  "ph": 0.5281,
+  "shown": "1-0"
+ },
  "Aston Villa FC|Fulham FC": {
   "away": "Fulham FC",
   "date": "2026-10-31",
@@ -94,6 +118,18 @@
   "pd": 0.2182,
   "ph": 0.6027,
   "shown": "1-0"
+ },
+ "Brentford FC|Arsenal FC": {
+  "away": "Arsenal FC",
+  "date": "2026-12-02",
+  "flag": false,
+  "home": "Brentford FC",
+  "logged_at": "2026-11-26T01:48Z",
+  "md": 13,
+  "pa": 0.4474,
+  "pd": 0.2644,
+  "ph": 0.2881,
+  "shown": "0-1"
  },
  "Brentford FC|Everton FC": {
   "away": "Everton FC",
@@ -141,6 +177,18 @@
   "pa": 0.1883,
   "pd": 0.2153,
   "ph": 0.5964,
+  "shown": "2-1"
+ },
+ "Chelsea FC|Crystal Palace FC": {
+  "away": "Crystal Palace FC",
+  "date": "2026-12-02",
+  "flag": false,
+  "home": "Chelsea FC",
+  "logged_at": "2026-11-26T01:48Z",
+  "md": 13,
+  "pa": 0.1851,
+  "pd": 0.2117,
+  "ph": 0.6032,
   "shown": "2-1"
  },
  "Chelsea FC|Leeds United FC": {
@@ -202,6 +250,18 @@
   "pd": 0.2637,
   "ph": 0.425,
   "shown": "1-1"
+ },
+ "Coventry City FC|Ipswich Town FC": {
+  "away": "Ipswich Town FC",
+  "date": "2026-12-02",
+  "flag": false,
+  "home": "Coventry City FC",
+  "logged_at": "2026-11-26T01:48Z",
+  "md": 13,
+  "pa": 0.2147,
+  "pd": 0.2228,
+  "ph": 0.5626,
+  "shown": "2-1"
  },
  "Coventry City FC|Sunderland AFC": {
   "away": "Sunderland AFC",
@@ -335,6 +395,18 @@
   "ph": 0.5594,
   "shown": "2-1"
  },
+ "Hull City AFC|Nottingham Forest FC": {
+  "away": "Nottingham Forest FC",
+  "date": "2026-12-02",
+  "flag": false,
+  "home": "Hull City AFC",
+  "logged_at": "2026-11-26T01:48Z",
+  "md": 13,
+  "pa": 0.3042,
+  "pd": 0.2677,
+  "ph": 0.4281,
+  "shown": "1-0"
+ },
  "Ipswich Town FC|AFC Bournemouth": {
   "away": "AFC Bournemouth",
   "date": "2026-11-07",
@@ -419,6 +491,18 @@
   "ph": 0.5722,
   "shown": "2-1"
  },
+ "Liverpool FC|Sunderland AFC": {
+  "away": "Sunderland AFC",
+  "date": "2026-12-02",
+  "flag": false,
+  "home": "Liverpool FC",
+  "logged_at": "2026-11-26T01:48Z",
+  "md": 13,
+  "pa": 0.1335,
+  "pd": 0.1916,
+  "ph": 0.675,
+  "shown": "1-0"
+ },
  "Manchester City FC|Brighton & Hove Albion FC": {
   "away": "Brighton & Hove Albion FC",
   "date": "2026-10-31",
@@ -442,6 +526,18 @@
   "pd": 0.1812,
   "ph": 0.696,
   "shown": "2-0"
+ },
+ "Manchester City FC|Leeds United FC": {
+  "away": "Leeds United FC",
+  "date": "2026-12-02",
+  "flag": false,
+  "home": "Manchester City FC",
+  "logged_at": "2026-11-26T01:48Z",
+  "md": 13,
+  "pa": 0.1427,
+  "pd": 0.1935,
+  "ph": 0.6638,
+  "shown": "1-0"
  },
  "Manchester United FC|AFC Bournemouth": {
   "away": "AFC Bournemouth",
@@ -502,6 +598,18 @@
   "pd": 0.2501,
   "ph": 0.5,
   "shown": "1-0"
+ },
+ "Newcastle United FC|Manchester United FC": {
+  "away": "Manchester United FC",
+  "date": "2026-12-02",
+  "flag": false,
+  "home": "Newcastle United FC",
+  "logged_at": "2026-11-26T01:48Z",
+  "md": 13,
+  "pa": 0.2863,
+  "pd": 0.2427,
+  "ph": 0.4709,
+  "shown": "2-1"
  },
  "Nottingham Forest FC|Chelsea FC": {
   "away": "Chelsea FC",
@@ -573,6 +681,18 @@
   "pa": 0.256,
   "pd": 0.2497,
   "ph": 0.4943,
+  "shown": "1-0"
+ },
+ "Tottenham Hotspur FC|Fulham FC": {
+  "away": "Fulham FC",
+  "date": "2026-12-02",
+  "flag": false,
+  "home": "Tottenham Hotspur FC",
+  "logged_at": "2026-11-26T01:48Z",
+  "md": 13,
+  "pa": 0.2916,
+  "pd": 0.2694,
+  "ph": 0.4391,
   "shown": "1-0"
  },
  "Tottenham Hotspur FC|Ipswich Town FC": {
