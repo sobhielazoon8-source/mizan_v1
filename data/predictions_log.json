@@ -184,11 +184,11 @@
   "date": "2026-12-02",
   "flag": false,
   "home": "Chelsea FC",
-  "logged_at": "2026-11-26T01:48Z",
+  "logged_at": "2026-11-28T08:27Z",
   "md": 13,
-  "pa": 0.1851,
-  "pd": 0.2117,
-  "ph": 0.6032,
+  "pa": 0.1892,
+  "pd": 0.2124,
+  "ph": 0.5984,
   "shown": "2-1"
  },
  "Chelsea FC|Leeds United FC": {
@@ -398,14 +398,14 @@
  "Hull City AFC|Nottingham Forest FC": {
   "away": "Nottingham Forest FC",
   "date": "2026-12-02",
-  "flag": false,
+  "flag": true,
   "home": "Hull City AFC",
-  "logged_at": "2026-11-26T01:48Z",
+  "logged_at": "2026-11-28T08:27Z",
   "md": 13,
-  "pa": 0.3042,
-  "pd": 0.2677,
-  "ph": 0.4281,
-  "shown": "1-0"
+  "pa": 0.3106,
+  "pd": 0.2668,
+  "ph": 0.4226,
+  "shown": "1-1"
  },
  "Ipswich Town FC|AFC Bournemouth": {
   "away": "AFC Bournemouth",
