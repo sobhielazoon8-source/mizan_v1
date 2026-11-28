@@ -47,6 +47,18 @@
   "ph": 0.4513,
   "shown": "1-0"
  },
+ "1. FC Union Berlin|Hamburger SV": {
+  "away": "Hamburger SV",
+  "date": "2026-12-05",
+  "flag": false,
+  "home": "1. FC Union Berlin",
+  "logged_at": "2026-11-28T00:38Z",
+  "md": 12,
+  "pa": 0.2987,
+  "pd": 0.2604,
+  "ph": 0.4409,
+  "shown": "1-0"
+ },
  "1. FC Union Berlin|RB Leipzig": {
   "away": "RB Leipzig",
   "date": "2026-11-21",
@@ -93,6 +105,18 @@
   "pa": 0.2395,
   "pd": 0.2357,
   "ph": 0.5248,
+  "shown": "2-1"
+ },
+ "Bayer 04 Leverkusen|Borussia Mönchengladbach": {
+  "away": "Borussia Mönchengladbach",
+  "date": "2026-12-05",
+  "flag": false,
+  "home": "Bayer 04 Leverkusen",
+  "logged_at": "2026-11-28T00:38Z",
+  "md": 12,
+  "pa": 0.1302,
+  "pd": 0.1651,
+  "ph": 0.7047,
   "shown": "2-1"
  },
  "Bayer 04 Leverkusen|SC Paderborn 07": {
@@ -191,6 +215,18 @@
   "ph": 0.5631,
   "shown": "2-1"
  },
+ "Eintracht Frankfurt|SV Werder Bremen": {
+  "away": "SV Werder Bremen",
+  "date": "2026-12-05",
+  "flag": false,
+  "home": "Eintracht Frankfurt",
+  "logged_at": "2026-11-28T00:38Z",
+  "md": 12,
+  "pa": 0.269,
+  "pd": 0.2297,
+  "ph": 0.5013,
+  "shown": "2-1"
+ },
  "Eintracht Frankfurt|TSG 1899 Hoffenheim": {
   "away": "TSG 1899 Hoffenheim",
   "date": "2026-11-21",
@@ -201,6 +237,18 @@
   "pa": 0.3078,
   "pd": 0.2278,
   "ph": 0.4644,
+  "shown": "2-1"
+ },
+ "FC Augsburg|1. FC Köln": {
+  "away": "1. FC Köln",
+  "date": "2026-12-05",
+  "flag": false,
+  "home": "FC Augsburg",
+  "logged_at": "2026-11-28T00:38Z",
+  "md": 12,
+  "pa": 0.2602,
+  "pd": 0.241,
+  "ph": 0.4988,
   "shown": "2-1"
  },
  "FC Augsburg|1. FC Union Berlin": {
@@ -263,6 +311,30 @@
   "ph": 0.6423,
   "shown": "2-1"
  },
+ "FC Bayern München|SC Paderborn 07": {
+  "away": "SC Paderborn 07",
+  "date": "2026-12-05",
+  "flag": false,
+  "home": "FC Bayern München",
+  "logged_at": "2026-11-28T00:38Z",
+  "md": 12,
+  "pa": 0.0427,
+  "pd": 0.0797,
+  "ph": 0.8777,
+  "shown": "3-0"
+ },
+ "FC Schalke 04|Borussia Dortmund": {
+  "away": "Borussia Dortmund",
+  "date": "2026-12-05",
+  "flag": false,
+  "home": "FC Schalke 04",
+  "logged_at": "2026-11-28T00:38Z",
+  "md": 12,
+  "pa": 0.6355,
+  "pd": 0.2103,
+  "ph": 0.1542,
+  "shown": "0-1"
+ },
  "FC Schalke 04|RB Leipzig": {
   "away": "RB Leipzig",
   "date": "2026-10-31",
@@ -310,6 +382,18 @@
   "pd": 0.1407,
   "ph": 0.0961,
   "shown": "0-3"
+ },
+ "RB Leipzig|1. FSV Mainz 05": {
+  "away": "1. FSV Mainz 05",
+  "date": "2026-12-05",
+  "flag": false,
+  "home": "RB Leipzig",
+  "logged_at": "2026-11-28T00:38Z",
+  "md": 12,
+  "pa": 0.1667,
+  "pd": 0.1906,
+  "ph": 0.6427,
+  "shown": "2-1"
  },
  "RB Leipzig|FC Augsburg": {
   "away": "FC Augsburg",
@@ -371,6 +455,18 @@
   "ph": 0.3364,
   "shown": "1-2"
  },
+ "SC Freiburg|TSG 1899 Hoffenheim": {
+  "away": "TSG 1899 Hoffenheim",
+  "date": "2026-12-05",
+  "flag": false,
+  "home": "SC Freiburg",
+  "logged_at": "2026-11-28T00:38Z",
+  "md": 12,
+  "pa": 0.2707,
+  "pd": 0.2333,
+  "ph": 0.4959,
+  "shown": "2-1"
+ },
  "SC Paderborn 07|Eintracht Frankfurt": {
   "away": "Eintracht Frankfurt",
   "date": "2026-11-07",
@@ -430,6 +526,18 @@
   "pd": 0.2521,
   "ph": 0.3832,
   "shown": "1-1"
+ },
+ "SV 07 Elversberg|VfB Stuttgart": {
+  "away": "VfB Stuttgart",
+  "date": "2026-12-05",
+  "flag": false,
+  "home": "SV 07 Elversberg",
+  "logged_at": "2026-11-28T00:38Z",
+  "md": 12,
+  "pa": 0.4411,
+  "pd": 0.245,
+  "ph": 0.3139,
+  "shown": "1-2"
  },
  "SV Werder Bremen|Borussia Mönchengladbach": {
   "away": "Borussia Mönchengladbach",

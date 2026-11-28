@@ -47,6 +47,18 @@
   "ph": 0.6448,
   "shown": "2-0"
  },
+ "AS Monaco FC|Angers SCO": {
+  "away": "Angers SCO",
+  "date": "2026-12-05",
+  "flag": false,
+  "home": "AS Monaco FC",
+  "logged_at": "2026-11-28T00:39Z",
+  "md": 13,
+  "pa": 0.1125,
+  "pd": 0.1714,
+  "ph": 0.7162,
+  "shown": "2-0"
+ },
  "AS Monaco FC|Lille OSC": {
   "away": "Lille OSC",
   "date": "2026-10-25",
@@ -118,6 +130,18 @@
   "pd": 0.2582,
   "ph": 0.3654,
   "shown": "1-1"
+ },
+ "ES Troyes AC|Olympique Lyonnais": {
+  "away": "Olympique Lyonnais",
+  "date": "2026-12-05",
+  "flag": false,
+  "home": "ES Troyes AC",
+  "logged_at": "2026-11-28T00:39Z",
+  "md": 13,
+  "pa": 0.5099,
+  "pd": 0.2464,
+  "ph": 0.2437,
+  "shown": "0-1"
  },
  "FC Lorient|Stade Brestois 29": {
   "away": "Stade Brestois 29",
@@ -202,6 +226,18 @@
   "pd": 0.2676,
   "ph": 0.3,
   "shown": "0-1"
+ },
+ "Lille OSC|AJ Auxerre": {
+  "away": "AJ Auxerre",
+  "date": "2026-12-05",
+  "flag": false,
+  "home": "Lille OSC",
+  "logged_at": "2026-11-28T00:39Z",
+  "md": 13,
+  "pa": 0.1449,
+  "pd": 0.2082,
+  "ph": 0.6469,
+  "shown": "1-0"
  },
  "Lille OSC|Olympique Lyonnais": {
   "away": "Olympique Lyonnais",
@@ -311,6 +347,18 @@
   "ph": 0.6751,
   "shown": "2-1"
  },
+ "Olympique de Marseille|OGC Nice": {
+  "away": "OGC Nice",
+  "date": "2026-12-05",
+  "flag": false,
+  "home": "Olympique de Marseille",
+  "logged_at": "2026-11-28T00:39Z",
+  "md": 13,
+  "pa": 0.1951,
+  "pd": 0.2131,
+  "ph": 0.5918,
+  "shown": "2-1"
+ },
  "Olympique de Marseille|Toulouse FC": {
   "away": "Toulouse FC",
   "date": "2026-11-01",
@@ -345,6 +393,18 @@
   "pa": 0.1326,
   "pd": 0.1952,
   "ph": 0.6722,
+  "shown": "1-0"
+ },
+ "Paris FC|Le Mans FC": {
+  "away": "Le Mans FC",
+  "date": "2026-12-05",
+  "flag": false,
+  "home": "Paris FC",
+  "logged_at": "2026-11-28T00:39Z",
+  "md": 13,
+  "pa": 0.1888,
+  "pd": 0.2196,
+  "ph": 0.5916,
   "shown": "1-0"
  },
  "Paris Saint-Germain FC|ES Troyes AC": {
@@ -395,6 +455,18 @@
   "ph": 0.5646,
   "shown": "2-1"
  },
+ "RC Strasbourg Alsace|FC Lorient": {
+  "away": "FC Lorient",
+  "date": "2026-12-05",
+  "flag": false,
+  "home": "RC Strasbourg Alsace",
+  "logged_at": "2026-11-28T00:39Z",
+  "md": 13,
+  "pa": 0.2476,
+  "pd": 0.2415,
+  "ph": 0.5108,
+  "shown": "2-1"
+ },
  "RC Strasbourg Alsace|Stade Brestois 29": {
   "away": "Stade Brestois 29",
   "date": "2026-11-21",
@@ -406,6 +478,18 @@
   "pd": 0.2316,
   "ph": 0.5149,
   "shown": "2-1"
+ },
+ "Racing Club de Lens|Le Havre AC": {
+  "away": "Le Havre AC",
+  "date": "2026-12-05",
+  "flag": false,
+  "home": "Racing Club de Lens",
+  "logged_at": "2026-11-28T00:39Z",
+  "md": 13,
+  "pa": 0.1061,
+  "pd": 0.163,
+  "ph": 0.7309,
+  "shown": "2-0"
  },
  "Racing Club de Lens|Olympique de Marseille": {
   "away": "Olympique de Marseille",
@@ -491,6 +575,18 @@
   "ph": 0.5229,
   "shown": "2-1"
  },
+ "Stade Rennais FC 1901|Stade Brestois 29": {
+  "away": "Stade Brestois 29",
+  "date": "2026-12-05",
+  "flag": false,
+  "home": "Stade Rennais FC 1901",
+  "logged_at": "2026-11-28T00:39Z",
+  "md": 13,
+  "pa": 0.2496,
+  "pd": 0.2292,
+  "ph": 0.5212,
+  "shown": "2-1"
+ },
  "Toulouse FC|ES Troyes AC": {
   "away": "ES Troyes AC",
   "date": "2026-10-24",
@@ -502,6 +598,18 @@
   "pd": 0.1893,
   "ph": 0.6693,
   "shown": "2-0"
+ },
+ "Toulouse FC|Paris Saint-Germain FC": {
+  "away": "Paris Saint-Germain FC",
+  "date": "2026-12-05",
+  "flag": false,
+  "home": "Toulouse FC",
+  "logged_at": "2026-11-28T00:39Z",
+  "md": 13,
+  "pa": 0.5304,
+  "pd": 0.2363,
+  "ph": 0.2333,
+  "shown": "0-1"
  },
  "Toulouse FC|RC Strasbourg Alsace": {
   "away": "RC Strasbourg Alsace",
